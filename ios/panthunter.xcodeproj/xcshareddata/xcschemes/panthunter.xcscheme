@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2D2A28121D9B038B00D4039D"
-               BuildableName = "libReact.a"
-               BlueprintName = "React-tvOS"
-               ReferencedContainer = "container:../node_modules/react-native/React/React.xcodeproj">
+               BlueprintIdentifier = "1BEE828C124E6416179B904A9F66D794"
+               BuildableName = "React"
+               BlueprintName = "React"
+               ReferencedContainer = "container:Pods/Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -28,10 +28,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "RNFirebaseStarter-tvOS.app"
-               BlueprintName = "RNFirebaseStarter-tvOS"
-               ReferencedContainer = "container:RNFirebaseStarter.xcodeproj">
+               BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
+               BuildableName = "panthunter.app"
+               BlueprintName = "panthunter"
+               ReferencedContainer = "container:panthunter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -42,10 +42,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "RNFirebaseStarter-tvOSTests.xctest"
-               BlueprintName = "RNFirebaseStarter-tvOSTests"
-               ReferencedContainer = "container:RNFirebaseStarter.xcodeproj">
+               BlueprintIdentifier = "00E356ED1AD99517003FC87E"
+               BuildableName = "panthunterTests.xctest"
+               BlueprintName = "panthunterTests"
+               ReferencedContainer = "container:panthunter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -60,20 +60,20 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "RNFirebaseStarter-tvOSTests.xctest"
-               BlueprintName = "RNFirebaseStarter-tvOSTests"
-               ReferencedContainer = "container:RNFirebaseStarter.xcodeproj">
+               BlueprintIdentifier = "00E356ED1AD99517003FC87E"
+               BuildableName = "panthunterTests.xctest"
+               BlueprintName = "panthunterTests"
+               ReferencedContainer = "container:panthunter.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "RNFirebaseStarter-tvOS.app"
-            BlueprintName = "RNFirebaseStarter-tvOS"
-            ReferencedContainer = "container:RNFirebaseStarter.xcodeproj">
+            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
+            BuildableName = "panthunter.app"
+            BlueprintName = "panthunter"
+            ReferencedContainer = "container:panthunter.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -93,10 +93,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "RNFirebaseStarter-tvOS.app"
-            BlueprintName = "RNFirebaseStarter-tvOS"
-            ReferencedContainer = "container:RNFirebaseStarter.xcodeproj">
+            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
+            BuildableName = "panthunter.app"
+            BlueprintName = "panthunter"
+            ReferencedContainer = "container:panthunter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -112,10 +112,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "RNFirebaseStarter-tvOS.app"
-            BlueprintName = "RNFirebaseStarter-tvOS"
-            ReferencedContainer = "container:RNFirebaseStarter.xcodeproj">
+            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
+            BuildableName = "panthunter.app"
+            BlueprintName = "panthunter"
+            ReferencedContainer = "container:panthunter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

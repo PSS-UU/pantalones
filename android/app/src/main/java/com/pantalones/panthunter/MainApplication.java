@@ -1,4 +1,4 @@
-package com.invertase.rnfirebasestarter;
+package com.pantalones.panthunter;
 
 import androidx.multidex.MultiDexApplication;
 

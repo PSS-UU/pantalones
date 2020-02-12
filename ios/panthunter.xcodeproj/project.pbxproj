@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* RNFirebaseStarterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RNFirebaseStarterTests.m */; };
-		039963B89D919933DA02DD1D /* libPods-RNFirebaseStarter-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A114661868ACFA83CCA60B3 /* libPods-RNFirebaseStarter-tvOS.a */; };
+		00E356F31AD99517003FC87E /* panthunterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* panthunterTests.m */; };
+		039963B89D919933DA02DD1D /* libPods-panthunter-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A114661868ACFA83CCA60B3 /* libPods-panthunter-tvOS.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -18,10 +18,10 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
-		2DCD954D1E0B4F2C00145EB5 /* RNFirebaseStarterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RNFirebaseStarterTests.m */; };
-		66F583A38C047519D1E18159 /* libPods-RNFirebaseStarter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 599A1087F9C545123EFD61BE /* libPods-RNFirebaseStarter.a */; };
-		ADDA258B0C3DE0261C60A364 /* libPods-RNFirebaseStarter-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11B23455DE3C4D5673E7318E /* libPods-RNFirebaseStarter-tvOSTests.a */; };
-		CB23C3742761BB2944FDCE0B /* libPods-RNFirebaseStarterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C3AC53CF282E97E63953C49 /* libPods-RNFirebaseStarterTests.a */; };
+		2DCD954D1E0B4F2C00145EB5 /* panthunterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* panthunterTests.m */; };
+		66F583A38C047519D1E18159 /* libPods-panthunter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 599A1087F9C545123EFD61BE /* libPods-panthunter.a */; };
+		ADDA258B0C3DE0261C60A364 /* libPods-panthunter-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11B23455DE3C4D5673E7318E /* libPods-panthunter-tvOSTests.a */; };
+		CB23C3742761BB2944FDCE0B /* libPods-panthunterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C3AC53CF282E97E63953C49 /* libPods-panthunterTests.a */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
 /* End PBXBuildFile section */
@@ -32,47 +32,47 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = RNFirebaseStarter;
+			remoteInfo = panthunter;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
-			remoteInfo = "RNFirebaseStarter-tvOS";
+			remoteInfo = "panthunter-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* RNFirebaseStarterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RNFirebaseStarterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* panthunterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = panthunterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* RNFirebaseStarterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNFirebaseStarterTests.m; sourceTree = "<group>"; };
-		0B0D8FD9866DDB3E9D5FE660 /* Pods-RNFirebaseStarter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFirebaseStarter.release.xcconfig"; path = "Pods/Target Support Files/Pods-RNFirebaseStarter/Pods-RNFirebaseStarter.release.xcconfig"; sourceTree = "<group>"; };
-		11B23455DE3C4D5673E7318E /* libPods-RNFirebaseStarter-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNFirebaseStarter-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07F961A680F5B00A75B9A /* RNFirebaseStarter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RNFirebaseStarter.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = RNFirebaseStarter/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = RNFirebaseStarter/AppDelegate.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* panthunterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = panthunterTests.m; sourceTree = "<group>"; };
+		0B0D8FD9866DDB3E9D5FE660 /* Pods-panthunter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-panthunter.release.xcconfig"; path = "Pods/Target Support Files/Pods-panthunter/Pods-panthunter.release.xcconfig"; sourceTree = "<group>"; };
+		11B23455DE3C4D5673E7318E /* libPods-panthunter-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-panthunter-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* panthunter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = panthunter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = panthunter/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = panthunter/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = RNFirebaseStarter/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RNFirebaseStarter/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = RNFirebaseStarter/main.m; sourceTree = "<group>"; };
-		22D75A04A020FD0E088C0426 /* Pods-RNFirebaseStarter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFirebaseStarter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RNFirebaseStarter/Pods-RNFirebaseStarter.debug.xcconfig"; sourceTree = "<group>"; };
-		27760E6A229B6FDF00F5F127 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "RNFirebaseStarter/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		2D02E47B1E0B4A5D006451C7 /* RNFirebaseStarter-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RNFirebaseStarter-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* RNFirebaseStarter-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RNFirebaseStarter-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = panthunter/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = panthunter/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = panthunter/main.m; sourceTree = "<group>"; };
+		22D75A04A020FD0E088C0426 /* Pods-panthunter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-panthunter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-panthunter/Pods-panthunter.debug.xcconfig"; sourceTree = "<group>"; };
+		27760E6A229B6FDF00F5F127 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "panthunter/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2D02E47B1E0B4A5D006451C7 /* panthunter-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "panthunter-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* panthunter-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "panthunter-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		4A114661868ACFA83CCA60B3 /* libPods-RNFirebaseStarter-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNFirebaseStarter-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		599A1087F9C545123EFD61BE /* libPods-RNFirebaseStarter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNFirebaseStarter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C04F7E60E3774814827066E /* Pods-RNFirebaseStarter-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFirebaseStarter-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RNFirebaseStarter-tvOS/Pods-RNFirebaseStarter-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		7A230A0DEF48DF21D545AA71 /* Pods-RNFirebaseStarter-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFirebaseStarter-tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-RNFirebaseStarter-tvOS/Pods-RNFirebaseStarter-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		9C3AC53CF282E97E63953C49 /* libPods-RNFirebaseStarterTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNFirebaseStarterTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AC301B00DE1F70B71BE4D317 /* Pods-RNFirebaseStarterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFirebaseStarterTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RNFirebaseStarterTests/Pods-RNFirebaseStarterTests.release.xcconfig"; sourceTree = "<group>"; };
-		CA346B7E0D05342E8E702E1C /* Pods-RNFirebaseStarter-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFirebaseStarter-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RNFirebaseStarter-tvOSTests/Pods-RNFirebaseStarter-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E36E327AAA5B4552B4028263 /* Pods-RNFirebaseStarterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFirebaseStarterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RNFirebaseStarterTests/Pods-RNFirebaseStarterTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4A114661868ACFA83CCA60B3 /* libPods-panthunter-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-panthunter-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		599A1087F9C545123EFD61BE /* libPods-panthunter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-panthunter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C04F7E60E3774814827066E /* Pods-panthunter-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-panthunter-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-panthunter-tvOS/Pods-panthunter-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		7A230A0DEF48DF21D545AA71 /* Pods-panthunter-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-panthunter-tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-panthunter-tvOS/Pods-panthunter-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		9C3AC53CF282E97E63953C49 /* libPods-panthunterTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-panthunterTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC301B00DE1F70B71BE4D317 /* Pods-panthunterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-panthunterTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-panthunterTests/Pods-panthunterTests.release.xcconfig"; sourceTree = "<group>"; };
+		CA346B7E0D05342E8E702E1C /* Pods-panthunter-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-panthunter-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-panthunter-tvOSTests/Pods-panthunter-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E36E327AAA5B4552B4028263 /* Pods-panthunterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-panthunterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-panthunterTests/Pods-panthunterTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F2C89EE2F4607D097253AE26 /* Pods-RNFirebaseStarter-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFirebaseStarter-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RNFirebaseStarter-tvOSTests/Pods-RNFirebaseStarter-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		F2C89EE2F4607D097253AE26 /* Pods-panthunter-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-panthunter-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-panthunter-tvOSTests/Pods-panthunter-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB23C3742761BB2944FDCE0B /* libPods-RNFirebaseStarterTests.a in Frameworks */,
+				CB23C3742761BB2944FDCE0B /* libPods-panthunterTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +89,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
-				66F583A38C047519D1E18159 /* libPods-RNFirebaseStarter.a in Frameworks */,
+				66F583A38C047519D1E18159 /* libPods-panthunter.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,7 +99,7 @@
 			files = (
 				ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */,
-				039963B89D919933DA02DD1D /* libPods-RNFirebaseStarter-tvOS.a in Frameworks */,
+				039963B89D919933DA02DD1D /* libPods-panthunter-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,20 +107,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADDA258B0C3DE0261C60A364 /* libPods-RNFirebaseStarter-tvOSTests.a in Frameworks */,
+				ADDA258B0C3DE0261C60A364 /* libPods-panthunter-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* RNFirebaseStarterTests */ = {
+		00E356EF1AD99517003FC87E /* panthunterTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* RNFirebaseStarterTests.m */,
+				00E356F21AD99517003FC87E /* panthunterTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = RNFirebaseStarterTests;
+			path = panthunterTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -134,19 +134,19 @@
 		0F65422D7FF42AB1B1B439CC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5C04F7E60E3774814827066E /* Pods-RNFirebaseStarter-tvOS.debug.xcconfig */,
-				7A230A0DEF48DF21D545AA71 /* Pods-RNFirebaseStarter-tvOS.release.xcconfig */,
-				CA346B7E0D05342E8E702E1C /* Pods-RNFirebaseStarter-tvOSTests.debug.xcconfig */,
-				F2C89EE2F4607D097253AE26 /* Pods-RNFirebaseStarter-tvOSTests.release.xcconfig */,
-				22D75A04A020FD0E088C0426 /* Pods-RNFirebaseStarter.debug.xcconfig */,
-				0B0D8FD9866DDB3E9D5FE660 /* Pods-RNFirebaseStarter.release.xcconfig */,
-				E36E327AAA5B4552B4028263 /* Pods-RNFirebaseStarterTests.debug.xcconfig */,
-				AC301B00DE1F70B71BE4D317 /* Pods-RNFirebaseStarterTests.release.xcconfig */,
+				5C04F7E60E3774814827066E /* Pods-panthunter-tvOS.debug.xcconfig */,
+				7A230A0DEF48DF21D545AA71 /* Pods-panthunter-tvOS.release.xcconfig */,
+				CA346B7E0D05342E8E702E1C /* Pods-panthunter-tvOSTests.debug.xcconfig */,
+				F2C89EE2F4607D097253AE26 /* Pods-panthunter-tvOSTests.release.xcconfig */,
+				22D75A04A020FD0E088C0426 /* Pods-panthunter.debug.xcconfig */,
+				0B0D8FD9866DDB3E9D5FE660 /* Pods-panthunter.release.xcconfig */,
+				E36E327AAA5B4552B4028263 /* Pods-panthunterTests.debug.xcconfig */,
+				AC301B00DE1F70B71BE4D317 /* Pods-panthunterTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* RNFirebaseStarter */ = {
+		13B07FAE1A68108700A75B9A /* panthunter */ = {
 			isa = PBXGroup;
 			children = (
 				27760E6A229B6FDF00F5F127 /* GoogleService-Info.plist */,
@@ -158,7 +158,7 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = RNFirebaseStarter;
+			name = panthunter;
 			sourceTree = "<group>";
 		};
 		2759474C2261A42900BA95C5 /* Recovered References */ = {
@@ -174,10 +174,10 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
-				599A1087F9C545123EFD61BE /* libPods-RNFirebaseStarter.a */,
-				4A114661868ACFA83CCA60B3 /* libPods-RNFirebaseStarter-tvOS.a */,
-				11B23455DE3C4D5673E7318E /* libPods-RNFirebaseStarter-tvOSTests.a */,
-				9C3AC53CF282E97E63953C49 /* libPods-RNFirebaseStarterTests.a */,
+				599A1087F9C545123EFD61BE /* libPods-panthunter.a */,
+				4A114661868ACFA83CCA60B3 /* libPods-panthunter-tvOS.a */,
+				11B23455DE3C4D5673E7318E /* libPods-panthunter-tvOSTests.a */,
+				9C3AC53CF282E97E63953C49 /* libPods-panthunterTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -192,9 +192,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* RNFirebaseStarter */,
+				13B07FAE1A68108700A75B9A /* panthunter */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* RNFirebaseStarterTests */,
+				00E356EF1AD99517003FC87E /* panthunterTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				0F65422D7FF42AB1B1B439CC /* Pods */,
@@ -208,10 +208,10 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* RNFirebaseStarter.app */,
-				00E356EE1AD99517003FC87E /* RNFirebaseStarterTests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* RNFirebaseStarter-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* RNFirebaseStarter-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* panthunter.app */,
+				00E356EE1AD99517003FC87E /* panthunterTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* panthunter-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* panthunter-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -219,9 +219,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* RNFirebaseStarterTests */ = {
+		00E356ED1AD99517003FC87E /* panthunterTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "RNFirebaseStarterTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "panthunterTests" */;
 			buildPhases = (
 				4FA1736D7C4B627B721868D5 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -233,14 +233,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = RNFirebaseStarterTests;
-			productName = RNFirebaseStarterTests;
-			productReference = 00E356EE1AD99517003FC87E /* RNFirebaseStarterTests.xctest */;
+			name = panthunterTests;
+			productName = panthunterTests;
+			productReference = 00E356EE1AD99517003FC87E /* panthunterTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* RNFirebaseStarter */ = {
+		13B07F861A680F5B00A75B9A /* panthunter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "RNFirebaseStarter" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "panthunter" */;
 			buildPhases = (
 				68C8DDEF1FB1D75B5BB1B6BF /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
@@ -254,14 +254,14 @@
 			);
 			dependencies = (
 			);
-			name = RNFirebaseStarter;
+			name = panthunter;
 			productName = "Hello World";
-			productReference = 13B07F961A680F5B00A75B9A /* RNFirebaseStarter.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* panthunter.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* RNFirebaseStarter-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* panthunter-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "RNFirebaseStarter-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "panthunter-tvOS" */;
 			buildPhases = (
 				F2D1C0B3AA54F23E0D104D24 /* [CP] Check Pods Manifest.lock */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
@@ -273,14 +273,14 @@
 			);
 			dependencies = (
 			);
-			name = "RNFirebaseStarter-tvOS";
-			productName = "RNFirebaseStarter-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* RNFirebaseStarter-tvOS.app */;
+			name = "panthunter-tvOS";
+			productName = "panthunter-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* panthunter-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* RNFirebaseStarter-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* panthunter-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "RNFirebaseStarter-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "panthunter-tvOSTests" */;
 			buildPhases = (
 				79393CDDE0E200C8D21E3C57 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
@@ -292,9 +292,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "RNFirebaseStarter-tvOSTests";
-			productName = "RNFirebaseStarter-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* RNFirebaseStarter-tvOSTests.xctest */;
+			name = "panthunter-tvOSTests";
+			productName = "panthunter-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* panthunter-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -321,7 +321,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "RNFirebaseStarter" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "panthunter" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -335,10 +335,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* RNFirebaseStarter */,
-				00E356ED1AD99517003FC87E /* RNFirebaseStarterTests */,
-				2D02E47A1E0B4A5D006451C7 /* RNFirebaseStarter-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* RNFirebaseStarter-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* panthunter */,
+				00E356ED1AD99517003FC87E /* panthunterTests */,
+				2D02E47A1E0B4A5D006451C7 /* panthunter-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* panthunter-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -439,7 +439,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RNFirebaseStarterTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-panthunterTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -461,7 +461,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RNFirebaseStarter-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-panthunter-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -483,7 +483,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RNFirebaseStarter-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-panthunter-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -496,7 +496,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RNFirebaseStarter/Pods-RNFirebaseStarter-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-panthunter/Pods-panthunter-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -505,7 +505,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RNFirebaseStarter/Pods-RNFirebaseStarter-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-panthunter/Pods-panthunter-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F2D1C0B3AA54F23E0D104D24 /* [CP] Check Pods Manifest.lock */ = {
@@ -523,7 +523,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RNFirebaseStarter-tvOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-panthunter-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -537,7 +537,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* RNFirebaseStarterTests.m in Sources */,
+				00E356F31AD99517003FC87E /* panthunterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,7 +563,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCD954D1E0B4F2C00145EB5 /* RNFirebaseStarterTests.m in Sources */,
+				2DCD954D1E0B4F2C00145EB5 /* panthunterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,12 +572,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* RNFirebaseStarter */;
+			target = 13B07F861A680F5B00A75B9A /* panthunter */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* RNFirebaseStarter-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* panthunter-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -589,7 +589,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = RNFirebaseStarter;
+			path = panthunter;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -597,7 +597,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E36E327AAA5B4552B4028263 /* Pods-RNFirebaseStarterTests.debug.xcconfig */;
+			baseConfigurationReference = E36E327AAA5B4552B4028263 /* Pods-panthunterTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -608,7 +608,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
-				INFOPLIST_FILE = RNFirebaseStarterTests/Info.plist;
+				INFOPLIST_FILE = panthunterTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -621,13 +621,13 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RNFirebaseStarter.app/RNFirebaseStarter";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/panthunter.app/panthunter";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC301B00DE1F70B71BE4D317 /* Pods-RNFirebaseStarterTests.release.xcconfig */;
+			baseConfigurationReference = AC301B00DE1F70B71BE4D317 /* Pods-panthunterTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -635,7 +635,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
-				INFOPLIST_FILE = RNFirebaseStarterTests/Info.plist;
+				INFOPLIST_FILE = panthunterTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -648,13 +648,13 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RNFirebaseStarter.app/RNFirebaseStarter";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/panthunter.app/panthunter";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22D75A04A020FD0E088C0426 /* Pods-RNFirebaseStarter.debug.xcconfig */;
+			baseConfigurationReference = 22D75A04A020FD0E088C0426 /* Pods-panthunter.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -663,22 +663,22 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
-				INFOPLIST_FILE = RNFirebaseStarter/Info.plist;
+				INFOPLIST_FILE = panthunter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.invertase.RNFirebaseStarter;
-				PRODUCT_NAME = RNFirebaseStarter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.invertase.panthunter;
+				PRODUCT_NAME = panthunter;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0B0D8FD9866DDB3E9D5FE660 /* Pods-RNFirebaseStarter.release.xcconfig */;
+			baseConfigurationReference = 0B0D8FD9866DDB3E9D5FE660 /* Pods-panthunter.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -686,22 +686,22 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
-				INFOPLIST_FILE = RNFirebaseStarter/Info.plist;
+				INFOPLIST_FILE = panthunter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.invertase.RNFirebaseStarter;
-				PRODUCT_NAME = RNFirebaseStarter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.invertase.panthunter;
+				PRODUCT_NAME = panthunter;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C04F7E60E3774814827066E /* Pods-RNFirebaseStarter-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 5C04F7E60E3774814827066E /* Pods-panthunter-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -716,7 +716,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
-				INFOPLIST_FILE = "RNFirebaseStarter-tvOS/Info.plist";
+				INFOPLIST_FILE = "panthunter-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -726,7 +726,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.invertase.RNFirebaseStarter-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.invertase.panthunter-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -736,7 +736,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A230A0DEF48DF21D545AA71 /* Pods-RNFirebaseStarter-tvOS.release.xcconfig */;
+			baseConfigurationReference = 7A230A0DEF48DF21D545AA71 /* Pods-panthunter-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -751,7 +751,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
-				INFOPLIST_FILE = "RNFirebaseStarter-tvOS/Info.plist";
+				INFOPLIST_FILE = "panthunter-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -761,7 +761,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.invertase.RNFirebaseStarter-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.invertase.panthunter-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -771,7 +771,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA346B7E0D05342E8E702E1C /* Pods-RNFirebaseStarter-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = CA346B7E0D05342E8E702E1C /* Pods-panthunter-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -785,7 +785,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
-				INFOPLIST_FILE = "RNFirebaseStarter-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "panthunter-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -795,17 +795,17 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.invertase.RNFirebaseStarter-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.invertase.panthunter-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RNFirebaseStarter-tvOS.app/RNFirebaseStarter-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/panthunter-tvOS.app/panthunter-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2C89EE2F4607D097253AE26 /* Pods-RNFirebaseStarter-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = F2C89EE2F4607D097253AE26 /* Pods-panthunter-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -819,7 +819,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
-				INFOPLIST_FILE = "RNFirebaseStarter-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "panthunter-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -829,10 +829,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.invertase.RNFirebaseStarter-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.invertase.panthunter-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RNFirebaseStarter-tvOS.app/RNFirebaseStarter-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/panthunter-tvOS.app/panthunter-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -939,7 +939,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "RNFirebaseStarterTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "panthunterTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -948,7 +948,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "RNFirebaseStarter" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "panthunter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -957,7 +957,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "RNFirebaseStarter-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "panthunter-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -966,7 +966,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "RNFirebaseStarter-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "panthunter-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -975,7 +975,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "RNFirebaseStarter" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "panthunter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
