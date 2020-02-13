@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
 import auth from "@react-native-firebase/auth";
+import { EmailInput, PasswordInput } from "../components";
 
 export default function HomeScreen({ navigation }) {
   const [user, setUser] = useState();
@@ -43,8 +44,6 @@ export const LoginScreen = () => {
   const login = async () => {
     try {
       await auth().signInWithEmailAndPassword(email, password);
-      setEmail("");
-      setPassword("");
     } catch (e) {
       Alert.alert(e.name, e.message);
     }
@@ -63,24 +62,12 @@ export const LoginScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Email:</Text>
-      <TextInput
-        autoCorrect={false}
-        autoCompleteType="email"
-        keyboardType="email-address"
-        onChangeText={value => setEmail(value)}
-        value={email}
-        placeholder="Enter email..."
-      />
+      <EmailInput onChangeText={value => setEmail(value)} value={email} />
       <Text>Password:</Text>
-      <TextInput
-        secureTextEntry
-        autoCorrect={false}
-        autoCompleteType="password"
+      <PasswordInput
         onChangeText={value => setPassword(value)}
         value={password}
-        placeholder="Enter password..."
       />
-
       <Button title="Login" onPress={login} />
       <Button title="Register" onPress={register} />
     </View>
@@ -97,6 +84,6 @@ const styles = StyleSheet.create({
   welcome: {
     fontSize: 20,
     textAlign: "center",
-    margin: 10,
-  },
+    margin: 10
+  }
 });

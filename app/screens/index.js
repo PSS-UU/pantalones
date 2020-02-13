@@ -1,10 +1,17 @@
-import { connect } from 'react-redux';
-import HomeScreenComponent from './HomeScreen';
-export { DetailsScreen } from './DetailsScreen';
+import { connect } from "react-redux";
+import HomeScreenComponent from "./HomeScreen";
+import { setUser } from "../state/actions";
+export { DetailsScreen } from "./DetailsScreen";
 
-const mapHomeStateToProps = state => {
-  const { auth } = state;
-  return { auth };
-};
+const mapHomeStateToProps = state => ({
+  auth: state.auth
+});
 
-export const HomeScreen = connect(mapHomeStateToProps)(HomeScreenComponent);
+const mapHomeDispatchToProps = dispatch => ({
+  setUser: user => dispatch(setUser(user))
+});
+
+export const HomeScreen = connect(
+  mapHomeStateToProps,
+  mapHomeDispatchToProps
+)(HomeScreenComponent);
