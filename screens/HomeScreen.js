@@ -1,20 +1,13 @@
 import * as firebase from "firebase";
 import React, { useState } from "react";
-import { EmailInput, PasswordInput } from "../components";
 import {
-  Image,
-  Platform,
   Button,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   Alert
 } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
-import * as WebBrowser from "expo-web-browser";
-
-import { MonoText } from "../components/StyledText";
+import { EmailInput, PasswordInput, PantMap } from "../components";
 
 export default function HomeScreen() {
   const [user, setUser] = useState();
@@ -32,16 +25,13 @@ export default function HomeScreen() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Home screen</Text>
+        <PantMap />
         <Text>
           Logged in user:{" "}
           <Text style={{ fontWeight: "bold" }}>
             {user ? user.email : "None"}
           </Text>
         </Text>
-        <Button
-          title="Go to Details"
-          onPress={() => navigation.navigate("Details")}
-        />
         <Button title="Logout" onPress={logout} />
       </View>
     );
