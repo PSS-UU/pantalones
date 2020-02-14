@@ -1,38 +1,16 @@
 import * as firebase from "firebase";
 import React, { useState } from "react";
-import {
-  Button,
-  StyleSheet,
-  Text,
-  View,
-  Alert
-} from "react-native";
+import { Button, StyleSheet, Text, View, Alert } from "react-native";
 import { EmailInput, PasswordInput, PantMap } from "../components";
 
 export default function HomeScreen() {
   const [user, setUser] = useState();
   firebase.auth().onAuthStateChanged(currentUser => setUser(currentUser));
 
-  const logout = async () => {
-    try {
-      await firebase.auth().signOut();
-    } catch (e) {
-      Alert.alert(e.name, e.message);
-    }
-  };
-
   if (user) {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Home screen</Text>
         <PantMap />
-        <Text>
-          Logged in user:{" "}
-          <Text style={{ fontWeight: "bold" }}>
-            {user ? user.email : "None"}
-          </Text>
-        </Text>
-        <Button title="Logout" onPress={logout} />
       </View>
     );
   }
