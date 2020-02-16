@@ -53,6 +53,6 @@ function getHeaderTitle(route) {
     case "Home":
       return "Panta mera!";
     case "Profile":
-      return "Din profil";
+      return "Your profile";
   }
 }
