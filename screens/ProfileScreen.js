@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as firebase from "firebase";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
@@ -21,11 +21,31 @@ export default function LinksScreen() {
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
     >
+      <View
+        style={styles.profileImagePlacement}>
+        <Image
+          style={{height: 110, width: 110}}
+          source={{uri: 'https://www.kindpng.com/picc/m/128-1282088_i-g-profile-icon-vector-png-transparent-png.png'}}
+          />
+        <Text>
+          Signed in as user:{" "}
+          <Text style={{ fontWeight: "bold" }}>{user ? user.email : "None"}</Text>
+        </Text>
+      </View>
+      
       <Text>
-        Logged in user:{" "}
-        <Text style={{ fontWeight: "bold" }}>{user ? user.email : "None"}</Text>
+        Full name:
       </Text>
-      <Button title="Logout" onPress={logout} />
+      <Text>
+        Email address:
+      </Text>
+      <Text>
+        Score:
+      </Text>
+      <Text>
+        Reviews:
+      </Text>
+      <Button title="Sign out" onPress={logout} />
     </ScrollView>
   );
 }
@@ -53,11 +73,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fafafa"
   },
+  profileImagePlacement: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   contentContainer: {
     paddingTop: 15
   },
   optionIconContainer: {
-    marginRight: 12
+    marginRight: 12,
   },
   option: {
     backgroundColor: "#fdfdfd",
