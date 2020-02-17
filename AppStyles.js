@@ -14,8 +14,21 @@ export default StyleSheet.create({
     backgroundColor: Colors.green
   },
 
+  marginBottom: {
+    marginBottom: 20
+  },
+
+  inputFieldContainer: {
+    borderRadius: 25,
+    backgroundColor: "#FFFFFF",
+    height: 40,
+    width: 200,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+
   yellowHeader: {
-    fontSize: 60,
+    fontSize: 46,
     color: "#FBDC64",
     fontFamily: "fredoka-one"
   },
