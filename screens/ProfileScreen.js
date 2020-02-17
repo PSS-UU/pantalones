@@ -22,30 +22,35 @@ export default function LinksScreen() {
       contentContainerStyle={styles.contentContainer}
     >
       <View
-        style={styles.profileImagePlacement}>
+        style={{justifyContent: 'center', alignItems: 'center',}}>
         <Image
           style={{height: 110, width: 110}}
           source={{uri: 'https://www.kindpng.com/picc/m/128-1282088_i-g-profile-icon-vector-png-transparent-png.png'}}
           />
         <Text>
-          Signed in as user:{" "}
+          Inloggad som:{" "}
           <Text style={{ fontWeight: "bold" }}>{user ? user.email : "None"}</Text>
         </Text>
       </View>
-      
-      <Text>
-        Full name:
-      </Text>
-      <Text>
-        Email address:
-      </Text>
-      <Text>
-        Score:
-      </Text>
-      <Text>
-        Reviews:
-      </Text>
-      <Button title="Sign out" onPress={logout} />
+
+      <View style={{paddingTop: 30}}>
+        <Text style={{fontSize: 20, paddingLeft: 20}}>
+          Full name:
+        </Text >
+        <Text style={{fontSize: 20, paddingLeft: 20}}>
+          Email address:
+        </Text>
+        <Text style={{fontSize: 20, paddingLeft: 20}}>
+          Address:
+        </Text>
+        <Text style={{fontSize: 20, paddingLeft: 20}}>
+          Score:
+        </Text>
+        <Text style={{fontSize: 20, paddingLeft: 20}}>
+          Reviews:
+        </Text>
+      </View>
+      <Button title="Logga ut" onPress={logout} />
     </ScrollView>
   );
 }
@@ -72,10 +77,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fafafa"
-  },
-  profileImagePlacement: {
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   contentContainer: {
     paddingTop: 15
