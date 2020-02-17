@@ -22,7 +22,7 @@ export default StyleSheet.create({
     borderRadius: 25,
     backgroundColor: "#FFFFFF",
     height: 40,
-    width: 200,
+    width: 240,
     justifyContent: "center",
     alignItems: "center"
   },
