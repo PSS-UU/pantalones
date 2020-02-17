@@ -2,6 +2,7 @@ import * as firebase from "firebase";
 import React, { useState } from "react";
 import { Button, StyleSheet, Text, View, Alert } from "react-native";
 import { EmailInput, PasswordInput, PantMap } from "../components";
+import styles from "../AppStyles";
 
 export default function HomeScreen() {
   const [user, setUser] = useState();
@@ -41,7 +42,8 @@ export const LoginScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.greenBg}>
+      <Text style={styles.yellowHeader}>Pantad!</Text>
       <Text>Email:</Text>
       <EmailInput onChangeText={value => setEmail(value)} value={email} />
       <Text>Password:</Text>
@@ -55,13 +57,14 @@ export const LoginScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF"
+const localStyles = StyleSheet.create({
+  circle: {
+    width: 100,
+    height: 100,
+    borderRadius: 100 / 2,
+    backgroundColor: "red"
   },
+
   welcome: {
     fontSize: 20,
     textAlign: "center",
