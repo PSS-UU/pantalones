@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import firebase from "firebase";
-import { StyleSheet, Text, View, Button, Image, Alert } from "react-native";
+import { StyleSheet, Text, View, Button, Image, Alert, TextInput, TouchableHighlight,} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
 import * as ImagePicker from 'expo-image-picker';
@@ -9,6 +9,7 @@ export default function ProfileScreen() {
   const [imageUrl, setImageUrl] = useState();
   const user = firebase.auth().currentUser;
   const profilePictureRef = firebase.storage().ref().child(`images/profiles/${user.uid}`);
+
 
   useEffect(() => {
     const getProfilePicture = async () => {
@@ -54,11 +55,23 @@ export default function ProfileScreen() {
     >
       <View
         style={{justifyContent: 'center', alignItems: 'center',}}>
+        
         <Image
-          style={{height: 110, width: 110}}
+          style={{height: 110, width: 110, borderRadius: 300/2, overflow: 'hidden'}}
           source={{uri: imageUrl}}
+        />
+
+        <TouchableHighlight style= {{paddingLeft: 100,}} onPress={this.onChooseImagePress}>
+          <Image
+            style={{height:30, width: 30}}
+            source={require('../assets/images/camera.png')}
           />
-        <Button title="Ladda upp bild" onPress={this.onChooseImagePress} />
+        </TouchableHighlight>  
+      </View>
+
+
+      <View
+        style={{justifyContent: 'center', alignItems: 'center',}}>
         <Text>
           Inloggad som:{" "}
           <Text style={{ fontWeight: "bold" }}>{user ? user.email : "None"}</Text>
@@ -67,21 +80,29 @@ export default function ProfileScreen() {
 
       <View style={{paddingTop: 30}}>
         <Text style={{fontSize: 20, paddingLeft: 20}}>
-          Full name:
-        </Text >
-        <Text style={{fontSize: 20, paddingLeft: 20}}>
-          Email address:
+          För- och efternamn:
         </Text>
+
         <Text style={{fontSize: 20, paddingLeft: 20}}>
-          Address:
+          E-postadress:{" "}
+          <Text style={{ fontWeight: "bold" }}>{user ? user.email : "None"}</Text>
         </Text>
+
         <Text style={{fontSize: 20, paddingLeft: 20}}>
-          Score:
+          Adress:
         </Text>
+
         <Text style={{fontSize: 20, paddingLeft: 20}}>
-          Reviews:
+          Poäng:
         </Text>
+
+        <Text style={{fontSize: 20, paddingLeft: 20}}>
+          Antal följare:
+        </Text>
+
+
       </View>
+
       <Button title="Logga ut" onPress={logout} />
     </ScrollView>
   );
