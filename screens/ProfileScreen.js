@@ -1,10 +1,11 @@
 import * as React from "react";
-import * as firebase from "firebase";
-import { StyleSheet, Text, View, Button, Image } from "react-native";
+import firebase from "firebase";
+import { StyleSheet, Text, View, Button, Image, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
 import { useDispatch } from 'react-redux'
 import { setUser } from "../state/actions";
+import * as ImagePicker from 'expo-image-picker';
 
 export default function ProfileScreen() {
   const user = firebase.auth().currentUser;
@@ -19,6 +20,29 @@ export default function ProfileScreen() {
     }
   };
 
+  onChooseImagePress = async () => {
+    // let result = await ImagePicker.launchCameraAsync();
+    let result = await ImagePicker.launchImageLibraryAsync();
+
+    if (!result.cancelled) {
+      this.uploadImage(result.uri, "test-image")
+        .then(() => {
+          Alert.alert("Success");
+        })
+        .catch((error) => {
+          Alert.alert(error);
+        });
+    }
+  }
+
+  uploadImage = async (uri, imageName) => {
+    const repsonse = await fetch(uri);
+    const blob = await response.blob();
+    
+    var ref = firebase.storage().ref().child("images/" + imageName);
+    return ref.put(blob);
+  }
+
   return (
     <ScrollView
       style={styles.container}
@@ -30,6 +54,7 @@ export default function ProfileScreen() {
           style={{height: 110, width: 110}}
           source={{uri: 'https://www.kindpng.com/picc/m/128-1282088_i-g-profile-icon-vector-png-transparent-png.png'}}
           />
+        <Button title="Ladda upp bild" onPress={this.onChooseImagePress} />
         <Text>
           Inloggad som:{" "}
           <Text style={{ fontWeight: "bold" }}>{user ? user.email : "None"}</Text>
