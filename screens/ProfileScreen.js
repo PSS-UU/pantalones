@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import firebase from "firebase";
 import { StyleSheet, Text, View, Button, Image, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -8,8 +8,18 @@ import { setUser } from "../state/actions";
 import * as ImagePicker from 'expo-image-picker';
 
 export default function ProfileScreen() {
+  const [imageUrl, setImageUrl] = useState();
   const user = firebase.auth().currentUser;
   const dispatch = useDispatch();
+  const profilePictureRef = firebase.storage().ref().child(`images/profiles/${user.uid}`);
+
+  useEffect(() => {
+    const getProfilePicture = async () => {
+      const url = await profilePictureRef.getDownloadURL();
+      setImageUrl(url);
+    };
+    getProfilePicture();
+  });
 
   const logout = async () => {
     try {
@@ -21,26 +31,24 @@ export default function ProfileScreen() {
   };
 
   onChooseImagePress = async () => {
-    // let result = await ImagePicker.launchCameraAsync();
     let result = await ImagePicker.launchImageLibraryAsync();
 
     if (!result.cancelled) {
-      this.uploadImage(result.uri, "test-image")
-        .then(() => {
-          Alert.alert("Success");
-        })
-        .catch((error) => {
-          Alert.alert(error);
-        });
+      try {
+        await this.uploadImage(result.uri);
+      } catch (error) {
+        Alert.alert("error", `Error: ${error}`);
+      }
     }
   }
 
-  uploadImage = async (uri, imageName) => {
-    const repsonse = await fetch(uri);
+  uploadImage = async uri => {
+    const response = await fetch(uri);
     const blob = await response.blob();
     
-    var ref = firebase.storage().ref().child("images/" + imageName);
-    return ref.put(blob);
+    await profilePictureRef.put(blob);
+    const url = await profilePictureRef.getDownloadURL();
+    setImageUrl(url);
   }
 
   return (
@@ -52,7 +60,7 @@ export default function ProfileScreen() {
         style={{justifyContent: 'center', alignItems: 'center',}}>
         <Image
           style={{height: 110, width: 110}}
-          source={{uri: 'https://www.kindpng.com/picc/m/128-1282088_i-g-profile-icon-vector-png-transparent-png.png'}}
+          source={{uri: imageUrl}}
           />
         <Button title="Ladda upp bild" onPress={this.onChooseImagePress} />
         <Text>
