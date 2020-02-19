@@ -1,13 +1,44 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import firebase from "firebase";
 import { StyleSheet, Text, View, Button, Image, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import * as WebBrowser from "expo-web-browser";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
 import * as ImagePicker from 'expo-image-picker';
+import { TextInput } from 'react-native';
+import { AddName } from "../components"
+
 
 export default function ProfileScreen() {
+  const [imageUrl, setImageUrl] = useState();
   const user = firebase.auth().currentUser;
+  const profilePictureRef = firebase.storage().ref().child(`images/profiles/${user.uid}`);
+  const [value, onChangeText] = React.useState('För- och efternamn');
+  const [fullName, setName] = useState({name: ''});
+
+  useEffect(() => {
+    const getProfilePicture = async () => {
+      const url = await profilePictureRef.getDownloadURL();
+      setImageUrl(url);
+    };
+    getProfilePicture();
+  });
+
+  let addName = fullName => {
+    firebase.database().ref(`users/${user.uid}`).push({
+      name: fullName 
+    })
+  }
+
+  handleChange = e => {
+    setName({
+      name: e.nativeEvent.text
+    });
+  };
+
+  handleSubmit = () => {
+    addName(fullName.name);
+    Alert.alert('Item saved successfully');
+  };
 
   const logout = async () => {
     try {
@@ -18,27 +49,27 @@ export default function ProfileScreen() {
   };
 
   onChooseImagePress = async () => {
-    // let result = await ImagePicker.launchCameraAsync();
     let result = await ImagePicker.launchImageLibraryAsync();
 
     if (!result.cancelled) {
-      this.uploadImage(result.uri, "test-image")
-        .then(() => {
-          Alert.alert("Success");
-        })
-        .catch((error) => {
-          Alert.alert(error);
-        });
+      try {
+        await this.uploadImage(result.uri);
+      } catch (error) {
+        Alert.alert("error", `Error: ${error}`);
+      }
     }
   }
 
-  uploadImage = async (uri, imageName) => {
-    const repsonse = await fetch(uri);
+  uploadImage = async uri => {
+    const response = await fetch(uri);
     const blob = await response.blob();
     
-    var ref = firebase.storage().ref().child("images/" + imageName);
-    return ref.put(blob);
+    await profilePictureRef.put(blob);
+    const url = await profilePictureRef.getDownloadURL();
+    setImageUrl(url);
   }
+
+  
 
   return (
     <ScrollView
@@ -48,22 +79,23 @@ export default function ProfileScreen() {
       <View
         style={{justifyContent: 'center', alignItems: 'center',}}>
         <Image
-          style={{height: 110, width: 110}}
-          source={{uri: 'https://www.kindpng.com/picc/m/128-1282088_i-g-profile-icon-vector-png-transparent-png.png'}}
+          style={{height: 110, width: 110, borderRadius: 110/ 2}}
+          source={{uri: imageUrl}}
           />
         <Button title="Ladda upp bild" onPress={this.onChooseImagePress} />
-        <Text>
-          Inloggad som:{" "}
-          <Text style={{ fontWeight: "bold" }}>{user ? user.email : "None"}</Text>
-        </Text>
       </View>
 
       <View style={{paddingTop: 30}}>
         <Text style={{fontSize: 20, paddingLeft: 20}}>
-          Full name:
+          Full name: {" "}
         </Text >
+
+        
+        <TextInput style={{ paddingLeft: 20, height: 30, width: 200, borderColor: 'gray', borderWidth: 1 }} onChange={handleChange} />
+          <Button title="Klar" onPress={handleSubmit}/>
         <Text style={{fontSize: 20, paddingLeft: 20}}>
-          Email address:
+          Email address: {" "}
+          <Text style={{ fontWeight: "bold" }}>{user ? user.email : "None"}</Text>
         </Text>
         <Text style={{fontSize: 20, paddingLeft: 20}}>
           Address:
