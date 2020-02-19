@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen, { LoginScreen } from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import MyPantScreen from "../screens/MyPantScreen";
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = "Home";
@@ -25,6 +26,16 @@ export default function BottomTabNavigator({ navigation, route }) {
             title: "Home",
             tabBarIcon: ({ focused }) => (
               <TabBarIcon focused={focused} name="ios-home" />
+            )
+          }}
+        />
+        <BottomTab.Screen
+          name="MyPant"
+          component={MyPantScreen}
+          options={{
+            title: "MinPant",
+            tabBarIcon: ({ focused }) => (
+              <TabBarIcon focused={focused} name="ios-book" />
             )
           }}
         />
@@ -54,5 +65,7 @@ function getHeaderTitle(route) {
       return "Panta mera!";
     case "Profile":
       return "Din profil";
+    case "MyPant":
+      return "Min Pant";
   }
 }
