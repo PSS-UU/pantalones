@@ -12,6 +12,7 @@ export default function ProfileScreen() {
   const user = firebase.auth().currentUser;
   const dispatch = useDispatch();
   const profilePictureRef = firebase.storage().ref().child(`images/profiles/${user.uid}`);
+  const [fullName, setName] = useState({name: ''});
 
 
   useEffect(() => {
@@ -21,6 +22,23 @@ export default function ProfileScreen() {
     };
     getProfilePicture();
   });
+
+  let addName = fullName => {
+    firebase.database().ref(`users/${user.uid}`).push({
+      name: fullName
+    })
+  }
+
+  handleChange = e => {
+    setName({
+      name:e.nativeEvent.text
+    });
+  };
+
+  handleSubmit = () => {
+    addName(fullName.name);
+    Alert.alert('Sparat!');
+  };
 
   const logout = async () => {
     try {
@@ -84,8 +102,11 @@ export default function ProfileScreen() {
 
       <View style={{paddingTop: 30}}>
         <Text style={{fontSize: 20, paddingLeft: 20}}>
-          För- och efternamn:
+          För- och efternamn:{" "}
         </Text>
+
+        <TextInput style={{ paddingLeft: 20, height: 30, width: 200, borderColor: 'gray', borderWidth: 1 }} onChange={handleChange} />
+          <Button title="Klar" onPress={handleSubmit}/>
 
         <Text style={{fontSize: 20, paddingLeft: 20}}>
           E-postadress:{" "}
