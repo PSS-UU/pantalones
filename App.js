@@ -8,6 +8,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as firebase from "firebase";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import useLinking from "./navigation/useLinking";
+import appStyles from "./AppStyles";
 
 const Stack = createStackNavigator();
 
@@ -45,7 +46,8 @@ export default function App(props) {
         // Load fonts
         await Font.loadAsync({
           ...Ionicons.font,
-          "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf")
+          "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf"),
+          "fredoka-one": require("./assets/fonts/FredokaOne-Regular.ttf")
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
