@@ -10,14 +10,17 @@ import {
   View,
   TouchableOpacity,
   Text,
-  TextInput,
   Button,
   Image,
-  Slider
+  Slider,
+  Alert
 } from "react-native";
+import { SelectLocationModal } from "./SelectLocationModal";
+import { MaterialIcons } from "@expo/vector-icons";
 
-export default CreatePant = props => {
+export default CreatePant = () => {
   const [cansCount, setCanAmount] = useState(0);
+  const [location, setLocation] = useState(null);
   const [modalVisible, setModal] = useState(false);
 
   const user = firebase.auth().currentUser.uid;
@@ -27,6 +30,7 @@ export default CreatePant = props => {
   async function addPant() {
     await ref.add({
       cans: cansCount,
+      location: location,
       userId: user
     });
     setCanAmount(0);
@@ -58,6 +62,19 @@ export default CreatePant = props => {
             onValueChange={value => setCanAmount(value)}
           />
           <Text style={styles.cansSelectedText}>{cansCount}</Text>
+
+          <View style={styles.canHeader}>
+            <MaterialIcons name="location-on" size={42} />
+            {location ? (
+              <Text style={styles.cansAmountText}>
+                Longitude: <Text style={{ fontWeight: 'bold' }}>{location.longitude.toFixed(3)}</Text>
+                {"\n"}
+                Latitude: <Text style={{ fontWeight: 'bold' }}>{location.latitude.toFixed(3)}</Text>
+              </Text>
+            ) : (
+              <SelectLocationModal onSelectLocation={setLocation} />
+            )}
+          </View>
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={addPant}
@@ -69,7 +86,7 @@ export default CreatePant = props => {
       </Modal>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={setModal}
+        onPress={() => setModal(true)}
         style={styles.TouchableOpacityStyle}
       >
         <Image
