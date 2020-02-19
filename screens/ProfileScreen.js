@@ -11,7 +11,6 @@ export default function ProfileScreen() {
   const profilePictureRef = firebase.storage().ref().child(`images/profiles/${user.uid}`);
   const [fullName, setName] = useState({name: ''});
 
-
   useEffect(() => {
     const getProfilePicture = async () => {
       const url = await profilePictureRef.getDownloadURL();
@@ -21,7 +20,7 @@ export default function ProfileScreen() {
   });
 
   let addName = fullName => {
-    firebase.database().ref(`users/${user.uid}`).push({
+    firebase.database().ref(`users/${user.uid}`).set({
       name: fullName
     })
   }
@@ -64,6 +63,11 @@ export default function ProfileScreen() {
     await profilePictureRef.put(blob);
     const url = await profilePictureRef.getDownloadURL();
     setImageUrl(url);
+  }
+
+  getName = () => {
+    var name = firebase.database().ref(`users/${user.uid}`).once('value')
+    return name.snapshot.val()
   }
 
   return (
