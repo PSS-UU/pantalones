@@ -2,10 +2,9 @@ import * as React from "react";
 import * as firebase from "firebase";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import * as WebBrowser from "expo-web-browser";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
 
-export default function LinksScreen() {
+export default function ProfileScreen() {
   const user = firebase.auth().currentUser;
 
   const logout = async () => {
