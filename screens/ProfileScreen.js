@@ -3,13 +3,17 @@ import * as firebase from "firebase";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
+import { useDispatch } from 'react-redux'
+import { setUser } from "../state/actions";
 
 export default function ProfileScreen() {
   const user = firebase.auth().currentUser;
+  const dispatch = useDispatch();
 
   const logout = async () => {
     try {
       await firebase.auth().signOut();
+      dispatch(setUser(null));
     } catch (e) {
       Alert.alert(e.name, e.message);
     }
