@@ -155,14 +155,6 @@ export default function ProfileScreen() {
       </View>
 
 
-      <View
-        style={{justifyContent: 'center', alignItems: 'center',}}>
-        <Text>
-          Inloggad som:{" "} 
-          <Text style={{ fontWeight: "bold" }}>{user ? user.email : "None"}</Text>
-        </Text>
-      </View>
-
       <View style={{paddingTop: 30}}>
         
         <Text style={{fontSize: 20, paddingLeft: 20}}>
