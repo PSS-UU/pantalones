@@ -38,32 +38,22 @@ export default function MyPant() {
   };
 
   useEffect(() => {
-    let query = ref
-      .where("userId", "==", user)
-      .get()
-      .then(snapshot => {
-        const list = [];
-        if (snapshot.empty) {
-          console.log("No matching documents.");
-          return;
-        }
-        snapshot.forEach(doc => {
-          const { cans } = doc.data();
-          console.log(cans);
-          list.push({
-            id: doc.id,
-            cans
-          });
-          console.log(myPants);
+    return ref.onSnapshot(querySnapshot => {
+      const list = [];
+      querySnapshot.forEach(doc => {
+        const { cans } = doc.data();
+        list.push({
+          id: doc.id,
+          cans
         });
-        setMyPants(list);
-        if (loading) {
-          setLoading(false);
-        }
-      })
-      .catch(err => {
-        console.log("Error getting documents", err);
       });
+
+      setMyPants(list);
+
+      if (loading) {
+        setLoading(false);
+      }
+    });
   }, []);
 
   //Add pant to the db
@@ -93,7 +83,7 @@ export default function MyPant() {
   };
   */
 
-  /* if (loading) {
+  /* if (loading) {   //TODO: detta borde fixas
     return null; // or a spinner
   }*/
 
