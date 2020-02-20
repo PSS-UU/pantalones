@@ -15,7 +15,7 @@ import {
   Button,
   ScrollView
 } from "react-native";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import globalStyles from "../AppStyles";
 
 export default function MyPant() {
   const [cansCount, setCanAmount] = useState(0);
@@ -102,7 +102,7 @@ export default function MyPant() {
           <TouchableOpacity
             activeOpacity={0.7}
             oonPress={addPant}
-            style={styles.addButton}
+            style={globalStyles.lightGreenButton}
           >
             <Text>Lets pant!</Text>
           </TouchableOpacity>
@@ -169,11 +169,12 @@ const styles = StyleSheet.create({
     color: "red"
   },
   addButton: {
-    width: 70,
-    height: 70,
-    backgroundColor: "black",
-    position: "absolute",
-    bottom: 10
+    borderRadius: 20,
+    backgroundColor: "#228669",
+    height: 40,
+    width: 100,
+    justifyContent: "center",
+    alignItems: "center"
   },
 
   FloatingButtonStyle: {

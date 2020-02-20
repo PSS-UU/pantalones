@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const Colors = {
   green: "#28A07D",
   darkGreen: "black",
-  lightGreen: "white"
+  lightGreen: "#42C9A7"
 };
 
 export default StyleSheet.create({
@@ -16,6 +16,15 @@ export default StyleSheet.create({
 
   marginBottom: {
     marginBottom: 20
+  },
+
+  lightGreenButton: {
+    borderRadius: 20,
+    backgroundColor: Colors.lightGreen,
+    height: 40,
+    width: 100,
+    justifyContent: "center",
+    alignItems: "center"
   },
 
   inputFieldContainer: {
