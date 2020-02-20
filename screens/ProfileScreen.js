@@ -12,7 +12,10 @@ export default function ProfileScreen() {
   const user = firebase.auth().currentUser;
   const dispatch = useDispatch();
   const profilePictureRef = firebase.storage().ref().child(`images/profiles/${user.uid}`);
+  const infoRef = firebase.database().ref(`users/${user.uid}`);
   const [fullName, setName] = useState({name: ''});
+  const [nameFrom, setNameFrom] = useState();
+
 
   useEffect(() => {
     const getProfilePicture = async () => {
@@ -23,7 +26,7 @@ export default function ProfileScreen() {
   });
 
   let addName = fullName => {
-    firebase.database().ref(`users/${user.uid}`).set({
+    infoRef.set({
       name: fullName
     })
   }
@@ -70,9 +73,14 @@ export default function ProfileScreen() {
   }
 
   getName = () => {
-    var name = firebase.database().ref(`users/${user.uid}`).once('value')
-    return name.snapshot.val()
+    infoRef.once("child_added", function(snapshot) {
+      console.log(snapshot.val());
+      setNameFrom(snapshot.val());
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
   }
+  
 
   return (
     <ScrollView
@@ -99,19 +107,21 @@ export default function ProfileScreen() {
       <View
         style={{justifyContent: 'center', alignItems: 'center',}}>
         <Text>
-          Inloggad som:{" "}
+          Inloggad som:{" "} 
           <Text style={{ fontWeight: "bold" }}>{user ? user.email : "None"}</Text>
         </Text>
       </View>
 
       <View style={{paddingTop: 30}}>
         <Text style={{fontSize: 20, paddingLeft: 20}}>
-          För- och efternamn:{" "}
+          För- och efternamn:{" "} {nameFrom}
         </Text>
 
+        <Text style={{fontSize: 20, paddingLeft: 20}}>
+        </Text>
         <TextInput style={{ paddingLeft: 20, height: 30, width: 200, borderColor: 'gray', borderWidth: 1 }} onChange={handleChange} />
           <Button title="Klar" onPress={handleSubmit}/>
-
+          <Button title="Klar" onPress={getName}/>
         <Text style={{fontSize: 20, paddingLeft: 20}}>
           E-postadress:{" "}
           <Text style={{ fontWeight: "bold" }}>{user ? user.email : "None"}</Text>
