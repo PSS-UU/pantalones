@@ -1,6 +1,7 @@
 import * as firebase from "firebase";
 import React, { useState, Component, useEffect } from "react";
 import MyPantCard from "../components";
+import Colors from "../constants/Colors";
 import "@firebase/firestore";
 import Modal from "react-native-modal";
 import {
@@ -16,6 +17,7 @@ import {
   ScrollView
 } from "react-native";
 import globalStyles from "../AppStyles";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export default function MyPant() {
   const [cansCount, setCanAmount] = useState(0);
@@ -91,22 +93,24 @@ export default function MyPant() {
 
   return (
     <View style={styles.MainContainer}>
-      <Modal isVisible={modalVisible}>
-        <View style={styles.ModalContainer}>
-          <Text style={styles.modalText}>Add pant!</Text>
-          <Button title="x" onPress={toggleModal} />
+      <Modal style={styles.ModalColor} isVisible={modalVisible}>
+        <View style={styles.ModalHeaderContainer}>
+          <Text style={styles.modalText}>Skapa pant</Text>
+          <Button style={styles.exitButton} title="x" onPress={toggleModal} />
+        </View>
+        <View style={styles.ModalContent}>
           <TextInput
             style={styles.pantTextField}
             onChangeText={canAmount => setCanAmount(canAmount)}
           />
-          <TouchableOpacity
-            activeOpacity={0.7}
-            oonPress={addPant}
-            style={globalStyles.lightGreenButton}
-          >
-            <Text>Lets pant!</Text>
-          </TouchableOpacity>
         </View>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={addPant}
+          style={[globalStyles.lightGreenButton, globalStyles.positionBottom]}
+        >
+          <Text style={globalStyles.buttonText}>Lets pant!</Text>
+        </TouchableOpacity>
       </Modal>
       <Text>Min pant</Text>
       <View style={styles.container}>
@@ -134,7 +138,6 @@ const styles = StyleSheet.create({
   container: {},
   MainContainer: {
     flex: 1,
-
     alignItems: "center",
     backgroundColor: "#F5F5F5"
   },
@@ -166,15 +169,10 @@ const styles = StyleSheet.create({
 
   modalText: {
     fontSize: 32,
-    color: "red"
-  },
-  addButton: {
-    borderRadius: 20,
-    backgroundColor: "#228669",
-    height: 40,
-    width: 100,
-    justifyContent: "center",
-    alignItems: "center"
+    color: Colors.lightGreen,
+    alignSelf: "flex-start",
+    flex: 1,
+    fontFamily: "fredoka-one"
   },
 
   FloatingButtonStyle: {
@@ -183,10 +181,24 @@ const styles = StyleSheet.create({
     height: 70
   },
 
-  ModalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+  exitButton: {
+    alignSelf: "flex-end",
+    flex: 1
+  },
+
+  ModalContent: {
+    padding: 20,
+    backgroundColor: "white",
+    flex: 1
+  },
+
+  ModalColor: {
     backgroundColor: "white"
+  },
+
+  ModalHeaderContainer: {
+    padding: 20,
+    flexDirection: "row",
+    justifyContent: "flex-end"
   }
 });

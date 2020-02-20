@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export const Colors = {
   green: "#28A07D",
@@ -18,12 +19,22 @@ export default StyleSheet.create({
     marginBottom: 20
   },
 
+  buttonText: {
+    color: "white",
+    fontWeight: "500",
+    fontSize: 18
+  },
+
+  positionBottom: {
+    position: "absolute",
+    bottom: 30
+  },
+
   lightGreenButton: {
     borderRadius: 20,
     backgroundColor: Colors.lightGreen,
-    height: 40,
-    width: 100,
     justifyContent: "center",
+    padding: 16,
     alignItems: "center"
   },
 
