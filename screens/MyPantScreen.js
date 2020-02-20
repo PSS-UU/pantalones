@@ -93,25 +93,23 @@ export default function MyPant() {
   };
   */
 
-  if (loading) {
+  /* if (loading) {
     return null; // or a spinner
-  }
+  }*/
 
   return (
     <View style={styles.MainContainer}>
       <Modal isVisible={modalVisible}>
         <View style={{ flex: 1, backgroundColor: "white" }}>
           <Text style={styles.modalText}>Add pant!</Text>
-          <Button title="Hide modal" onPress={toggleModal} />
+          <Button title="x" onPress={toggleModal} />
+          <TextInput
+            style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+            onChangeText={canAmount => setCanAmount(canAmount)}
+          />
+          <Button title="Lets pant!" onPress={addPant} />
         </View>
       </Modal>
-      <TextInput
-        style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-        onChangeText={canAmount => setCanAmount(canAmount)}
-      />
-      <Text>Example of Floating Action Button</Text>
-      <Text>Click on Action Button to see Alert</Text>
-      <Text>{cansCount}</Text>
       <Text>Min pant</Text>
       <View style={styles.container}>
         <FlatList
