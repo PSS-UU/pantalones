@@ -15,13 +15,28 @@ export default function MyPant() {
   const [cansCount, setCanAmount] = useState(0);
   const user = firebase.auth().currentUser.uid;
 
-  //var pantsRef = firebase.database().ref("pants");
   const dbh = firebase.firestore();
+  const ref = dbh.collection("pants"); //reference to the pants collection
 
-  const ref = dbh.collection("pants");
+  //Get all the current users posted Pant
+  let query = ref
+    .where("userId", "==", user)
+    .get()
+    .then(snapshot => {
+      if (snapshot.empty) {
+        console.log("No matching documents.");
+        return;
+      }
 
-  //Get all the pant objects
+      snapshot.forEach(doc => {
+        console.log(doc.id, "=>", doc.data());
+      });
+    })
+    .catch(err => {
+      console.log("Error getting documents", err);
+    });
 
+  //Add pant to the db
   async function addPant() {
     await ref.add({
       cans: cansCount,
