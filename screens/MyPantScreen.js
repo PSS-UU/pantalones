@@ -1,5 +1,5 @@
 import * as firebase from "firebase";
-import React, { useState, Component } from "react";
+import React, { useState, Component, useEffect } from "react";
 import "@firebase/firestore";
 import {
   StyleSheet,
@@ -8,33 +8,52 @@ import {
   TouchableOpacity,
   Alert,
   Text,
-  TextInput
+  TextInput,
+  FlatList,
+  ScrollView,
+  Item
 } from "react-native";
 
 export default function MyPant() {
   const [cansCount, setCanAmount] = useState(0);
+  const [myPants, setMyPants] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const user = firebase.auth().currentUser.uid;
 
   const dbh = firebase.firestore();
   const ref = dbh.collection("pants"); //reference to the pants collection
 
   //Get all the current users posted Pant
-  let query = ref
-    .where("userId", "==", user)
-    .get()
-    .then(snapshot => {
-      if (snapshot.empty) {
-        console.log("No matching documents.");
-        return;
-      }
 
-      snapshot.forEach(doc => {
-        console.log(doc.id, "=>", doc.data());
+  useEffect(() => {
+    let query = ref
+      .where("userId", "==", user)
+      .get()
+      .then(snapshot => {
+        const list = [];
+        if (snapshot.empty) {
+          console.log("No matching documents.");
+          return;
+        }
+        snapshot.forEach(doc => {
+          const { cans } = doc.data();
+          console.log(cans);
+          list.push({
+            id: doc.id,
+            cans
+          });
+          console.log(myPants);
+        });
+        setMyPants(list);
+        if (loading) {
+          setLoading(false);
+        }
+      })
+      .catch(err => {
+        console.log("Error getting documents", err);
       });
-    })
-    .catch(err => {
-      console.log("Error getting documents", err);
-    });
+  }, []);
 
   //Add pant to the db
   async function addPant() {
@@ -44,7 +63,14 @@ export default function MyPant() {
     });
     setCanAmount("");
   }
-
+  function Item({ title }) {
+    return (
+      <View style={styles.item}>
+        <Text style={styles.title}>{title}</Text>
+      </View>
+    );
+  }
+  /* OLD FUNCTION
   const clickHandler = () => {
     Alert.alert("Floating Button Clicked");
     var newPostRef = pantsRef.push();
@@ -53,6 +79,11 @@ export default function MyPant() {
       userId: user
     });
   };
+  */
+
+  if (loading) {
+    return null; // or a spinner
+  }
 
   return (
     <View style={styles.MainContainer}>
@@ -74,6 +105,11 @@ export default function MyPant() {
         />
       </TouchableOpacity>
       <Text>Min pant</Text>
+      <FlatList
+        data={myPants}
+        renderItem={({ item }) => <Item title={item.cans} />}
+        keyExtractor={item => item.id}
+      />
     </View>
   );
 }
@@ -93,6 +129,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     bottom: 30
+  },
+  item: {
+    backgroundColor: "#f9c2ff",
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16
+  },
+  title: {
+    fontSize: 32
   },
 
   FloatingButtonStyle: {
