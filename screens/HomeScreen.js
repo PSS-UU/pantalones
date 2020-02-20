@@ -1,7 +1,17 @@
 import * as firebase from "firebase";
 import React, { useState } from "react";
-import { Button, StyleSheet, Text, View, Alert } from "react-native";
+import {
+  Button,
+  StyleSheet,
+  Text,
+  View,
+  Alert,
+  TouchableOpacity,
+  Image
+} from "react-native";
 import { EmailInput, PasswordInput, PantMap } from "../components";
+import styles from "../AppStyles";
+import logo from "../assets/images/can.png";
 
 export default function HomeScreen() {
   const [user, setUser] = useState();
@@ -41,27 +51,72 @@ export const LoginScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text>Email:</Text>
-      <EmailInput onChangeText={value => setEmail(value)} value={email} />
-      <Text>Password:</Text>
-      <PasswordInput
-        onChangeText={value => setPassword(value)}
-        value={password}
-      />
-      <Button title="Login" onPress={login} />
-      <Button title="Register" onPress={register} />
+    <View style={styles.greenBg}>
+      <Image style={[localStyles.stretch, styles.marginBottom]} source={logo} />
+      <Text style={[styles.yellowHeader, styles.marginBottom]}>Pantad!</Text>
+      <View style={[styles.inputFieldContainer, styles.marginBottom]}>
+        <EmailInput
+          onChangeText={value => setEmail(value)}
+          value={email}
+          placeholder="email"
+          style={localStyles.emailInput}
+        />
+      </View>
+      <View style={[styles.inputFieldContainer, styles.marginBottom]}>
+        <PasswordInput
+          onChangeText={value => setPassword(value)}
+          value={password}
+        />
+      </View>
+      <TouchableOpacity
+        style={[localStyles.greenButton, styles.marginBottom]}
+        title="Login"
+        onPress={login}
+      >
+        <Text style={localStyles.whiteText}>Logga in</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[localStyles.greenText, styles.marginBottom]}
+        title="Registrera"
+        onPress={register}
+      >
+        <Text style={localStyles.greenText}>Inte medlem? Registrera dig!</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF"
+const localStyles = StyleSheet.create({
+  emailInput: {
+    textAlign: "center",
+    color: "#28A07D",
+    marginBottom: 20
   },
+
+  greenText: {
+    color: "#0A5F48",
+    fontStyle: "italic"
+  },
+
+  whiteText: {
+    color: "white",
+    fontWeight: "500"
+  },
+
+  greenButton: {
+    borderRadius: 20,
+    backgroundColor: "#228669",
+    height: 40,
+    width: 100,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+
+  stretch: {
+    height: 50,
+    resizeMode: "contain"
+  },
+
   welcome: {
     fontSize: 20,
     textAlign: "center",

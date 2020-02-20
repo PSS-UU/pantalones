@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from 'react';
 import MapView from "react-native-maps";
-import { Dimensions, StyleSheet } from "react-native";
+import { Modal, Dimensions, StyleSheet, TouchableHighlight, View, Text, Alert} from "react-native";
+import { EmailInput } from './EmailInput.js';
 
 export const PantMap = props => {
+  const [modal, setModal] = useState(false)
   return (
     <MapView
       style={styles.map}
@@ -12,7 +14,9 @@ export const PantMap = props => {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421
       }}
-    />
+
+    >
+    </MapView>
   );
 };
 
