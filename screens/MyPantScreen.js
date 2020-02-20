@@ -1,6 +1,8 @@
 import * as firebase from "firebase";
 import React, { useState, Component, useEffect } from "react";
+import MyPantCard from "../components";
 import "@firebase/firestore";
+import Modal from "react-native-modal";
 import {
   StyleSheet,
   View,
@@ -10,14 +12,15 @@ import {
   Text,
   TextInput,
   FlatList,
-  ScrollView,
-  Item
+  Button,
+  ScrollView
 } from "react-native";
 
 export default function MyPant() {
   const [cansCount, setCanAmount] = useState(0);
   const [myPants, setMyPants] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [modalVisible, setModal] = useState(false);
 
   const user = firebase.auth().currentUser.uid;
 
@@ -25,6 +28,14 @@ export default function MyPant() {
   const ref = dbh.collection("pants"); //reference to the pants collection
 
   //Get all the current users posted Pant
+
+  toggleModal = () => {
+    if (!modalVisible) {
+      setModal(true);
+    } else {
+      setModal(false);
+    }
+  };
 
   useEffect(() => {
     let query = ref
@@ -63,10 +74,11 @@ export default function MyPant() {
     });
     setCanAmount("");
   }
-  function Item({ title }) {
+
+  function Item({ cans }) {
     return (
-      <View style={styles.item}>
-        <Text style={styles.title}>{title}</Text>
+      <View style={styles.cans}>
+        <Text style={styles.title}>{cans}</Text>
       </View>
     );
   }
@@ -87,6 +99,12 @@ export default function MyPant() {
 
   return (
     <View style={styles.MainContainer}>
+      <Modal isVisible={modalVisible}>
+        <View style={{ flex: 1, backgroundColor: "white" }}>
+          <Text style={styles.modalText}>Add pant!</Text>
+          <Button title="Hide modal" onPress={toggleModal} />
+        </View>
+      </Modal>
       <TextInput
         style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
         onChangeText={canAmount => setCanAmount(canAmount)}
@@ -94,9 +112,17 @@ export default function MyPant() {
       <Text>Example of Floating Action Button</Text>
       <Text>Click on Action Button to see Alert</Text>
       <Text>{cansCount}</Text>
+      <Text>Min pant</Text>
+      <View style={styles.container}>
+        <FlatList
+          data={myPants}
+          renderItem={({ item }) => <Item cans={item.cans} />}
+          keyExtractor={item => item.id}
+        />
+      </View>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={addPant}
+        onPress={setModal} //Was addPant
         style={styles.TouchableOpacityStyle}
       >
         <Image
@@ -104,20 +130,15 @@ export default function MyPant() {
           style={styles.FloatingButtonStyle}
         />
       </TouchableOpacity>
-      <Text>Min pant</Text>
-      <FlatList
-        data={myPants}
-        renderItem={({ item }) => <Item title={item.cans} />}
-        keyExtractor={item => item.id}
-      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {},
   MainContainer: {
     flex: 1,
-    justifyContent: "center",
+
     alignItems: "center",
     backgroundColor: "#F5F5F5"
   },
@@ -138,6 +159,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32
+  },
+
+  modalText: {
+    fontSize: 32,
+    color: "red"
   },
 
   FloatingButtonStyle: {
