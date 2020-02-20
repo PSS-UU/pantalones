@@ -15,6 +15,7 @@ import {
   Button,
   ScrollView
 } from "react-native";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export default function MyPant() {
   const [cansCount, setCanAmount] = useState(0);
@@ -63,6 +64,7 @@ export default function MyPant() {
       userId: user
     });
     setCanAmount("");
+    setModal(!modalVisible);
   }
 
   function Item({ cans }) {
@@ -90,14 +92,20 @@ export default function MyPant() {
   return (
     <View style={styles.MainContainer}>
       <Modal isVisible={modalVisible}>
-        <View style={{ flex: 1, backgroundColor: "white" }}>
+        <View style={styles.ModalContainer}>
           <Text style={styles.modalText}>Add pant!</Text>
           <Button title="x" onPress={toggleModal} />
           <TextInput
-            style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+            style={styles.pantTextField}
             onChangeText={canAmount => setCanAmount(canAmount)}
           />
-          <Button title="Lets pant!" onPress={addPant} />
+          <TouchableOpacity
+            activeOpacity={0.7}
+            oonPress={addPant}
+            style={styles.addButton}
+          >
+            <Text>Lets pant!</Text>
+          </TouchableOpacity>
         </View>
       </Modal>
       <Text>Min pant</Text>
@@ -149,14 +157,35 @@ const styles = StyleSheet.create({
     fontSize: 32
   },
 
+  pantTextField: {
+    height: 40,
+    width: 300,
+    borderColor: "gray",
+    borderWidth: 1
+  },
+
   modalText: {
     fontSize: 32,
     color: "red"
+  },
+  addButton: {
+    width: 70,
+    height: 70,
+    backgroundColor: "black",
+    position: "absolute",
+    bottom: 10
   },
 
   FloatingButtonStyle: {
     resizeMode: "contain",
     width: 70,
     height: 70
+  },
+
+  ModalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white"
   }
 });
