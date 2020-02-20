@@ -13,9 +13,10 @@ export default function ProfileScreen() {
   const dispatch = useDispatch();
   const profilePictureRef = firebase.storage().ref().child(`images/profiles/${user.uid}`);
   const infoRef = firebase.database().ref(`users/${user.uid}`);
-  const [fullName, setName] = useState({name: ''});
+  const [nameInput, setNameInput] = useState({name: '', address: ''});
+  const [addressInput, setAddressInput] = useState({name: '', address: ''});
   const [nameFrom, setNameFrom] = useState();
-
+  const [addressFrom, setAddressFrom] = useState();
 
   useEffect(() => {
     const getProfilePicture = async () => {
@@ -25,21 +26,38 @@ export default function ProfileScreen() {
     getProfilePicture();
   });
 
-  let addName = fullName => {
-    infoRef.set({
-      name: fullName
-    })
-  }
-
   handleChange = e => {
-    setName({
+    setNameInput({
       name:e.nativeEvent.text
     });
   };
 
+  handleChangeAddress = e => {
+    setAddressInput({
+      address:e.nativeEvent.text
+    });
+  };
+
+  let addName = (nameInput, addressInput) => {
+    infoRef.set({
+      name: nameInput,
+      address: addressInput
+    })
+  }
+
+  let addAddress = (nameInput, addressInput) => {
+    infoRef.set({
+      name: nameInput,
+      address: addressInput
+    })
+  }
+
   handleSubmit = () => {
-    addName(fullName.name);
-    Alert.alert('Sparat!');
+    addName(nameInput.name, addressInput.address);
+  };
+
+  handleSubmitAddress = () => {
+    addAddress(nameInput.name, addressInput.address);
   };
 
   const logout = async () => {
@@ -73,12 +91,36 @@ export default function ProfileScreen() {
   }
 
   getName = () => {
-    infoRef.once("child_added", function(snapshot) {
+    infoRef.on("child_added", function(snapshot) {
       console.log(snapshot.val());
       setNameFrom(snapshot.val());
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
+  }
+
+  getAddress = () => {
+    infoRef.once("child_added", function(snapshot) {
+      console.log(snapshot.val());
+      setAddressFrom(snapshot.val());
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+  }
+
+  saveAndDisplay = () => {
+    this.handleSubmit();
+    this.getName();
+  } 
+
+  saveAndDisplayAddress = () => {
+    this.handleSubmitAddress();
+    this.getAddress();
+  } 
+
+  saveAndDisplayAll = () => {
+    this.saveAndDisplay();
+    this.saveAndDisplayAddress();
   }
   
 
@@ -94,13 +136,22 @@ export default function ProfileScreen() {
           style={{height: 110, width: 110, borderRadius: 300/2, overflow: 'hidden'}}
           source={{uri: imageUrl}}
         />
-
         <TouchableHighlight style= {{paddingLeft: 100,}} onPress={this.onChooseImagePress}>
           <Image
             style={{height:30, width: 30}}
             source={require('../assets/images/camera.png')}
           />
         </TouchableHighlight>  
+        <Text style={{fontSize: 20, paddingLeft: 20}}>
+          För- och efternamn:{" "} {nameFrom}
+        </Text>
+
+        <Text style={{fontSize: 20, paddingLeft: 20}}>
+        </Text>
+        <TextInput style={{ paddingLeft: 20, height: 30, width: 200, borderColor: 'gray', borderWidth: 1 }} onChange={handleChange} />
+        <Text style={{fontSize: 20, paddingLeft: 20}}>
+          Antal följare:
+        </Text>
       </View>
 
 
@@ -113,35 +164,24 @@ export default function ProfileScreen() {
       </View>
 
       <View style={{paddingTop: 30}}>
-        <Text style={{fontSize: 20, paddingLeft: 20}}>
-          För- och efternamn:{" "} {nameFrom}
-        </Text>
-
-        <Text style={{fontSize: 20, paddingLeft: 20}}>
-        </Text>
-        <TextInput style={{ paddingLeft: 20, height: 30, width: 200, borderColor: 'gray', borderWidth: 1 }} onChange={handleChange} />
-          <Button title="Klar" onPress={handleSubmit}/>
-          <Button title="Klar" onPress={getName}/>
+        
         <Text style={{fontSize: 20, paddingLeft: 20}}>
           E-postadress:{" "}
           <Text style={{ fontWeight: "bold" }}>{user ? user.email : "None"}</Text>
         </Text>
 
         <Text style={{fontSize: 20, paddingLeft: 20}}>
-          Adress:
+          Adress: {addressFrom}
         </Text>
-
+        <TextInput style={{ paddingLeft: 20, height: 30, width: 200, borderColor: 'gray', borderWidth: 1 }} onChange={handleChangeAddress} />
+        
         <Text style={{fontSize: 20, paddingLeft: 20}}>
           Poäng:
         </Text>
 
-        <Text style={{fontSize: 20, paddingLeft: 20}}>
-          Antal följare:
-        </Text>
-
 
       </View>
-
+      <Button title="Spara" onPress={saveAndDisplayAll}/>
       <Button title="Logga ut" onPress={logout} />
     </ScrollView>
   );
