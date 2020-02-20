@@ -1,5 +1,6 @@
 import * as firebase from "firebase";
 import React, { useState, Component } from "react";
+import "@firebase/firestore";
 import {
   StyleSheet,
   View,
@@ -14,7 +15,21 @@ export default function MyPant() {
   const [cansCount, setCanAmount] = useState(0);
   const user = firebase.auth().currentUser.uid;
 
-  var pantsRef = firebase.database().ref("pants");
+  //var pantsRef = firebase.database().ref("pants");
+  const dbh = firebase.firestore();
+
+  const ref = dbh.collection("pants");
+
+  //Get all the pant objects
+
+  async function addPant() {
+    await ref.add({
+      cans: cansCount,
+      userId: user
+    });
+    setCanAmount("");
+  }
+
   const clickHandler = () => {
     Alert.alert("Floating Button Clicked");
     var newPostRef = pantsRef.push();
@@ -35,7 +50,7 @@ export default function MyPant() {
       <Text>{cansCount}</Text>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={clickHandler}
+        onPress={addPant}
         style={styles.TouchableOpacityStyle}
       >
         <Image

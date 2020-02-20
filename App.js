@@ -15,14 +15,16 @@ import {
   API_KEY,
   AUTH_DOMAIN,
   DATABASE_URL,
-  STORAGE_BUCKET
+  STORAGE_BUCKET,
+  PROJECT_ID
 } from "react-native-dotenv";
 // Initialize Firebase
 const firebaseConfig = {
   apiKey: API_KEY,
   authDomain: AUTH_DOMAIN,
   databaseURL: DATABASE_URL,
-  storageBucket: STORAGE_BUCKET
+  storageBucket: STORAGE_BUCKET,
+  projectId: PROJECT_ID
 };
 
 firebase.initializeApp(firebaseConfig);
