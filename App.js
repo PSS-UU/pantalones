@@ -2,6 +2,8 @@ import * as React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { SplashScreen } from "expo";
 import * as Font from "expo-font";
+import { createStore } from "redux";
+import { Provider, useDispatch } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -9,8 +11,8 @@ import * as firebase from "firebase";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import useLinking from "./navigation/useLinking";
 import appStyles from "./AppStyles";
-
-const Stack = createStackNavigator();
+import reducer from "./state/reducers";
+import { setUser } from "./state/actions";
 
 import {
   API_KEY,
@@ -19,6 +21,9 @@ import {
   STORAGE_BUCKET,
   PROJECT_ID
 } from "react-native-dotenv";
+
+const Stack = createStackNavigator();
+
 // Initialize Firebase
 const firebaseConfig = {
   apiKey: API_KEY,
@@ -30,11 +35,24 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+const store = createStore(reducer);
+
 export default function App(props) {
+  return (
+    <Provider store={store}>
+      <Main />
+    </Provider>
+  );
+}
+
+export function Main(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
   const [initialNavigationState, setInitialNavigationState] = React.useState();
   const containerRef = React.useRef();
   const { getInitialState } = useLinking(containerRef);
+  const dispatch = useDispatch();
+
+  firebase.auth().onAuthStateChanged(user => dispatch(setUser(user)));
 
   // Load any resources or data that we need prior to rendering the app
   React.useEffect(() => {
