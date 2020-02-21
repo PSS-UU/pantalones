@@ -13,11 +13,9 @@ import {
   Text,
   TextInput,
   FlatList,
-  Button,
-  ScrollView
+  Button
 } from "react-native";
 import globalStyles from "../AppStyles";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export default function MyPant() {
   const [cansCount, setCanAmount] = useState(0);
@@ -29,14 +27,6 @@ export default function MyPant() {
 
   const dbh = firebase.firestore();
   const ref = dbh.collection("pants"); //reference to the pants collection
-  /*
-  constructor(props) {
-    super(props);
-    // Don't do this!
-    this.state = { color: props.color };
-   } */
-
-  //Get all the current users posted Pant
 
   toggleModal = () => {
     if (!modalVisible) {
@@ -45,7 +35,7 @@ export default function MyPant() {
       setModal(false);
     }
   };
-
+  //Get all the current users posted Pant
   useEffect(() => {
     return ref.onSnapshot(querySnapshot => {
       const list = [];
@@ -74,28 +64,6 @@ export default function MyPant() {
     setCanAmount("");
     setModal(!modalVisible);
   }
-
-  function Item({ cans }) {
-    return (
-      <View style={styles.cans}>
-        <Text style={styles.title}>{cans}</Text>
-      </View>
-    );
-  }
-  /* OLD FUNCTION
-  const clickHandler = () => {
-    Alert.alert("Floating Button Clicked");
-    var newPostRef = pantsRef.push();
-    newPostRef.set({
-      cans: cansCount,
-      userId: user
-    });
-  };
-  */
-
-  /* if (loading) {   //TODO: detta borde fixas
-    return null; // or a spinner
-  }*/
 
   return (
     <View style={styles.MainContainer}>
@@ -141,7 +109,11 @@ export default function MyPant() {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    padding: 20,
+    flex: 1,
+    flexDirection: "row"
+  },
   MainContainer: {
     flex: 1,
     alignItems: "center",
