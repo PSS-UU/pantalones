@@ -19,7 +19,6 @@ export default CreatePant = props => {
   const [modalVisible, setModal] = useState(false);
 
   const user = firebase.auth().currentUser.uid;
-
   const dbh = firebase.firestore();
   const ref = dbh.collection("pants"); //reference to the pants collection
 
@@ -59,7 +58,7 @@ export default CreatePant = props => {
       </Modal>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={setModal} //Was addPant
+        onPress={setModal}
         style={styles.TouchableOpacityStyle}
       >
         <Image
@@ -72,11 +71,6 @@ export default CreatePant = props => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    flex: 1,
-    flexDirection: "row"
-  },
   MainContainer: {
     alignItems: "center",
     backgroundColor: "#F5F5F5"
@@ -90,21 +84,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     bottom: 30
   },
-  item: {
-    backgroundColor: "#f9c2ff",
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16
-  },
-  title: {
-    fontSize: 32
-  },
 
   pantTextField: {
     height: 40,
     width: 300,
     borderColor: "gray",
-    borderWidth: 1
+    borderWidth: 1,
+    borderRadius: 20
   },
 
   modalText: {
