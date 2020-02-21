@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export const Colors = {
   green: "#28A07D",
   darkGreen: "black",
-  lightGreen: "white"
+  lightGreen: "#42C9A7"
 };
 
 export default StyleSheet.create({
@@ -16,6 +17,25 @@ export default StyleSheet.create({
 
   marginBottom: {
     marginBottom: 20
+  },
+
+  buttonText: {
+    color: "white",
+    fontWeight: "500",
+    fontSize: 18
+  },
+
+  positionBottom: {
+    position: "absolute",
+    bottom: 30
+  },
+
+  lightGreenButton: {
+    borderRadius: 20,
+    backgroundColor: Colors.lightGreen,
+    justifyContent: "center",
+    padding: 16,
+    alignItems: "center"
   },
 
   inputFieldContainer: {
