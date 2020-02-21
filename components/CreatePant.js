@@ -1,27 +1,21 @@
 import * as firebase from "firebase";
 import React, { useState, Component, useEffect } from "react";
-import MyPantCard from "../components/MyPantCard";
-import CreatePant from "../components/CreatePant";
-import Colors from "../constants/Colors";
 import "@firebase/firestore";
 import Modal from "react-native-modal";
+import Colors from "../constants/Colors";
+import globalStyles from "../AppStyles";
 import {
   StyleSheet,
   View,
-  Image,
   TouchableOpacity,
-  Alert,
   Text,
   TextInput,
-  FlatList,
-  Button
+  Button,
+  Image
 } from "react-native";
-import globalStyles from "../AppStyles";
 
-export default function MyPant() {
-  //const [cansCount, setCanAmount] = useState(0);
-  const [myPants, setMyPants] = useState([]);
-  // const [loading, setLoading] = useState(true);
+export default CreatePant = props => {
+  const [cansCount, setCanAmount] = useState(0);
   const [modalVisible, setModal] = useState(false);
 
   const user = firebase.auth().currentUser.uid;
@@ -29,31 +23,6 @@ export default function MyPant() {
   const dbh = firebase.firestore();
   const ref = dbh.collection("pants"); //reference to the pants collection
 
-  toggleModal = () => {
-    if (!modalVisible) {
-      setModal(true);
-    } else {
-      setModal(false);
-    }
-  };
-  //Get all the current users posted Pant
-  useEffect(() => {
-    return ref.onSnapshot(querySnapshot => {
-      const list = [];
-      querySnapshot.forEach(doc => {
-        const { cans } = doc.data();
-        list.push({
-          id: doc.id,
-          cans
-        });
-      });
-
-      setMyPants(list);
-    });
-  }, []);
-
-  //Add pant to the db
-  /*
   async function addPant() {
     await ref.add({
       cans: cansCount,
@@ -61,22 +30,46 @@ export default function MyPant() {
     });
     setCanAmount("");
     setModal(!modalVisible);
-  } */
+  }
 
   return (
     <View style={styles.MainContainer}>
-      <Text>Min pant</Text>
-      <View style={styles.container}>
-        <FlatList
-          data={myPants}
-          renderItem={({ item }) => <MyPantCard cans={item.cans} />}
-          keyExtractor={item => item.id}
+      <Modal style={styles.ModalColor} isVisible={modalVisible}>
+        <View style={styles.ModalHeaderContainer}>
+          <Text style={styles.modalText}>Skapa pant</Text>
+          <Button
+            style={styles.exitButton}
+            title="x"
+            onPress={() => setModal(!modalVisible)}
+          />
+        </View>
+        <View style={styles.ModalContent}>
+          <TextInput
+            style={styles.pantTextField}
+            onChangeText={canAmount => setCanAmount(canAmount)}
+          />
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={addPant}
+            style={[globalStyles.lightGreenButton, globalStyles.positionBottom]}
+          >
+            <Text style={globalStyles.buttonText}>Lets pant!</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={setModal} //Was addPant
+        style={styles.TouchableOpacityStyle}
+      >
+        <Image
+          source={require("../assets/images/floating_button_green.png")}
+          style={styles.FloatingButtonStyle}
         />
-      </View>
-      <CreatePant value={modalVisible} />
+      </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -85,7 +78,6 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   MainContainer: {
-    flex: 1,
     alignItems: "center",
     backgroundColor: "#F5F5F5"
   },
