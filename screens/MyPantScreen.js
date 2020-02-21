@@ -1,6 +1,6 @@
 import * as firebase from "firebase";
 import React, { useState, Component, useEffect } from "react";
-import MyPantCard from "../components";
+import MyPantCard from "../components/MyPantCard";
 import Colors from "../constants/Colors";
 import "@firebase/firestore";
 import Modal from "react-native-modal";
@@ -29,6 +29,12 @@ export default function MyPant() {
 
   const dbh = firebase.firestore();
   const ref = dbh.collection("pants"); //reference to the pants collection
+  /*
+  constructor(props) {
+    super(props);
+    // Don't do this!
+    this.state = { color: props.color };
+   } */
 
   //Get all the current users posted Pant
 
@@ -103,20 +109,20 @@ export default function MyPant() {
             style={styles.pantTextField}
             onChangeText={canAmount => setCanAmount(canAmount)}
           />
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={addPant}
+            style={[globalStyles.lightGreenButton, globalStyles.positionBottom]}
+          >
+            <Text style={globalStyles.buttonText}>Lets pant!</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={addPant}
-          style={[globalStyles.lightGreenButton, globalStyles.positionBottom]}
-        >
-          <Text style={globalStyles.buttonText}>Lets pant!</Text>
-        </TouchableOpacity>
       </Modal>
       <Text>Min pant</Text>
       <View style={styles.container}>
         <FlatList
           data={myPants}
-          renderItem={({ item }) => <Item cans={item.cans} />}
+          renderItem={({ item }) => <MyPantCard cans={item.cans} />}
           keyExtractor={item => item.id}
         />
       </View>
@@ -193,7 +199,9 @@ const styles = StyleSheet.create({
   },
 
   ModalColor: {
-    backgroundColor: "white"
+    backgroundColor: "white",
+    flex: 1,
+    justifyContent: "center"
   },
 
   ModalHeaderContainer: {
