@@ -4,6 +4,7 @@ import "@firebase/firestore";
 import Modal from "react-native-modal";
 import Colors from "../constants/Colors";
 import globalStyles from "../AppStyles";
+import cansIcon from "../assets/images/can.png";
 import {
   StyleSheet,
   View,
@@ -11,7 +12,8 @@ import {
   Text,
   TextInput,
   Button,
-  Image
+  Image,
+  Slider
 } from "react-native";
 
 export default CreatePant = props => {
@@ -43,10 +45,19 @@ export default CreatePant = props => {
           />
         </View>
         <View style={styles.ModalContent}>
-          <TextInput
-            style={styles.pantTextField}
-            onChangeText={canAmount => setCanAmount(canAmount)}
+          <View style={styles.canHeader}>
+            <Image style={styles.cansIcon} source={cansIcon} />
+            <Text>Antal burkar</Text>
+          </View>
+          <Slider
+            value={0}
+            step={1}
+            maximumValue={300}
+            minimumTrackTintColor={Colors.lightGreen}
+            thumbTintColor={Colors.lightGreen}
+            onValueChange={value => setCanAmount(value)}
           />
+          <Text style={styles.cansCount}>{cansCount}</Text>
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={addPant}
@@ -93,6 +104,12 @@ const styles = StyleSheet.create({
     borderRadius: 20
   },
 
+  cansIcon: {
+    width: 40,
+    height: 40,
+    resizeMode: "contain"
+  },
+
   modalText: {
     fontSize: 32,
     color: Colors.lightGreen,
@@ -112,10 +129,21 @@ const styles = StyleSheet.create({
     flex: 1
   },
 
+  cansCount: {
+    color: Colors.lightGreen,
+    fontWeight: "700"
+  },
+
   ModalContent: {
     padding: 20,
     backgroundColor: "white",
     flex: 1
+  },
+
+  canHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10
   },
 
   ModalColor: {
