@@ -47,7 +47,7 @@ export default CreatePant = props => {
         <View style={styles.ModalContent}>
           <View style={styles.canHeader}>
             <Image style={styles.cansIcon} source={cansIcon} />
-            <Text>Antal burkar</Text>
+            <Text style={styles.cansAmountText}>Antal burkar</Text>
           </View>
           <Slider
             value={0}
@@ -57,11 +57,11 @@ export default CreatePant = props => {
             thumbTintColor={Colors.lightGreen}
             onValueChange={value => setCanAmount(value)}
           />
-          <Text style={styles.cansCount}>{cansCount}</Text>
+          <Text style={styles.cansSelectedText}>{cansCount}</Text>
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={addPant}
-            style={[globalStyles.lightGreenButton, globalStyles.positionBottom]}
+            style={[globalStyles.lightGreenButton, styles.positionBottom]}
           >
             <Text style={globalStyles.buttonText}>Lets pant!</Text>
           </TouchableOpacity>
@@ -124,20 +124,28 @@ const styles = StyleSheet.create({
     height: 70
   },
 
+  positionBottom: {
+    alignSelf: "flex-end"
+  },
+
   exitButton: {
     alignSelf: "flex-end",
     flex: 1
   },
 
-  cansCount: {
+  cansSelectedText: {
     color: Colors.lightGreen,
-    fontWeight: "700"
+    fontFamily: "space-mono"
+  },
+  cansAmountText: {
+    color: Colors.grayText,
+    marginLeft: 10,
+    fontSize: 18
   },
 
   ModalContent: {
     padding: 20,
-    backgroundColor: "white",
-    flex: 1
+    backgroundColor: "white"
   },
 
   canHeader: {
@@ -148,8 +156,11 @@ const styles = StyleSheet.create({
 
   ModalColor: {
     backgroundColor: "white",
+    justifyContent: "center",
+    borderRadius: 20,
     flex: 1,
-    justifyContent: "center"
+    flexDirection: "column",
+    justifyContent: "flex-start"
   },
 
   ModalHeaderContainer: {
