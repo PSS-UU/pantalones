@@ -29,7 +29,7 @@ export default CreatePant = props => {
       cans: cansCount,
       userId: user
     });
-    setCanAmount("");
+    setCanAmount(0);
     setModal(!modalVisible);
   }
 
@@ -124,9 +124,7 @@ const styles = StyleSheet.create({
     height: 70
   },
 
-  positionBottom: {
-    alignSelf: "flex-end"
-  },
+  positionBottom: {},
 
   exitButton: {
     alignSelf: "flex-end",
