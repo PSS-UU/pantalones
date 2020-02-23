@@ -4,6 +4,7 @@ import "@firebase/firestore";
 import Modal from "react-native-modal";
 import Colors from "../constants/Colors";
 import globalStyles from "../AppStyles";
+import cansIcon from "../assets/images/can.png";
 import {
   StyleSheet,
   View,
@@ -11,7 +12,8 @@ import {
   Text,
   TextInput,
   Button,
-  Image
+  Image,
+  Slider
 } from "react-native";
 
 export default CreatePant = props => {
@@ -27,7 +29,7 @@ export default CreatePant = props => {
       cans: cansCount,
       userId: user
     });
-    setCanAmount("");
+    setCanAmount(0);
     setModal(!modalVisible);
   }
 
@@ -43,14 +45,23 @@ export default CreatePant = props => {
           />
         </View>
         <View style={styles.ModalContent}>
-          <TextInput
-            style={styles.pantTextField}
-            onChangeText={canAmount => setCanAmount(canAmount)}
+          <View style={styles.canHeader}>
+            <Image style={styles.cansIcon} source={cansIcon} />
+            <Text style={styles.cansAmountText}>Antal burkar</Text>
+          </View>
+          <Slider
+            value={0}
+            step={1}
+            maximumValue={300}
+            minimumTrackTintColor={Colors.lightGreen}
+            thumbTintColor={Colors.lightGreen}
+            onValueChange={value => setCanAmount(value)}
           />
+          <Text style={styles.cansSelectedText}>{cansCount}</Text>
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={addPant}
-            style={[globalStyles.lightGreenButton, globalStyles.positionBottom]}
+            style={[globalStyles.lightGreenButton, styles.positionBottom]}
           >
             <Text style={globalStyles.buttonText}>Lets pant!</Text>
           </TouchableOpacity>
@@ -93,6 +104,12 @@ const styles = StyleSheet.create({
     borderRadius: 20
   },
 
+  cansIcon: {
+    width: 40,
+    height: 40,
+    resizeMode: "contain"
+  },
+
   modalText: {
     fontSize: 32,
     color: Colors.lightGreen,
@@ -107,21 +124,41 @@ const styles = StyleSheet.create({
     height: 70
   },
 
+  positionBottom: {},
+
   exitButton: {
     alignSelf: "flex-end",
     flex: 1
   },
 
+  cansSelectedText: {
+    color: Colors.lightGreen,
+    fontFamily: "space-mono"
+  },
+  cansAmountText: {
+    color: Colors.grayText,
+    marginLeft: 10,
+    fontSize: 18
+  },
+
   ModalContent: {
     padding: 20,
-    backgroundColor: "white",
-    flex: 1
+    backgroundColor: "white"
+  },
+
+  canHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10
   },
 
   ModalColor: {
     backgroundColor: "white",
+    justifyContent: "center",
+    borderRadius: 20,
     flex: 1,
-    justifyContent: "center"
+    flexDirection: "column",
+    justifyContent: "flex-start"
   },
 
   ModalHeaderContainer: {

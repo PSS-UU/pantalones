@@ -4,6 +4,7 @@ export default {
   tintColor,
   mediumGreen: "#228669",
   lightGreen: "#42C9A7",
+  grayText: "#757383",
   tabIconDefault: "#ccc",
   tabIconSelected: tintColor,
   tabBar: "#fefefe",

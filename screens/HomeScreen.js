@@ -12,7 +12,7 @@ import {
 import { EmailInput, PasswordInput, PantMap } from "../components";
 import styles from "../AppStyles";
 import logo from "../assets/images/can.png";
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 
 export default function HomeScreen() {
   const user = useSelector(state => state.auth.user);

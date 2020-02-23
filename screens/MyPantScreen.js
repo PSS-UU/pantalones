@@ -38,7 +38,7 @@ export default function MyPant() {
           keyExtractor={item => item.id}
         />
       </View>
-      <CreatePant />
+      <CreatePant cans={0} />
     </View>
   );
 }
