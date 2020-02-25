@@ -76,6 +76,7 @@ export default function ProfileScreen() {
   const logout = async () => {
     try {
       await firebase.auth().signOut();
+      dispatch(setUser(null));
     } catch (e) {
       Alert.alert(e.name, e.message);
     }
