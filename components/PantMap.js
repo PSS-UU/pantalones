@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import MapView from "react-native-maps";
-import { Modal, Dimensions, StyleSheet, TouchableHighlight, View, Text, Alert} from "react-native";
-import { EmailInput } from './EmailInput.js';
-import { PasswordInput } from './PasswordInput.js';
+import { Modal, Dimensions, StyleSheet, TouchableHighlight, View, Text, Image} from "react-native";
+import StarRating from 'react-native-star-rating';
+import PantInfoPopUp from './PantInfoPopUp';
 
 export const PantMap = props => {
   const [modal, setModal] = useState(false)
+  
   return (
-    <View>
+  <View>
     <MapView
       style={styles.map}
       initialRegion={{
@@ -18,13 +19,15 @@ export const PantMap = props => {
       }}
     >
     <MapView.Marker
+        //flytta koordinater
         coordinate={{latitude: 59.8150,
         longitude: 17.6629}}
         title={"SLU"}
         description={"example marker"}
         onPress={() => setModal(true)}
-        >
-       <MapView.Callout tooltip style={styles.customView}>
+        pinColor = {'aqua'}
+    >
+       <MapView.Callout>
           <TouchableHighlight>
           <View>
           </View>
@@ -32,23 +35,7 @@ export const PantMap = props => {
         </MapView.Callout>
     </MapView.Marker>
     </MapView>
-    <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modal}
-          >
-          <View style={{backgroundColor: "white", height: '50%', width: '50%', justifyContent: "center", alignContent: "center"}}>
-            <View>
-              <Text>Hello World!</Text>
-              <TouchableHighlight
-                onPress={() => {
-                  setModal(!modal);
-                }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
-            </View>
-          </View>
-        </Modal>
+    <PantInfoPopUp modal={modal} setModal={setModal}></PantInfoPopUp>
     </View>
   );
 };
@@ -57,5 +44,5 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height
-  }
+  },
 });
