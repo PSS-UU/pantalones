@@ -12,10 +12,10 @@ import {
 import { EmailInput, PasswordInput, PantMap } from "../components";
 import styles from "../AppStyles";
 import logo from "../assets/images/can.png";
+import { useSelector } from "react-redux";
 
 export default function HomeScreen() {
-  const [user, setUser] = useState();
-  firebase.auth().onAuthStateChanged(currentUser => setUser(currentUser));
+  const user = useSelector(state => state.auth.user);
 
   if (user) {
     return (
