@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="825834a7-6ea9-4dd2-a9cc-b2295863a720" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/PantMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/PantMap.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,12 +34,22 @@
               <item name="pantalones" type="b2602c69:ProjectViewProjectNode" />
               <item name="pantalones" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="pantalones" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pantalones" type="462c0819:PsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pantalones" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pantalones" type="462c0819:PsiDirectoryNode" />
+              <item name="state" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
