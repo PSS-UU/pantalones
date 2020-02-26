@@ -33,7 +33,7 @@ export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
       let { status } = await Permissions.askAsync(Permissions.LOCATION);
       if (status === "granted") {
         if (!location) {
-          location = await Location.getCurrentPositionAsync({});
+          location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High });
         }
         const region = {
           latitude: location.coords.latitude,
@@ -67,7 +67,6 @@ export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
     <View style={StyleSheet.absoluteFillObject}>
       <MapView
         showsUserLocation
-        onUserLocationChange={newRegion => setRegion(newRegion)}
         onRegionChangeComplete={onRegionChange}
         style={styles.map}
         region={region}
