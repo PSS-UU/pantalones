@@ -77,11 +77,7 @@ export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
       >
         {pants.map(pant => (
     <MapView.Marker
-        //flytta koordinater
-        coordinate={{latitude: 59.8150,
-        longitude: 17.6629}}
-        title={"SLU"}
-        description={"example marker"}
+        coordinate={pant.location}
         onPress={() => setModal(true)}
         pinColor = {'aqua'}
     >
