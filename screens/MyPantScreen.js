@@ -4,10 +4,18 @@ import MyPantCard from "../components/MyPantCard";
 import CreatePant from "../components/CreatePant";
 import Colors from "../constants/Colors";
 import "@firebase/firestore";
-import { StyleSheet, View, Text, FlatList } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  Image
+} from "react-native";
 
 export default function MyPant() {
   const [myPants, setMyPants] = useState([]);
+  const [modalVisible, setModal] = useState(false);
 
   const dbh = firebase.firestore();
   const ref = dbh.collection("pants"); //reference to the pants collection
@@ -38,7 +46,17 @@ export default function MyPant() {
           keyExtractor={item => item.id}
         />
       </View>
-      <CreatePant cans={0} />
+      <CreatePant cans={0} modalStatus={modalVisible} setModal={setModal} />
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() => setModal(true)}
+        style={styles.TouchableOpacityStyle}
+      >
+        <Image
+          source={require("../assets/images/floating_button_green.png")}
+          style={styles.FloatingButtonStyle}
+        />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -48,6 +66,19 @@ const styles = StyleSheet.create({
     padding: 20,
     flex: 1,
     flexDirection: "row"
+  },
+  FloatingButtonStyle: {
+    resizeMode: "contain",
+    width: 70,
+    height: 70
+  },
+  TouchableOpacityStyle: {
+    position: "absolute",
+    width: 70,
+    height: 70,
+    alignItems: "center",
+    justifyContent: "center",
+    bottom: 30
   },
   mainContainer: {
     flex: 1,

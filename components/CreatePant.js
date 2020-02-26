@@ -18,10 +18,9 @@ import {
 import { SelectLocationModal } from "./SelectLocationModal";
 import { MaterialIcons } from "@expo/vector-icons";
 
-export default CreatePant = () => {
+export default CreatePant = ({ setModal, modalStatus }) => {
   const [cansCount, setCanAmount] = useState(0);
   const [location, setLocation] = useState(null);
-  const [modalVisible, setModal] = useState(false);
 
   const user = firebase.auth().currentUser.uid;
   const dbh = firebase.firestore();
@@ -34,18 +33,18 @@ export default CreatePant = () => {
       userId: user
     });
     setCanAmount(0);
-    setModal(!modalVisible);
+    setModal(false);
   }
 
   return (
     <View style={styles.MainContainer}>
-      <Modal style={styles.ModalColor} isVisible={modalVisible}>
+      <Modal style={styles.ModalColor} isVisible={modalStatus}>
         <View style={styles.ModalHeaderContainer}>
           <Text style={styles.modalText}>Skapa pant</Text>
           <Button
             style={styles.exitButton}
             title="x"
-            onPress={() => setModal(!modalVisible)}
+            onPress={() => setModal(false)}
           />
         </View>
         <View style={styles.ModalContent}>
@@ -67,9 +66,15 @@ export default CreatePant = () => {
             <MaterialIcons name="location-on" size={42} />
             {location ? (
               <Text style={styles.cansAmountText}>
-                Longitude: <Text style={{ fontWeight: 'bold' }}>{location.longitude.toFixed(3)}</Text>
+                Longitude:{" "}
+                <Text style={{ fontWeight: "bold" }}>
+                  {location.longitude.toFixed(3)}
+                </Text>
                 {"\n"}
-                Latitude: <Text style={{ fontWeight: 'bold' }}>{location.latitude.toFixed(3)}</Text>
+                Latitude:{" "}
+                <Text style={{ fontWeight: "bold" }}>
+                  {location.latitude.toFixed(3)}
+                </Text>
               </Text>
             ) : (
               <SelectLocationModal onSelectLocation={setLocation} />
@@ -84,16 +89,6 @@ export default CreatePant = () => {
           </TouchableOpacity>
         </View>
       </Modal>
-      <TouchableOpacity
-        activeOpacity={0.7}
-        onPress={() => setModal(true)}
-        style={styles.TouchableOpacityStyle}
-      >
-        <Image
-          source={require("../assets/images/floating_button_green.png")}
-          style={styles.FloatingButtonStyle}
-        />
-      </TouchableOpacity>
     </View>
   );
 };
