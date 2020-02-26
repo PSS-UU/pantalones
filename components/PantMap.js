@@ -85,12 +85,6 @@ export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
         onPress={() => setModal(true)}
         pinColor = {'aqua'}
     >
-       <MapView.Callout>
-          <TouchableHighlight>
-          <View>
-          </View>
-          </TouchableHighlight>
-        </MapView.Callout>
     </MapView.Marker>
         ))}
       </MapView>
