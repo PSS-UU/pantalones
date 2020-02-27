@@ -11,18 +11,25 @@ export const SelectLocationModal = props => {
   const [visible, setVisible] = useState();
 
   const onSelectLocation = () => {
+    console.log("onselectlocation");
     setVisible(false);
     props.onSelectLocation(region);
   };
 
   const footer = (
+    <View>
+    <Button
+    title="Press me"
+    onPress={onSelectLocation}>
+    </Button>
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={onSelectLocation}
       style={styles.selectLocationButton}
     >
-      <Text style={styles.locationButtonText}>Välj plats</Text>
+      <Text style={styles.locationButtonText}>Välj plarre</Text>
     </TouchableOpacity>
+    </View>
   );
 
   return (
