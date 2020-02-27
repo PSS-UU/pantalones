@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import * as firebase from "firebase";
 import MapView, { Marker } from "react-native-maps";
-import { Dimensions, StyleSheet, View, Text } from "react-native";
+import { Modal, Dimensions, StyleSheet, TouchableHighlight, View, Text, Image} from "react-native";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
+import StarRating from 'react-native-star-rating';
+import PantInfoPopUp from './PantInfoPopUp';
 
 export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
   const [pants, setPants] = useState([]);
   const [region, setRegion] = useState();
+  const [modal, setModal] = useState(false)
 
   const db = firebase.firestore();
   const pantsRef = db.collection("pants");
@@ -72,14 +75,15 @@ export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
         region={region}
       >
         {pants.map(pant => (
-          <Marker
-            key={pant.id}
-            coordinate={pant.location}
-            title={pant.id}
-            description={`Burkar: ${pant.cans}`}
-          />
+    <MapView.Marker
+        coordinate={pant.location}
+        onPress={() => setModal(true)}
+        pinColor = {'aqua'}
+    >
+    </MapView.Marker>
         ))}
       </MapView>
+    <PantInfoPopUp modal={modal} setModal={setModal}></PantInfoPopUp>
     </View>
   );
 };
@@ -106,5 +110,5 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height
-  }
+  },
 });
