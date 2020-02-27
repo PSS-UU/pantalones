@@ -18,17 +18,10 @@ export const SelectLocationModal = props => {
 
   const footer = (
     <View>
-    <Button
-    title="Press me"
+    <Button 
+    title="Välj plats"
     onPress={onSelectLocation}>
     </Button>
-    <TouchableOpacity
-      activeOpacity={0.7}
-      onPress={onSelectLocation}
-      style={styles.selectLocationButton}
-    >
-      <Text style={styles.locationButtonText}>Välj plarre</Text>
-    </TouchableOpacity>
     </View>
   );
 
@@ -64,7 +57,6 @@ const styles = StyleSheet.create({
   selectLocationButton: {
     zIndex: 10,
     alignItems: "center",
-    backgroundColor: "#000",
     position: "relative",
     margin: 20,
     padding: 10
