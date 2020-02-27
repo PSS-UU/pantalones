@@ -14,6 +14,7 @@ import {
 import StarRating from "react-native-star-rating";
 import Colors from "../constants/Colors";
 import globalStyles from "../AppStyles";
+import cansIcon from "../assets/images/can.png";
 
 export default function PantInfoPopUp({ pant, modal, setModal }) {
   async function paxaPant() {
@@ -50,30 +51,29 @@ export default function PantInfoPopUp({ pant, modal, setModal }) {
                 onPress={() => setModal(false)}
               />
             </View>
-            <Text>Distance</Text>
+            <Text style={{ color: "white", paddingLeft: 20 }}>2km bort</Text>
 
-            <View style={styles.pantAmountContainer}>
-              <View style={styles.pantAmount}>
-                <Image
-                  style={styles.icon}
-                  source={require("../assets/images/can.png")}
-                />
-                <Text>Burkar</Text>
-                <Text>{pant.cans}</Text>
+            <View style={styles.displayPantContainer}>
+              <View style={styles.pantAmountColumn}>
+                <View style={styles.pantAmountRow}>
+                  <Image style={styles.icon} source={cansIcon} />
+                  <Text style={styles.amountText}>{pant.cans}</Text>
+                </View>
+                <Text style={styles.descriptionText}>burkar</Text>
               </View>
-              <View style={styles.pantAmountCenter}>
-                <Image
-                  style={styles.icon}
-                  source={require("../assets/images/can.png")}
-                />
-                <Text>Flaskor</Text>
+              <View style={styles.pantAmountColumn}>
+                <View style={styles.pantAmountRow}>
+                  <Image style={styles.icon} source={cansIcon} />
+                  <Text style={styles.amountText}>{pant.cans}</Text>
+                </View>
+                <Text style={styles.descriptionText}>flaskor</Text>
               </View>
-              <View style={styles.pantAmount}>
-                <Image
-                  style={styles.icon}
-                  source={require("../assets/images/can.png")}
-                />
-                <Text>Kronor</Text>
+              <View style={styles.pantAmountColumn}>
+                <View style={styles.pantAmountRow}>
+                  <Image style={styles.icon} source={cansIcon} />
+                  <Text style={styles.amountText}>{pant.cans}</Text>
+                </View>
+                <Text style={styles.descriptionText}>kronor</Text>
               </View>
             </View>
             <View>
@@ -115,17 +115,40 @@ const styles = StyleSheet.create({
   modalText: {
     fontSize: 32,
     color: Colors.mediumGreen,
-    alignSelf: "flex-start",
     flex: 1,
     fontFamily: "fredoka-one"
   },
 
-  pantAmountContainer: {
+  pantAmountColumn: {
+    flexDirection: "column",
+    flex: 1,
+    alignItems: "flex-start",
+    alignItems: "center"
+  },
+  pantAmountRow: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: 30
+  },
+  displayPantContainer: {
     flex: 1,
     flexDirection: "row",
-    padding: 20
+    paddingTop: 30,
+    justifyContent: "center"
   },
 
+  amountText: {
+    fontSize: 26,
+    color: "white",
+    paddingLeft: 10
+  },
+
+  descriptionText: {
+    fontSize: 16,
+    color: Colors.mediumGreen,
+    paddingTop: 10
+  },
   icon: {
     width: 32,
     height: 40
@@ -150,7 +173,7 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     width: "100%",
-    height: Dimensions.get("window").height / 3,
+    height: 300,
     position: "absolute",
     borderRadius: 10,
     right: 0,
