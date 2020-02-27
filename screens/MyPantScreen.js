@@ -33,7 +33,7 @@ export default function MyPant() {
       <View style={styles.pantCards}>
         <FlatList
           data={myPants}
-          renderItem={({ item }) => <PantCard pant={item} />}
+          renderItem={({ item }) => <PantCard key={item.id} pant={item} />}
           keyExtractor={item => item.id}
         />
       </View>

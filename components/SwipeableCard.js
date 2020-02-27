@@ -2,12 +2,20 @@ import React from "react";
 import PropTypes from "prop-types";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { RectButton } from "react-native-gesture-handler";
-import { StyleSheet, Text, View, Animated, Alert } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Animated,
+  Alert,
+  Platform
+} from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const AnimatedIcon = Animated.createAnimatedComponent(MaterialIcons);
 
 const CardActionIcon = ({ color, dragX, icon, onPress }) => {
+  // TODO: Fix animated icon on android
   const scale = dragX.interpolate({
     inputRange: [-120, 0],
     outputRange: [1.3, 0],
@@ -15,17 +23,26 @@ const CardActionIcon = ({ color, dragX, icon, onPress }) => {
   });
   return (
     <RectButton style={styles.rightAction} onPress={onPress}>
-      <AnimatedIcon
-        name={icon}
-        size={28}
-        color={color}
-        style={[
-          styles.actionIcon,
-          {
-            transform: [{ scale: scale }]
-          }
-        ]}
-      />
+      {Platform.OS === "ios" ? (
+        <AnimatedIcon
+          name={icon}
+          size={28}
+          color={color}
+          style={[
+            styles.actionIcon,
+            {
+              transform: [{ scale: scale }]
+            }
+          ]}
+        />
+      ) : (
+        <MaterialIcons
+          name={icon}
+          size={28}
+          color={color}
+          style={styles.actionIcon}
+        />
+      )}
     </RectButton>
   );
 };
@@ -34,7 +51,7 @@ CardActionIcon.propTypes = {
   color: PropTypes.string,
   dragX: PropTypes.object.isRequired,
   icon: PropTypes.string.isRequired,
-  onPress: PropTypes.func,
+  onPress: PropTypes.func
 };
 
 export const SwipeableCard = ({ rightActions, children }) => {
@@ -57,7 +74,9 @@ export const SwipeableCard = ({ rightActions, children }) => {
             x={(index + 1) * 64}
             progress={progress}
             dragX={dragX}
-            onPress={() => { action.onPress && action.onPress(close) }}
+            onPress={() => {
+              action.onPress && action.onPress(close);
+            }}
           />
         ))}
       </View>
