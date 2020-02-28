@@ -94,6 +94,7 @@ export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
           <MapView.Marker
             coordinate={pant.location}
             onPress={() => onMarkerClick(pant)}
+            key={pant.id}
             pinColor={"aqua"}
           ></MapView.Marker>
         ))}
