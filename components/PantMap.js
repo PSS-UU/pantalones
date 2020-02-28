@@ -19,6 +19,7 @@ export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
   const [pants, setPants] = useState([]);
   const [region, setRegion] = useState();
   const [modal, setModal] = useState(false);
+  const [selectedPant, setSelectedPant] = useState(0);
 
   const db = firebase.firestore();
   const pantsRef = db.collection("pants");
@@ -63,6 +64,11 @@ export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
     }
   };
 
+  const onMarkerClick = pant => {
+    setModal(true);
+    setSelectedPant(pant);
+  };
+
   const onRegionChange = newRegion => {
     setRegion(newRegion);
     if (onRegionChangeComplete) {
@@ -86,14 +92,18 @@ export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
       >
         {pants.map(pant => (
           <MapView.Marker
-            key={pant.id}
             coordinate={pant.location}
-            onPress={() => setModal(true)}
+            onPress={() => onMarkerClick(pant)}
+            key={pant.id}
             pinColor={"aqua"}
           ></MapView.Marker>
         ))}
       </MapView>
-      <PantInfoPopUp modal={modal} setModal={setModal}></PantInfoPopUp>
+      <PantInfoPopUp
+        modal={modal}
+        pant={selectedPant}
+        setModal={setModal}
+      ></PantInfoPopUp>
     </View>
   );
 };
