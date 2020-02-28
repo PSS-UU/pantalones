@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
 import * as firebase from "firebase";
 import MapView, { Marker } from "react-native-maps";
-import { Modal, Dimensions, StyleSheet, TouchableHighlight, View, Text, Image} from "react-native";
+import {
+  Modal,
+  Dimensions,
+  StyleSheet,
+  TouchableHighlight,
+  View,
+  Text,
+  Image
+} from "react-native";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
-import StarRating from 'react-native-star-rating';
-import PantInfoPopUp from './PantInfoPopUp';
+import StarRating from "react-native-star-rating";
+import PantInfoPopUp from "./PantInfoPopUp";
 
 export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
   const [pants, setPants] = useState([]);
   const [region, setRegion] = useState();
-  const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState(false);
 
   const db = firebase.firestore();
   const pantsRef = db.collection("pants");
@@ -36,7 +44,9 @@ export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
       let { status } = await Permissions.askAsync(Permissions.LOCATION);
       if (status === "granted") {
         if (!location) {
-          location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High });
+          location = await Location.getCurrentPositionAsync({
+            accuracy: Location.Accuracy.High
+          });
         }
         const region = {
           latitude: location.coords.latitude,
@@ -75,15 +85,15 @@ export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
         region={region}
       >
         {pants.map(pant => (
-    <MapView.Marker
-        coordinate={pant.location}
-        onPress={() => setModal(true)}
-        pinColor = {'aqua'}
-    >
-    </MapView.Marker>
+          <MapView.Marker
+            key={pant.id}
+            coordinate={pant.location}
+            onPress={() => setModal(true)}
+            pinColor={"aqua"}
+          ></MapView.Marker>
         ))}
       </MapView>
-    <PantInfoPopUp modal={modal} setModal={setModal}></PantInfoPopUp>
+      <PantInfoPopUp modal={modal} setModal={setModal}></PantInfoPopUp>
     </View>
   );
 };
@@ -110,5 +120,5 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height
-  },
+  }
 });
