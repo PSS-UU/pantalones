@@ -24,10 +24,9 @@ export default function MyPant() {
     return ref.onSnapshot(querySnapshot => {
       const list = [];
       querySnapshot.forEach(doc => {
-        const { cans } = doc.data();
         list.push({
+          ...doc.data(),
           id: doc.id,
-          cans
         });
       });
 

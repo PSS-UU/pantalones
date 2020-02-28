@@ -1,38 +1,46 @@
 import React, { useEffect, useState } from "react";
 import * as firebase from "firebase";
-import MapView, { Marker } from "react-native-maps";
+import MapView from "react-native-maps";
 import {
-  Modal,
   Dimensions,
   StyleSheet,
-  TouchableHighlight,
   View,
-  Text,
   Image
 } from "react-native";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
-import StarRating from "react-native-star-rating";
 import PantInfoPopUp from "./PantInfoPopUp";
+import canIcon from "../assets/images/can.png";
+import canGrayIcon from "../assets/images/can-gray.png";
+import { PantStatus } from "../constants/PantStatus";
 
 export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
   const [pants, setPants] = useState([]);
   const [region, setRegion] = useState();
   const [modal, setModal] = useState(false);
-  const [selectedPant, setSelectedPant] = useState(0);
+  const [selectedPant, setSelectedPant] = useState();
 
   const db = firebase.firestore();
   const pantsRef = db.collection("pants");
+
+  const displayModal = pant => {
+    setSelectedPant(pant);
+    setModal(true);
+  }
+
+  const hideModal = () => {
+    setSelectedPant(undefined);
+    setModal(false);
+  }
 
   useEffect(() => {
     return pantsRef.onSnapshot(snap => {
       const list = [];
       snap.forEach(doc => {
-        const { cans, location } = doc.data();
+        const data = doc.data();
         list.push({
-          id: doc.id,
-          cans,
-          location
+          ...data,
+          id: doc.id
         });
       });
 
@@ -92,18 +100,21 @@ export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
       >
         {pants.map(pant => (
           <MapView.Marker
-            coordinate={pant.location}
-            onPress={() => onMarkerClick(pant)}
             key={pant.id}
-            pinColor={"aqua"}
-          ></MapView.Marker>
+            coordinate={pant.location}
+            onPress={() => displayModal(pant)}
+            style={{}}
+          >
+            {pant.status === PantStatus.Available && (
+              <Image style={styles.canIcon} source={canIcon} />
+            )}
+            {pant.status === PantStatus.Claimed && (
+              <Image style={styles.canIcon} source={canGrayIcon} />
+            )}
+          </MapView.Marker>
         ))}
       </MapView>
-      <PantInfoPopUp
-        modal={modal}
-        pant={selectedPant}
-        setModal={setModal}
-      ></PantInfoPopUp>
+      <PantInfoPopUp modal={modal} hideModal={hideModal} pant={selectedPant} />
     </View>
   );
 };
@@ -118,6 +129,11 @@ const styles = StyleSheet.create({
     marginLeft: -21,
     left: "50%",
     top: "50%"
+  },
+  canIcon: {
+    width: 40,
+    height: 40,
+    resizeMode: "contain"
   },
   selectLocationButton: {
     zIndex: 10,
