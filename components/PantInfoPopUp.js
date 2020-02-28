@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   Dimensions,
@@ -12,11 +12,29 @@ import {
   ImageBackground
 } from "react-native";
 import StarRating from "react-native-star-rating";
+import firebase from "firebase";
 import Colors from "../constants/Colors";
 import globalStyles from "../AppStyles";
 import cansIcon from "../assets/images/can.png";
 
 export default function PantInfoPopUp({ pant, modal, setModal }) {
+  const [imageUrl, setImageUrl] = useState();
+
+  const user = firebase.auth().currentUser;
+
+  const profilePictureRef = firebase
+    .storage()
+    .ref()
+    .child(`images/profiles/${user.uid}`);
+
+  useEffect(() => {
+    const getProfilePicture = async () => {
+      const url = await profilePictureRef.getDownloadURL();
+      setImageUrl(url);
+    };
+    getProfilePicture();
+  });
+
   async function paxaPant() {
     await ref.add({
       cans: cansCount,
@@ -76,14 +94,26 @@ export default function PantInfoPopUp({ pant, modal, setModal }) {
                 <Text style={styles.descriptionText}>kronor</Text>
               </View>
             </View>
-            <View>
+            <View style={styles.profileContainer}>
               <Image
-                style={styles.icon}
-                source={require("../assets/images/can.png")}
+                style={{
+                  height: 90,
+                  width: 90,
+                  borderRadius: 300 / 2,
+                  overflow: "hidden"
+                }}
+                source={{ uri: imageUrl }}
               />
-              <Text>Name</Text>
+              <View style={styles.profileInfo}>
+                <Text style={styles.profileName}>Name</Text>
+                <StarRating
+                  style={{
+                    width: 20
+                  }}
+                ></StarRating>
+              </View>
             </View>
-            <StarRating></StarRating>
+
             <TouchableOpacity
               activeOpacity={0.7}
               onPress={paxaPant}
@@ -107,6 +137,20 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     flex: 1,
     flexDirection: "column"
+  },
+  profileContainer: {
+    marginTop: 120,
+    marginLeft: 20,
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  profileName: {
+    color: Colors.darkGrayText,
+    fontSize: 22
+  },
+  profileInfo: {
+    flexDirection: "column",
+    marginLeft: 20
   },
   exitButton: {
     alignSelf: "flex-end",
@@ -132,7 +176,6 @@ const styles = StyleSheet.create({
     fontSize: 30
   },
   displayPantContainer: {
-    flex: 1,
     flexDirection: "row",
     paddingTop: 30,
     justifyContent: "center"
