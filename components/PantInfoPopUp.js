@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import firebase from "firebase";
 import {
   Modal,
   Dimensions,
@@ -9,15 +11,75 @@ import {
   Image,
   TouchableOpacity,
   Button,
-  ImageBackground
+  ImageBackground,
+  Alert
 } from "react-native";
 import StarRating from "react-native-star-rating";
-import firebase from "firebase";
 import Colors from "../constants/Colors";
 import globalStyles from "../AppStyles";
 import cansIcon from "../assets/images/can.png";
+import { PantStatus } from "../constants/PantStatus";
 
-export default function PantInfoPopUp({ pant, modal, setModal }) {
+const PantStatusButton = ({ hideModal, pant }) => {
+  const db = firebase.firestore();
+
+  const claimPant = () => {
+    Alert.alert(
+      "Claima pant",
+      "Är du säker på att du vill claima denna panten?",
+      [
+        {
+          text: "Avbryt",
+          onPress: () => {}
+        },
+        {
+          text: "Claima",
+          onPress: async () => {
+            try {
+              await db
+                .collection("pants")
+                .doc(pant.id)
+                .update({ status: PantStatus.Claimed });
+            } catch (error) {
+              console.error(error);
+              Alert.alert("Error", "Error!");
+            }
+            hideModal();
+          }
+        }
+      ]
+    );
+  };
+
+  switch (pant.status) {
+    case PantStatus.Available:
+      return (
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={claimPant}
+          style={[globalStyles.lightGreenButton, styles.positionBottom]}
+        >
+          <Text style={globalStyles.buttonText}>Paxa pant!</Text>
+        </TouchableOpacity>
+      );
+    case PantStatus.Claimed:
+      return (
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={[globalStyles.lightGreenButton, styles.positionBottom]}
+          onPress={() =>
+            Alert.alert("Not implemented", "Scan is not yet implemented.")
+          }
+        >
+          <Text style={globalStyles.buttonText}>Scanna!</Text>
+        </TouchableOpacity>
+      );
+    default:
+      return null;
+  }
+};
+
+export default function PantInfoPopUp({ pant, modal, hideModal }) {
   const [imageUrl, setImageUrl] = useState();
   const [userName, setUserName] = useState("Användare");
 
@@ -41,23 +103,13 @@ export default function PantInfoPopUp({ pant, modal, setModal }) {
     });
   });
 
-  async function paxaPant() {
-    await ref.add({
-      cans: cansCount,
-      location: location,
-      userId: user
-    });
-    setCanAmount(0);
-    setModal(!modalVisible);
-  }
-
   return (
     <Modal
       transparent={true}
       visible={modal}
       //fix
       onBackdropPress={() => {
-        setModal(false);
+        hideModal();
       }}
     >
       <View style={styles.modalContent}>
@@ -69,7 +121,7 @@ export default function PantInfoPopUp({ pant, modal, setModal }) {
           <View style={styles.modalContentContainer}>
             <View style={styles.modalHeaderContainer}>
               <Text style={styles.modalText}>Pant</Text>
-              <TouchableOpacity onPress={() => setModal(false)}>
+              <TouchableOpacity onPress={() => hideModal()}>
                 <Text style={{ color: "white" }}>X</Text>
               </TouchableOpacity>
             </View>
@@ -85,9 +137,9 @@ export default function PantInfoPopUp({ pant, modal, setModal }) {
                 source={require("../assets/images/location.png")}
                 style={{ width: 14, height: 20 }}
               />
+              <Text style={styles.statusText}>{pant.status}</Text>
               <Text style={styles.locationText}>2km bort</Text>
             </View>
-
             <View style={styles.displayPantContainer}>
               <View style={styles.pantAmountColumn}>
                 <View style={styles.pantAmountRow}>
@@ -134,18 +186,19 @@ export default function PantInfoPopUp({ pant, modal, setModal }) {
               </View>
             </View>
           </View>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={paxaPant}
-            style={[globalStyles.lightGreenButton, styles.positionBottom]}
-          >
-            <Text style={globalStyles.buttonText}>Paxa pant!</Text>
-          </TouchableOpacity>
+          <PantStatusButton pant={pant} hideModal={hideModal} />
         </View>
       </View>
     </Modal>
   );
 }
+
+PantInfoPopUp.propTypes = {
+  pant: PropTypes.object
+};
+PantInfoPopUp.defaultProps = {
+  pant: {}
+};
 
 const styles = StyleSheet.create({
   star: {
@@ -202,6 +255,14 @@ const styles = StyleSheet.create({
   locationText: {
     color: Colors.xLightGreen,
     paddingLeft: 18,
+    fontSize: 16
+  },
+  statusText: {
+    color: Colors.xLightGreen,
+    paddingRight: 18,
+    position: "absolute",
+    right: 0,
+    // textAlign: 'right',
     fontSize: 16
   },
 

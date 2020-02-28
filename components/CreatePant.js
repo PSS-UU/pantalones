@@ -17,6 +17,7 @@ import {
 } from "react-native";
 import { SelectLocationModal } from "./SelectLocationModal";
 import { MaterialIcons } from "@expo/vector-icons";
+import { PantStatus } from "../constants/PantStatus";
 
 export default CreatePant = ({ setModal, modalStatus }) => {
   const [cansCount, setCanAmount] = useState(0);
@@ -30,9 +31,11 @@ export default CreatePant = ({ setModal, modalStatus }) => {
     await ref.add({
       cans: cansCount,
       location: location,
-      userId: user
+      userId: user,
+      status: PantStatus.Available
     });
     setCanAmount(0);
+    setLocation(null);
     setModal(false);
   }
 

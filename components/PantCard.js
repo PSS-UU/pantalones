@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { View, Text, StyleSheet, Alert } from "react-native";
 import Colors from "../constants/Colors";
 import { SwipeableCard } from "./SwipeableCard";
+import { PantStatus } from "../constants/PantStatus";
 
 export const PantCard = ({ pant }) => {
   const db = firebase.firestore();
@@ -35,10 +36,14 @@ export const PantCard = ({ pant }) => {
     { color: "#ce4257", icon: "delete", onPress: onPressDelete },
   ];
 
+  const cardColor = pant.status === PantStatus.Available ? styles.cardGreen : styles.cardGray;
+
   return (
     <SwipeableCard rightActions={rightActions}>
-      <View style={[styles.cardShadow, styles.card]}>
-        <Text>{pant.id}</Text>
+      <View style={[styles.cardShadow, styles.card, cardColor]}>
+        <Text>ID: {pant.id}</Text>
+        <Text>Status: {pant.status}</Text>
+        <Text>Burkar: {pant.cans}</Text>
       </View>
     </SwipeableCard>
   );
@@ -59,14 +64,20 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5
   },
+  cardGreen: {
+    backgroundColor: Colors.lightGreen,
+    borderColor: Colors.mediumGreen,
+  },
+  cardGray: {
+    backgroundColor: Colors.lightGray,
+    borderColor: Colors.mediumGray,
+  },
   card: {
     height: 100,
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: Colors.lightGreen,
     borderWidth: 1,
-    borderColor: Colors.mediumGreen,
     borderRadius: 20,
     marginBottom: 10
   }
