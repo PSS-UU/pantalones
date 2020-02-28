@@ -19,8 +19,10 @@ import cansIcon from "../assets/images/can.png";
 
 export default function PantInfoPopUp({ pant, modal, setModal }) {
   const [imageUrl, setImageUrl] = useState();
+  const [userName, setUserName] = useState("Användare");
 
   const user = firebase.auth().currentUser;
+  const userRef = firebase.database().ref(`users/${user.uid}`);
 
   const profilePictureRef = firebase
     .storage()
@@ -33,6 +35,10 @@ export default function PantInfoPopUp({ pant, modal, setModal }) {
       setImageUrl(url);
     };
     getProfilePicture();
+
+    userRef.once("value", function(snapshot) {
+      setUserName(snapshot.val().name);
+    });
   });
 
   async function paxaPant() {
@@ -63,13 +69,24 @@ export default function PantInfoPopUp({ pant, modal, setModal }) {
           <View style={styles.modalContentContainer}>
             <View style={styles.modalHeaderContainer}>
               <Text style={styles.modalText}>Pant</Text>
-              <Button
-                style={styles.exitButton}
-                title="x"
-                onPress={() => setModal(false)}
-              />
+              <TouchableOpacity onPress={() => setModal(false)}>
+                <Text style={{ color: "white" }}>X</Text>
+              </TouchableOpacity>
             </View>
-            <Text style={{ color: "white", paddingLeft: 20 }}>2km bort</Text>
+            <View
+              style={{
+                flexDirection: "row",
+                paddingLeft: 20,
+                alignItems: "center",
+                marginTop: -12
+              }}
+            >
+              <Image
+                source={require("../assets/images/location.png")}
+                style={{ width: 14, height: 20 }}
+              />
+              <Text style={styles.locationText}>2km bort</Text>
+            </View>
 
             <View style={styles.displayPantContainer}>
               <View style={styles.pantAmountColumn}>
@@ -105,23 +122,25 @@ export default function PantInfoPopUp({ pant, modal, setModal }) {
                 source={{ uri: imageUrl }}
               />
               <View style={styles.profileInfo}>
-                <Text style={styles.profileName}>Name</Text>
+                <Text style={styles.profileName}>{userName}</Text>
                 <StarRating
-                  style={{
-                    width: 20
-                  }}
+                  maxStars={5}
+                  starSize={24}
+                  rating={2}
+                  fullStarColor={"#FADA6D"}
+                  emptyStarColor={"#FADA6D"}
+                  starStyle={styles.star}
                 ></StarRating>
               </View>
             </View>
-
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={paxaPant}
-              style={[globalStyles.lightGreenButton, styles.positionBottom]}
-            >
-              <Text style={globalStyles.buttonText}>Paxa pant!</Text>
-            </TouchableOpacity>
           </View>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={paxaPant}
+            style={[globalStyles.lightGreenButton, styles.positionBottom]}
+          >
+            <Text style={globalStyles.buttonText}>Paxa pant!</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
@@ -129,12 +148,15 @@ export default function PantInfoPopUp({ pant, modal, setModal }) {
 }
 
 const styles = StyleSheet.create({
+  star: {
+    marginRight: 5,
+    paddingTop: 10
+  },
   map: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height
   },
   modalContentContainer: {
-    alignItems: "flex-start",
     flex: 1,
     flexDirection: "column"
   },
@@ -151,10 +173,6 @@ const styles = StyleSheet.create({
   profileInfo: {
     flexDirection: "column",
     marginLeft: 20
-  },
-  exitButton: {
-    alignSelf: "flex-end",
-    flex: 1
   },
   modalText: {
     fontSize: 32,
@@ -177,8 +195,14 @@ const styles = StyleSheet.create({
   },
   displayPantContainer: {
     flexDirection: "row",
-    paddingTop: 30,
+    paddingTop: 40,
     justifyContent: "center"
+  },
+
+  locationText: {
+    color: Colors.xLightGreen,
+    paddingLeft: 18,
+    fontSize: 16
   },
 
   amountText: {
@@ -207,7 +231,7 @@ const styles = StyleSheet.create({
     padding: 20
   },
   positionBottom: {
-    alignSelf: "flex-end"
+    margin: 20
   },
   modalContent: {
     alignItems: "center",
