@@ -1,10 +1,9 @@
 import * as firebase from "firebase";
 import React, { useState, Component, useEffect } from "react";
-import MyPantCard from "../components/MyPantCard";
 import CreatePant from "../components/CreatePant";
-import Colors from "../constants/Colors";
 import "@firebase/firestore";
 import { StyleSheet, View, Text, FlatList } from "react-native";
+import { PantCard } from "../components/PantCard";
 
 export default function MyPant() {
   const [myPants, setMyPants] = useState([]);
@@ -34,7 +33,7 @@ export default function MyPant() {
       <View style={styles.pantCards}>
         <FlatList
           data={myPants}
-          renderItem={({ item }) => <MyPantCard cans={item.cans} />}
+          renderItem={({ item }) => <PantCard key={item.id} pant={item} />}
           keyExtractor={item => item.id}
         />
       </View>
