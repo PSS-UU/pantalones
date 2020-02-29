@@ -9,7 +9,7 @@ import {
   Alert,
   TextInput,
   TouchableHighlight,
-  TouchableOpacity,
+  TouchableOpacity
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import {
@@ -151,50 +151,52 @@ export default function ProfileScreen() {
       style={profileStyles.container}
       contentContainerStyle={profileStyles.contentContainer}
     >
-      <View style={{ justifyContent: "center", alignItems: "center" }}>
+      <Image
+        style={profileStyles.backgroundImage}
+        source={require("../assets/images/background-wave.png")}
+      />
+
+      <View style={profileStyles.topInfo}>
         <Image
           resizeMode="cover"
           style={profileStyles.profilePicture}
           source={{ uri: imageUrl }}
         />
 
-        <TouchableOpacity
-          style={profileStyles.edit}
-          size={25}>
+        <TouchableOpacity style={profileStyles.editButtonPlacement} size={25}>
           <Image
-            style={{ height: 30, width: 30 }}
-            source={require("../assets/images/setting.png")}/>
+            style={profileStyles.editButton}
+            source={require("../assets/images/setting-white.png")}
+          />
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={profileStyles.cameraButton}
-          onPress={this.onChooseImagePress}>
+          style={profileStyles.cameraButtonPlacement}
+          onPress={this.onChooseImagePress}
+        >
           <Image
-            style={{ height: 30, width: 30 }}
-            source={require("../assets/images/camera.png")}/>
+            style={profileStyles.cameraButton}
+            source={require("../assets/images/camera-white.png")}
+          />
         </TouchableOpacity>
 
         <View style={profileStyles.infoNameAndFollowers}>
-          <Text style={profileStyles.infoName}>För- och efternamn: {nameFrom}</Text>
+          <Text style={profileStyles.textName}>
+            För- och efternamn: {nameFrom}
+          </Text>
 
-          <TextInput
-            style={{
-              paddingLeft: 20,
-              height: 30,
-              width: 200,
-              borderColor: "gray",
-              borderWidth: 1
-            }}
-            onChange={handleChange}
-          />
-          <Text style={{ fontSize: 20, paddingLeft: 20 }}>Antal följare:</Text>
+          <TextInput style={profileStyles.nameInput} onChange={handleChange} />
+
+          <View style={profileStyles.followers}>
+            <Text style={profileStyles.textFollowers}>Antal följare:</Text>
+          </View>
         </View>
       </View>
 
-      <View style={{ paddingTop: 30 }}>
-        <Text style={{ fontSize: 20, paddingLeft: 20 }}>
+      <View style={profileStyles.userInfoBlackText}>
+        <Text style={profileStyles.textEmail}>
           E-postadress:{" "}
-          <Text style={{ fontWeight: "bold" }}>
+          <Text style={profileStyles.textInfoEmail}>
             {user ? user.email : "None"}
           </Text>
         </Text>
@@ -215,18 +217,22 @@ export default function ProfileScreen() {
 
         <Text style={{ fontSize: 20, paddingLeft: 20 }}>Poäng:</Text>
       </View>
-      <Button title="Spara" onPress={saveAndDisplayAll} />
 
 
 
-      <TouchableOpacity
-        style={[profileStyles.greenButton, styles.marginBottom]}
-        title="Logga ut"
-        onPress={logout}
-      >
-        <Text style={profileStyles.whiteText}>Logga ut</Text>
-      </TouchableOpacity>
+      <View style={profileStyles.saveButtonPlacement}>
+        <Button title="Spara" onPress={saveAndDisplayAll} />
+      </View>
 
+      <View style={profileStyles.logOutButtonPlacement}>
+        <TouchableOpacity
+          style={profileStyles.greenButton}
+          title="Logga ut"
+          onPress={logout}
+        >
+          <Text style={profileStyles.whiteText}>Logga ut</Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 }
@@ -248,10 +254,6 @@ function OptionButton({ icon, label, onPress, isLastOption }) {
     </RectButton>
   );
 }
-
-
-
-
 
 const profileStyles = StyleSheet.create({
   container: {
@@ -286,34 +288,112 @@ const profileStyles = StyleSheet.create({
     marginTop: 1
   },
 
+  backgroundImage: {
+    //flex: 1,
+    //alignSelf: "flex-end",
+    //resizeMode: 'cover',
+    position: "absolute",
+    width: "100%",
+    height: "80%"
+  },
+
   profilePicture: {
     flex: 1,
     height: 115,
     width: 115,
-    top: 5,
+    top: 10,
     borderRadius: 300 / 2,
     overflow: "hidden"
   },
 
-  edit: {
+  topInfo: {
+    justifyContent: "center",
+    alignItems: "center"
+  },
+
+  editButtonPlacement: {
     margin: 5,
     position: "absolute",
-    top: 10,
+    top: 15,
     right: 35
   },
 
-  cameraButton: {
+  editButton: {
+    height: 30,
+    width: 30
+  },
+
+  cameraButtonPlacement: {
     position: "absolute",
-    top: 95,
-    right: 110
+    top: 110,
+    right: 115
+  },
+
+  cameraButton: {
+    height: 20,
+    width: 30
   },
 
   infoNameAndFollowers: {
-    top: 15
+    top: 25,
+    justifyContent: "center",
+    alignItems: "center"
   },
 
-  infoName: {
-    fontSize: 20
+  textName: {
+    fontSize: 26,
+    color: "white"
+  },
+
+  followers: {
+    top: 10
+  },
+
+  textFollowers: {
+    fontSize: 20,
+    color: "white"
+  },
+
+  nameInput: {
+    paddingLeft: 20,
+    height: 30,
+    width: 200,
+    borderColor: "gray",
+    borderWidth: 1,
+    justifyContent: "flex-end"
+  },
+
+  userInfoBlackText: {
+    top: 120
+  },
+
+  textEmail: {
+    fontSize: 20,
+    paddingLeft: 20,
+    fontWeight: "bold"
+  },
+
+  textInfoEmail: {
+    fontSize: 18,
+    color: "grey"
+  },
+
+  whiteText: {
+    color: "white",
+    fontWeight: "500"
+  },
+
+  wrapper: {
+    padding: 10
+  },
+
+  saveButtonPlacement: {
+    alignItems: 'center',
+    top: 150,
+  },
+
+  logOutButtonPlacement: {
+    alignItems: "center"
   },
 
   greenButton: {
@@ -322,12 +402,7 @@ const profileStyles = StyleSheet.create({
     height: 40,
     width: 100,
     justifyContent: "center",
-    alignItems: "center"
-  },
-
-  whiteText: {
-    color: "white",
-    fontWeight: "500"
-  },
-
+    alignItems: "center",
+    top: 180
+  }
 });
