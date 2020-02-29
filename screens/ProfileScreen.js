@@ -8,7 +8,8 @@ import {
   Image,
   Alert,
   TextInput,
-  TouchableHighlight
+  TouchableHighlight,
+  TouchableOpacity,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import {
@@ -17,6 +18,7 @@ import {
   TouchableWithoutFeedback
 } from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker";
+import styles from "../AppStyles";
 
 export default function ProfileScreen() {
   const [imageUrl, setImageUrl] = useState();
@@ -156,22 +158,21 @@ export default function ProfileScreen() {
           source={{ uri: imageUrl }}
         />
 
-        <TouchableHighlight style={profileStyles.edit} size={25}>
+        <TouchableOpacity
+          style={profileStyles.edit}
+          size={25}>
           <Image
             style={{ height: 30, width: 30 }}
-            source={require("../assets/images/setting.png")}
-          />
-        </TouchableHighlight>
+            source={require("../assets/images/setting.png")}/>
+        </TouchableOpacity>
 
-        <TouchableHighlight
+        <TouchableOpacity
           style={profileStyles.cameraButton}
-          onPress={this.onChooseImagePress}
-        >
+          onPress={this.onChooseImagePress}>
           <Image
             style={{ height: 30, width: 30 }}
-            source={require("../assets/images/camera.png")}
-          />
-        </TouchableHighlight>
+            source={require("../assets/images/camera.png")}/>
+        </TouchableOpacity>
 
         <View style={profileStyles.infoNameAndFollowers}>
           <Text style={profileStyles.infoName}>För- och efternamn: {nameFrom}</Text>
@@ -215,7 +216,17 @@ export default function ProfileScreen() {
         <Text style={{ fontSize: 20, paddingLeft: 20 }}>Poäng:</Text>
       </View>
       <Button title="Spara" onPress={saveAndDisplayAll} />
-      <Button title="Logga ut" onPress={logout} />
+
+
+
+      <TouchableOpacity
+        style={[profileStyles.greenButton, styles.marginBottom]}
+        title="Logga ut"
+        onPress={logout}
+      >
+        <Text style={profileStyles.whiteText}>Logga ut</Text>
+      </TouchableOpacity>
+
     </ScrollView>
   );
 }
@@ -237,6 +248,10 @@ function OptionButton({ icon, label, onPress, isLastOption }) {
     </RectButton>
   );
 }
+
+
+
+
 
 const profileStyles = StyleSheet.create({
   container: {
@@ -299,6 +314,20 @@ const profileStyles = StyleSheet.create({
 
   infoName: {
     fontSize: 20
+  },
+
+  greenButton: {
+    borderRadius: 20,
+    backgroundColor: "#228669",
+    height: 40,
+    width: 100,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+
+  whiteText: {
+    color: "white",
+    fontWeight: "500"
   },
 
 });
