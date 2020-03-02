@@ -145,6 +145,7 @@ export default function ProfileScreen() {
   saveAndDisplayAll = () => {
     this.saveAndDisplay();
     this.saveAndDisplayAddress();
+    setShowEditForm(false);
   };
 
   return (
@@ -164,7 +165,11 @@ export default function ProfileScreen() {
           source={{ uri: imageUrl }}
         />
 
-        <TouchableOpacity style={profileStyles.editButtonPlacement} size={25} onPress={setShowEditForm(true)}>
+        <TouchableOpacity
+          style={profileStyles.editButtonPlacement}
+          size={25}
+          onPress={() => setShowEditForm(true)}
+        >
           <Image
             style={profileStyles.editButton}
             source={require("../assets/images/setting-white.png")}
@@ -186,7 +191,12 @@ export default function ProfileScreen() {
             För- och efternamn: {nameFrom}
           </Text>
 
-          <TextInput style={profileStyles.nameInput} onChange={handleChange} />
+          {showEditForm && (
+            <TextInput
+              style={profileStyles.nameInput}
+              onChange={handleChange}
+            />
+          )}
 
           <View style={profileStyles.followers}>
             <Text style={profileStyles.textFollowers}>Antal följare:</Text>
@@ -205,16 +215,19 @@ export default function ProfileScreen() {
         <Text style={{ fontSize: 20, paddingLeft: 20 }}>
           Adress: {addressFrom}
         </Text>
-        <TextInput
-          style={{
-            paddingLeft: 20,
-            height: 30,
-            width: 200,
-            borderColor: "gray",
-            borderWidth: 1
-          }}
-          onChange={handleChangeAddress}
-        />
+
+        {showEditForm && (
+          <TextInput
+            style={{
+              paddingLeft: 20,
+              height: 30,
+              width: 200,
+              borderColor: "gray",
+              borderWidth: 1
+            }}
+            onChange={handleChangeAddress}
+          />
+        )}
 
         <Text style={{ fontSize: 20, paddingLeft: 20 }}>Poäng:</Text>
       </View>
