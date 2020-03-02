@@ -32,6 +32,7 @@ export default function ProfileScreen() {
   const [addressInput, setAddressInput] = useState({ name: "", address: "" });
   const [nameFrom, setNameFrom] = useState();
   const [addressFrom, setAddressFrom] = useState();
+  const [showEditForm, setShowEditForm] = useState();
 
   useEffect(() => {
     const getProfilePicture = async () => {
@@ -163,7 +164,7 @@ export default function ProfileScreen() {
           source={{ uri: imageUrl }}
         />
 
-        <TouchableOpacity style={profileStyles.editButtonPlacement} size={25}>
+        <TouchableOpacity style={profileStyles.editButtonPlacement} size={25} onPress={setShowEditForm(true)}>
           <Image
             style={profileStyles.editButton}
             source={require("../assets/images/setting-white.png")}
@@ -217,8 +218,6 @@ export default function ProfileScreen() {
 
         <Text style={{ fontSize: 20, paddingLeft: 20 }}>Poäng:</Text>
       </View>
-
-
 
       <View style={profileStyles.saveButtonPlacement}>
         <Button title="Spara" onPress={saveAndDisplayAll} />
@@ -388,8 +387,8 @@ const profileStyles = StyleSheet.create({
   },
 
   saveButtonPlacement: {
-    alignItems: 'center',
-    top: 150,
+    alignItems: "center",
+    top: 150
   },
 
   logOutButtonPlacement: {
