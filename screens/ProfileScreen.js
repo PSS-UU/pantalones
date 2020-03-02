@@ -19,6 +19,10 @@ import {
 } from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker";
 import styles from "../AppStyles";
+import cansIcon from "../assets/images/can.png";
+import Colors from "../constants/Colors";
+import StarRating from "react-native-star-rating";
+import Modal from "react-native-modal";
 
 export default function ProfileScreen() {
   const [imageUrl, setImageUrl] = useState();
@@ -33,6 +37,8 @@ export default function ProfileScreen() {
   const [nameFrom, setNameFrom] = useState();
   const [addressFrom, setAddressFrom] = useState();
   const [showEditForm, setShowEditForm] = useState();
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     const getProfilePicture = async () => {
@@ -132,7 +138,7 @@ export default function ProfileScreen() {
     );
   };
 
-  saveAndDisplay = () => {
+  saveAndDisplayName = () => {
     this.handleSubmit();
     this.getName();
   };
@@ -143,9 +149,10 @@ export default function ProfileScreen() {
   };
 
   saveAndDisplayAll = () => {
-    this.saveAndDisplay();
+    this.saveAndDisplayName();
     this.saveAndDisplayAddress();
-    setShowEditForm(false);
+    setIsModalVisible(false);
+    //setShowEditForm(false);
   };
 
   return (
@@ -168,13 +175,39 @@ export default function ProfileScreen() {
         <TouchableOpacity
           style={profileStyles.editButtonPlacement}
           size={25}
-          onPress={() => setShowEditForm(true)}
+          onPress={() => setIsModalVisible(true)}
         >
           <Image
             style={profileStyles.editButton}
             source={require("../assets/images/setting-white.png")}
           />
         </TouchableOpacity>
+        <Modal isVisible={isModalVisible} style={{ backgroundColor: "white" }}>
+          <View>
+            <Text>Ändra namn:</Text>
+            <TextInput
+              style={profileStyles.nameInput}
+              onChange={handleChange}
+            />
+            <Text>Ändra adress:</Text>
+            <TextInput
+              style={{
+                paddingLeft: 20,
+                height: 30,
+                width: 200,
+                borderColor: "gray",
+                borderWidth: 1
+              }}
+              onChange={handleChangeAddress}
+            />
+            <View style={profileStyles.saveButtonPlacement}>
+              <Button
+                title="Spara"
+                onPress={saveAndDisplayAll}
+              />
+            </View>
+          </View>
+        </Modal>
 
         <TouchableOpacity
           style={profileStyles.cameraButtonPlacement}
@@ -191,17 +224,46 @@ export default function ProfileScreen() {
             För- och efternamn: {nameFrom}
           </Text>
 
-          {showEditForm && (
-            <TextInput
-              style={profileStyles.nameInput}
-              onChange={handleChange}
-            />
-          )}
-
           <View style={profileStyles.followers}>
             <Text style={profileStyles.textFollowers}>Antal följare:</Text>
           </View>
         </View>
+      </View>
+
+      <View style={profileStyles.displayPantContainer}>
+        <View style={profileStyles.pantAmountColumn}>
+          <View style={profileStyles.pantAmountRow}>
+            <Image style={profileStyles.iconCan} source={cansIcon} />
+            <Text style={profileStyles.amountText}>249</Text>
+          </View>
+          <Text style={profileStyles.descriptionText}>burkar</Text>
+        </View>
+        <View style={profileStyles.pantAmountColumn}>
+          <View style={profileStyles.pantAmountRow}>
+            <Image style={profileStyles.iconCan} source={cansIcon} />
+            <Text style={profileStyles.amountText}>10</Text>
+          </View>
+          <Text style={profileStyles.descriptionText}>flaskor</Text>
+        </View>
+        <View style={profileStyles.pantAmountColumn}>
+          <View style={profileStyles.pantAmountRow}>
+            <Image style={profileStyles.iconCan} source={cansIcon} />
+            <Text style={profileStyles.amountText}>198</Text>
+          </View>
+          <Text style={profileStyles.descriptionText}>kronor</Text>
+        </View>
+      </View>
+
+      <View style={profileStyles.recension}>
+        <Text style={profileStyles.recensionText}>Recensioner</Text>
+        <StarRating
+          maxStars={5}
+          starSize={24}
+          rating={2}
+          fullStarColor={"#FADA6D"}
+          emptyStarColor={"#FADA6D"}
+          starStyle={profileStyles.star}
+        ></StarRating>
       </View>
 
       <View style={profileStyles.userInfoBlackText}>
@@ -216,24 +278,7 @@ export default function ProfileScreen() {
           Adress: {addressFrom}
         </Text>
 
-        {showEditForm && (
-          <TextInput
-            style={{
-              paddingLeft: 20,
-              height: 30,
-              width: 200,
-              borderColor: "gray",
-              borderWidth: 1
-            }}
-            onChange={handleChangeAddress}
-          />
-        )}
-
         <Text style={{ fontSize: 20, paddingLeft: 20 }}>Poäng:</Text>
-      </View>
-
-      <View style={profileStyles.saveButtonPlacement}>
-        <Button title="Spara" onPress={saveAndDisplayAll} />
       </View>
 
       <View style={profileStyles.logOutButtonPlacement}>
@@ -306,7 +351,7 @@ const profileStyles = StyleSheet.create({
     //resizeMode: 'cover',
     position: "absolute",
     width: "100%",
-    height: "80%"
+    height: "83%"
   },
 
   profilePicture: {
@@ -363,7 +408,7 @@ const profileStyles = StyleSheet.create({
 
   textFollowers: {
     fontSize: 20,
-    color: "white"
+    color: "#228669"
   },
 
   nameInput: {
@@ -401,7 +446,7 @@ const profileStyles = StyleSheet.create({
 
   saveButtonPlacement: {
     alignItems: "center",
-    top: 150
+    top: 130
   },
 
   logOutButtonPlacement: {
@@ -415,6 +460,58 @@ const profileStyles = StyleSheet.create({
     width: 100,
     justifyContent: "center",
     alignItems: "center",
-    top: 180
-  }
+    top: 130
+  },
+
+  iconCan: {
+    width: 32,
+    height: 40
+  },
+
+  displayPantContainer: {
+    flexDirection: "row",
+    paddingTop: 60,
+    justifyContent: "center"
+  },
+
+  pantAmountColumn: {
+    flexDirection: "column",
+    flex: 1,
+    alignItems: "flex-start",
+    alignItems: "center"
+  },
+
+  pantAmountRow: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: 30
+  },
+
+  amountText: {
+    fontSize: 20,
+    color: "white",
+    paddingLeft: 10
+  },
+
+  descriptionText: {
+    fontSize: 16,
+    color: Colors.mediumGreen,
+    paddingTop: 10
+  },
+
+  star: {
+    marginRight: 5,
+    paddingTop: 10,
+  },
+
+  recension: {
+    top: 85,
+    left: 30,
+  },
+
+  recensionText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
 });
