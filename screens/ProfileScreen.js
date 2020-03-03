@@ -198,23 +198,23 @@ export default function ProfileScreen() {
               <Text style={profileStyles.settingText}>Inställningar</Text>
               <View>
                 <View style={{ top: 20 }}>
-                  <Text style={profileStyles.changeNameText}>Ändra namn:</Text>
-                </View>
-                <TextInput
-                  style={profileStyles.settingInput}
-                  onChange={handleChange}
-                  placeholder={nameFrom ? nameFrom : "Skriv ditt för- och efternamn..."}
-                />
-              </View>
-              <View>
-                <View style={{ top: 50 }}>
-                  <Text style={profileStyles.changeAddressText}>
-                    Ändra adress:
+                  <Text style={profileStyles.changeNameText}
+                  >Ändra namn:
                   </Text>
                 </View>
+              </View>
+              <View>
                 <View style={{ top: 30 }}>
-                  <TextInput
+                <TextInput
                     style={profileStyles.settingInput}
+                    onChange={handleChange}
+                    placeholder={addressFrom ? addressFrom :"Skriv ditt för- och efternamn..."}
+                    />
+                    <Text style={profileStyles.changeAddressText}>
+                      Ändra adress:
+                    </Text>
+                  <TextInput
+                    style={profileStyles.settingInputAddress}
                     onChange={handleChangeAddress}
                     placeholder= {addressFrom ? addressFrom :"Skriv din adress..."}
                   />
@@ -243,7 +243,6 @@ export default function ProfileScreen() {
             source={require("../assets/images/camera-white.png")}
           />
         </TouchableOpacity>
-
         <View style={profileStyles.infoNameAndFollowers}>
           <Text style={profileStyles.textName}>
           {nameFrom ? nameFrom : "För- och efternamn:"}
@@ -450,6 +449,34 @@ const profileStyles = StyleSheet.create({
     justifyContent: "flex-end",
     color: "#28A07D",
     backgroundColor: "white",
+    top: 50
+  },
+
+  settingInputAddress: {
+    paddingLeft: 10,
+    height: 40,
+    width: 250,
+    borderColor: "white",
+    borderRadius: 20,
+    borderWidth: 1,
+    justifyContent: "flex-end",
+    color: "#28A07D",
+    backgroundColor: "white",
+    top: 90
+  },
+
+  changeNameText: {
+    fontSize: 20,
+    paddingRight: 135,
+    color: "white",
+    top: 50
+  },
+
+  changeAddressText: {
+    fontSize: 20,
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    color: "white",
     top: 80
   },
 
@@ -578,18 +605,6 @@ const profileStyles = StyleSheet.create({
     fontSize: 26,
     color: "white",
     top: 30
-  },
-
-  changeNameText: {
-    fontSize: 20,
-    color: "white",
-    top: 50
-  },
-
-  changeAddressText: {
-    fontSize: 20,
-    color: "white",
-    top: 50
   },
 
   closeModal: {
