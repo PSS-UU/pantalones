@@ -16,6 +16,7 @@ import { PantStatus } from "../constants/PantStatus";
 
 export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
   const [pants, setPants] = useState([]);
+  const [stations, setStations] = useState([]);
   const [region, setRegion] = useState();
   const [modal, setModal] = useState(false);
   const [selectedPant, setSelectedPant] = useState();
@@ -34,7 +35,7 @@ export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
   }
 
   useEffect(() => {
-    return pantsRef.onSnapshot(snap => {
+    pantsRef.onSnapshot(snap => {
       const list = [];
       snap.forEach(doc => {
         const data = doc.data();
@@ -45,6 +46,18 @@ export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
       });
 
       setPants(list);
+    });
+
+    db.collection("stations").onSnapshot(snap => {
+      const list = [];
+      snap.forEach(doc => {
+        const data = doc.data();
+        list.push({
+          ...data,
+          id :doc.id
+        });
+      })
+      setStations(list);
     });
   }, []);
 
@@ -72,11 +85,6 @@ export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
     }
   };
 
-  const onMarkerClick = pant => {
-    setModal(true);
-    setSelectedPant(pant);
-  };
-
   const onRegionChange = newRegion => {
     setRegion(newRegion);
     if (onRegionChangeComplete) {
@@ -94,6 +102,7 @@ export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
     <View style={StyleSheet.absoluteFillObject}>
       <MapView
         showsUserLocation
+        userLocationAnnotationTitle=""
         onRegionChangeComplete={onRegionChange}
         style={styles.map}
         region={region}
@@ -112,6 +121,14 @@ export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
               <Image style={styles.canIcon} source={canGrayIcon} />
             )}
           </MapView.Marker>
+        ))}
+        {stations.map(station => (
+          <MapView.Marker
+            key={station.id}
+            coordinate={station.location}
+            title={station.name}
+            description={`Öppettider: ${station.openingHours}`}
+          />
         ))}
       </MapView>
       <PantInfoPopUp modal={modal} hideModal={hideModal} pant={selectedPant} />
