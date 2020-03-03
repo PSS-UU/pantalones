@@ -36,9 +36,10 @@ export default function ProfileScreen() {
   const [addressInput, setAddressInput] = useState({ name: "", address: "" });
   const [nameFrom, setNameFrom] = useState();
   const [addressFrom, setAddressFrom] = useState();
-  const [showEditForm, setShowEditForm] = useState();
+  const [showEditForm, setShowEditForm] = useState(true);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [placeholderText, setPlaceholderText] = useState(true);
 
   useEffect(() => {
     const getProfilePicture = async () => {
@@ -152,7 +153,7 @@ export default function ProfileScreen() {
     this.saveAndDisplayName();
     this.saveAndDisplayAddress();
     setIsModalVisible(false);
-    //setShowEditForm(false);
+    setShowEditForm(false);
   };
 
   return (
@@ -220,8 +221,11 @@ export default function ProfileScreen() {
         </TouchableOpacity>
 
         <View style={profileStyles.infoNameAndFollowers}>
-          <Text style={profileStyles.textName}>
+          <Text isVisible={showEditForm} style={profileStyles.textName}>
             För- och efternamn: {nameFrom}
+          </Text>
+          <Text style={profileStyles.textName}>
+          
           </Text>
 
           <View style={profileStyles.followers}>
@@ -263,22 +267,26 @@ export default function ProfileScreen() {
           fullStarColor={"#FADA6D"}
           emptyStarColor={"#FADA6D"}
           starStyle={profileStyles.star}
+          containerStyle={profileStyles.starContainer}
         ></StarRating>
       </View>
-
       <View style={profileStyles.userInfoBlackText}>
         <Text style={profileStyles.textEmail}>
-          E-postadress:{" "}
+          E-postadress {"\n"}
+          {""}
           <Text style={profileStyles.textInfoEmail}>
-            {user ? user.email : "None"}
+            {user ? user.email : "None"} {"\n"}
           </Text>
         </Text>
 
-        <Text style={{ fontSize: 20, paddingLeft: 20 }}>
-          Adress: {addressFrom}
-        </Text>
+        <Text style={profileStyles.textEmail}>
+        Adress
+          <Text style={profileStyles.textInfoEmail}>
+          {"\n"}{addressFrom}{"\n"}
+          </Text>
+          </Text> 
 
-        <Text style={{ fontSize: 20, paddingLeft: 20 }}>Poäng:</Text>
+        <Text style={profileStyles.textEmail}>Poäng</Text>
       </View>
 
       <View style={profileStyles.logOutButtonPlacement}>
@@ -351,7 +359,7 @@ const profileStyles = StyleSheet.create({
     //resizeMode: 'cover',
     position: "absolute",
     width: "100%",
-    height: "83%"
+    height: "70%"
   },
 
   profilePicture: {
@@ -402,6 +410,7 @@ const profileStyles = StyleSheet.create({
     color: "white"
   },
 
+
   followers: {
     top: 10
   },
@@ -421,18 +430,19 @@ const profileStyles = StyleSheet.create({
   },
 
   userInfoBlackText: {
-    top: 120
+    top: 120,
+    left: 10,
   },
 
   textEmail: {
-    fontSize: 20,
+    fontSize: 23,
     paddingLeft: 20,
-    fontWeight: "bold"
+    color: "#282828"
   },
 
   textInfoEmail: {
-    fontSize: 18,
-    color: "grey"
+    fontSize: 20,
+    color: "#BEBEBE"
   },
 
   whiteText: {
@@ -503,15 +513,27 @@ const profileStyles = StyleSheet.create({
   star: {
     marginRight: 5,
     paddingTop: 10,
+    paddingBottom: 0,
+  },
+
+  starContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   recension: {
-    top: 85,
+    top: 70,
     left: 30,
+    flexDirection: "column",
+    flex: 1,
+    alignItems: "flex-start",
+    color: '#282828',
+    height: 40,
   },
 
   recensionText: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 23,
+    color: '#282828'
   },
 });
