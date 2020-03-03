@@ -203,7 +203,7 @@ export default function ProfileScreen() {
                 <TextInput
                   style={profileStyles.settingInput}
                   onChange={handleChange}
-                  placeholder="Skriv ditt för- och efternamn..."
+                  placeholder={nameFrom ? nameFrom : "Skriv ditt för- och efternamn..."}
                 />
               </View>
               <View>
@@ -216,7 +216,7 @@ export default function ProfileScreen() {
                   <TextInput
                     style={profileStyles.settingInput}
                     onChange={handleChangeAddress}
-                    placeholder="Skriv din adress..."
+                    placeholder= {addressFrom ? addressFrom :"Skriv din adress..."}
                   />
                 </View>
               </View>
@@ -245,11 +245,8 @@ export default function ProfileScreen() {
         </TouchableOpacity>
 
         <View style={profileStyles.infoNameAndFollowers}>
-          <Text isVisible={showEditForm} style={profileStyles.textName}>
-            För- och efternamn: {nameFrom}
-          </Text>
           <Text style={profileStyles.textName}>
-          
+          {nameFrom ? nameFrom : "För- och efternamn:"}
           </Text>
 
           <View style={profileStyles.followers}>
