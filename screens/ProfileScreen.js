@@ -36,7 +36,7 @@ export default function ProfileScreen() {
   const [addressInput, setAddressInput] = useState({ name: "", address: "" });
   const [nameFrom, setNameFrom] = useState();
   const [addressFrom, setAddressFrom] = useState();
-  const [showEditForm, setShowEditForm] = useState();
+  //const [showEditForm, setShowEditForm] = useState();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -182,29 +182,53 @@ export default function ProfileScreen() {
             source={require("../assets/images/setting-white.png")}
           />
         </TouchableOpacity>
-        <Modal isVisible={isModalVisible} style={{ backgroundColor: "white" }}>
-          <View>
-            <Text>Ändra namn:</Text>
-            <TextInput
-              style={profileStyles.nameInput}
-              onChange={handleChange}
-            />
-            <Text>Ändra adress:</Text>
-            <TextInput
-              style={{
-                paddingLeft: 20,
-                height: 30,
-                width: 200,
-                borderColor: "gray",
-                borderWidth: 1
-              }}
-              onChange={handleChangeAddress}
-            />
-            <View style={profileStyles.saveButtonPlacement}>
-              <Button
-                title="Spara"
-                onPress={saveAndDisplayAll}
-              />
+
+        <Modal transparent={true} isVisible={isModalVisible}>
+          <View style={profileStyles.modalContentContainer}>
+            <View style={profileStyles.popupBackground}>
+              <View style={profileStyles.modalHeaderContainer}>
+                <TouchableOpacity
+                  style={profileStyles.closeModal}
+                  onPress={() => setIsModalVisible(false)}
+                >
+                  <Text style={{ color: "white", fontSize: 20 }}>X</Text>
+                </TouchableOpacity>
+              </View>
+              <Text style={profileStyles.settingText}>Inställningar</Text>
+              <View>
+                <View style={{ top: 20 }}>
+                  <Text style={profileStyles.changeNameText}>Ändra namn:</Text>
+                </View>
+                <TextInput
+                  style={profileStyles.settingInput}
+                  onChange={handleChange}
+                  placeholder="Skriv ditt för- och efternamn..."
+                />
+              </View>
+              <View>
+                <View style={{ top: 50 }}>
+                  <Text style={profileStyles.changeAddressText}>
+                    Ändra adress:
+                  </Text>
+                </View>
+                <View style={{ top: 30 }}>
+                  <TextInput
+                    style={profileStyles.settingInput}
+                    onChange={handleChangeAddress}
+                    placeholder="Skriv din adress..."
+                  />
+                </View>
+              </View>
+
+              <View style={profileStyles.saveButtonPlacement}>
+                <TouchableOpacity
+                  style={profileStyles.saveButtonGreen}
+                  title="Spara"
+                  onPress={saveAndDisplayAll}
+                >
+                  <Text style={profileStyles.whiteText}>Spara</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         </Modal>
@@ -403,7 +427,7 @@ const profileStyles = StyleSheet.create({
   },
 
   followers: {
-    top: 10
+    top: 3
   },
 
   textFollowers: {
@@ -411,13 +435,17 @@ const profileStyles = StyleSheet.create({
     color: "#228669"
   },
 
-  nameInput: {
-    paddingLeft: 20,
-    height: 30,
-    width: 200,
-    borderColor: "gray",
+  settingInput: {
+    paddingLeft: 10,
+    height: 40,
+    width: 250,
+    borderColor: "white",
+    borderRadius: 20,
     borderWidth: 1,
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    color: "#28A07D",
+    backgroundColor: "white",
+    top: 80
   },
 
   userInfoBlackText: {
@@ -502,16 +530,72 @@ const profileStyles = StyleSheet.create({
 
   star: {
     marginRight: 5,
-    paddingTop: 10,
+    paddingTop: 10
   },
 
   recension: {
     top: 85,
-    left: 30,
+    left: 30
   },
 
   recensionText: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold"
   },
+
+  modalContentContainer: {
+    flex: 1,
+    flexDirection: "column",
+    top: 40,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+
+  popupBackground: {
+    borderRadius: 10,
+    backgroundColor: "#28A07D",
+    height: "60%",
+    width: "90%",
+    //justifyContent: "center",
+    alignItems: "center"
+  },
+
+  settingText: {
+    fontSize: 26,
+    color: "white",
+    top: 30
+  },
+
+  changeNameText: {
+    fontSize: 20,
+    color: "white",
+    top: 50
+  },
+
+  changeAddressText: {
+    fontSize: 20,
+    color: "white",
+    top: 50
+  },
+
+  closeModal: {
+    top: 15,
+    paddingRight: 5
+  },
+
+  saveButtonGreen: {
+    borderRadius: 20,
+    backgroundColor: "#228669",
+    height: 40,
+    width: 100,
+    justifyContent: "center",
+    alignItems: "center",
+    top: 80
+  },
+
+  modalHeaderContainer: {
+    flexDirection: "row",
+    top: 8,
+    left: 125,
+  }
 });
