@@ -208,7 +208,7 @@ export default function ProfileScreen() {
                 <TextInput
                     style={profileStyles.settingInput}
                     onChange={handleChange}
-                    placeholder={addressFrom ? addressFrom :"Skriv ditt för- och efternamn..."}
+                    placeholder={nameFrom ? nameFrom :"Skriv ditt för- och efternamn..."}
                     />
                     <Text style={profileStyles.changeAddressText}>
                       Ändra adress:
