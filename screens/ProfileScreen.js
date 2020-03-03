@@ -431,7 +431,6 @@ const profileStyles = StyleSheet.create({
     color: "white"
   },
 
-
   followers: {
     top: 3
   },
@@ -473,10 +472,6 @@ const profileStyles = StyleSheet.create({
   whiteText: {
     color: "white",
     fontWeight: "500"
-  },
-
-  wrapper: {
-    padding: 10
   },
 
   saveButtonPlacement: {
