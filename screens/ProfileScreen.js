@@ -42,6 +42,11 @@ export default function ProfileScreen() {
   const [placeholderText, setPlaceholderText] = useState(true);
 
   useEffect(() => {
+    getName();
+    getAddress();
+  }, []);
+
+  useEffect(() => {
     const getProfilePicture = async () => {
       const url = await profilePictureRef.getDownloadURL();
       setImageUrl(url);
@@ -570,7 +575,7 @@ const profileStyles = StyleSheet.create({
   },
 
   recension: {
-    top: 70,
+    top: 73,
     left: 30,
     flexDirection: "column",
     flex: 1,
