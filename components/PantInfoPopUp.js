@@ -3,6 +3,15 @@ import { Modal, Dimensions, StyleSheet, TouchableHighlight, View, Text, Image} f
 import StarRating from 'react-native-star-rating';
 
 export default function PantInfoPopUp(props) {
+  const [starCount, setStarCount] = useState(4);
+
+  const onRatingPress = (rating, starCount) => {
+      setStarCount(newAverageRating(rating, starCount, 1));
+  };
+  const newAverageRating = (newRating, oldRating, amount) => {
+    return (oldRating*amount+newRating)/(amount+1)
+  };
+
   return (
     <Modal
     transparent={true}
@@ -50,7 +59,11 @@ export default function PantInfoPopUp(props) {
         <Image style={styles.icon} source={require('../assets/images/can.png')}/>
         <Text>Name</Text>
       </View>
-      <StarRating></StarRating>
+      <StarRating   
+      rating={starCount}
+      selectedStar={(rating) => onRatingPress(rating, starCount)}
+      fullStarColor={'gold'}>
+      </StarRating>
     </View>
   </View>
 </Modal>
@@ -58,6 +71,7 @@ export default function PantInfoPopUp(props) {
     
 );
 }
+
 
 const styles = StyleSheet.create({
     map: {
