@@ -5,6 +5,7 @@ import Modal from "react-native-modal";
 import Colors from "../constants/Colors";
 import globalStyles from "../AppStyles";
 import cansIcon from "../assets/images/can.png";
+import flaskIcon from "../assets/images/flask.png";
 import {
   StyleSheet,
   View,
@@ -21,6 +22,7 @@ import { PantStatus } from "../constants/PantStatus";
 
 export default CreatePant = ({ setModal, modalStatus }) => {
   const [cansCount, setCanAmount] = useState(0);
+  const [flaskCount, setFlaskAmount] = useState(0);
   const [location, setLocation] = useState(null);
 
   const user = firebase.auth().currentUser.uid;
@@ -28,10 +30,14 @@ export default CreatePant = ({ setModal, modalStatus }) => {
   const ref = dbh.collection("pants"); //reference to the pants collection
 
   async function addPant() {
+    const pantMoney = cansCount + flaskCount * 2;
+
     await ref.add({
       cans: cansCount,
+      flasks: flaskCount,
       location: location,
       userId: user,
+      pantMoney: pantMoney,
       status: PantStatus.Available
     });
     setCanAmount(0);
@@ -64,6 +70,20 @@ export default CreatePant = ({ setModal, modalStatus }) => {
             onValueChange={value => setCanAmount(value)}
           />
           <Text style={styles.cansSelectedText}>{cansCount}</Text>
+
+          <View style={styles.canHeader}>
+            <Image style={styles.cansIcon} source={flaskIcon} />
+            <Text style={styles.cansAmountText}>Antal flaskor</Text>
+          </View>
+          <Slider
+            value={0}
+            step={1}
+            maximumValue={300}
+            minimumTrackTintColor={Colors.lightGreen}
+            thumbTintColor={Colors.lightGreen}
+            onValueChange={value => setFlaskAmount(value)}
+          />
+          <Text style={styles.cansSelectedText}>{flaskCount}</Text>
 
           <View style={styles.canHeader}>
             <MaterialIcons name="location-on" size={42} />
@@ -148,7 +168,8 @@ const styles = StyleSheet.create({
 
   cansSelectedText: {
     color: Colors.lightGreen,
-    fontFamily: "space-mono"
+    fontFamily: "space-mono",
+    marginBottom: 10
   },
   cansAmountText: {
     color: Colors.grayText,
