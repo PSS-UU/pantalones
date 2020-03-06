@@ -32,10 +32,6 @@ export default CreatePant = ({ setModal, modalStatus }) => {
   const dbh = firebase.firestore();
   const ref = dbh.collection("pants"); //reference to the pants collection
 
-  function handleChange() {
-    console.log("hello");
-  }
-
   async function addPant() {
     const pantMoney = cansCount + flaskCount * 2;
 
@@ -49,6 +45,8 @@ export default CreatePant = ({ setModal, modalStatus }) => {
       status: PantStatus.Available
     });
     setCanAmount(0);
+    setFlaskAmount(0);
+    onChangeText("");
     setLocation(null);
     setModal(false);
   }
