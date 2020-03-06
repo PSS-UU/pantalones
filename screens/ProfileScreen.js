@@ -9,7 +9,8 @@ import {
   Alert,
   TextInput,
   TouchableHighlight,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import {
@@ -20,6 +21,8 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import styles from "../AppStyles";
 import cansIcon from "../assets/images/can.png";
+import moneyIcon from "../assets/images/money.png";
+import bottleIcon from "../assets/images/flaskor.png";
 import Colors from "../constants/Colors";
 import StarRating from "react-native-star-rating";
 import Modal from "react-native-modal";
@@ -36,10 +39,8 @@ export default function ProfileScreen() {
   const [addressInput, setAddressInput] = useState({ name: "", address: "" });
   const [nameFrom, setNameFrom] = useState();
   const [addressFrom, setAddressFrom] = useState();
-  const [showEditForm, setShowEditForm] = useState(true);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [placeholderText, setPlaceholderText] = useState(true);
 
   useEffect(() => {
     getName();
@@ -158,10 +159,10 @@ export default function ProfileScreen() {
     this.saveAndDisplayName();
     this.saveAndDisplayAddress();
     setIsModalVisible(false);
-    setShowEditForm(false);
   };
 
   return (
+    <View style={profileStyles.container}>
     <ScrollView
       style={profileStyles.container}
       contentContainerStyle={profileStyles.contentContainer}
@@ -269,14 +270,14 @@ export default function ProfileScreen() {
         </View>
         <View style={profileStyles.pantAmountColumn}>
           <View style={profileStyles.pantAmountRow}>
-            <Image style={profileStyles.iconCan} source={cansIcon} />
+            <Image style={profileStyles.iconBottle} source={bottleIcon} />
             <Text style={profileStyles.amountText}>10</Text>
           </View>
           <Text style={profileStyles.descriptionText}>flaskor</Text>
         </View>
         <View style={profileStyles.pantAmountColumn}>
           <View style={profileStyles.pantAmountRow}>
-            <Image style={profileStyles.iconCan} source={cansIcon} />
+            <Image style={profileStyles.iconCan} source={moneyIcon} />
             <Text style={profileStyles.amountText}>198</Text>
           </View>
           <Text style={profileStyles.descriptionText}>kronor</Text>
@@ -324,6 +325,7 @@ export default function ProfileScreen() {
         </TouchableOpacity>
       </View>
     </ScrollView>
+    </View>
   );
 }
 
@@ -528,6 +530,11 @@ const profileStyles = StyleSheet.create({
   iconCan: {
     width: 32,
     height: 40
+  },
+
+  iconBottle: {
+    width: 35,
+    height: 42
   },
 
   displayPantContainer: {
