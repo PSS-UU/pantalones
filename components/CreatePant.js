@@ -6,6 +6,7 @@ import Colors from "../constants/Colors";
 import globalStyles from "../AppStyles";
 import cansIcon from "../assets/images/can.png";
 import flaskIcon from "../assets/images/flask.png";
+import locationIcon from "../assets/images/location-green.png";
 import {
   StyleSheet,
   View,
@@ -14,6 +15,7 @@ import {
   Button,
   Image,
   Slider,
+  TextInput,
   Alert
 } from "react-native";
 import { SelectLocationModal } from "./SelectLocationModal";
@@ -24,10 +26,15 @@ export default CreatePant = ({ setModal, modalStatus }) => {
   const [cansCount, setCanAmount] = useState(0);
   const [flaskCount, setFlaskAmount] = useState(0);
   const [location, setLocation] = useState(null);
+  const [pantTextComment, onChangeText] = useState("");
 
   const user = firebase.auth().currentUser.uid;
   const dbh = firebase.firestore();
   const ref = dbh.collection("pants"); //reference to the pants collection
+
+  function handleChange() {
+    console.log("hello");
+  }
 
   async function addPant() {
     const pantMoney = cansCount + flaskCount * 2;
@@ -38,6 +45,7 @@ export default CreatePant = ({ setModal, modalStatus }) => {
       location: location,
       userId: user,
       pantMoney: pantMoney,
+      pantComment: pantTextComment,
       status: PantStatus.Available
     });
     setCanAmount(0);
@@ -85,10 +93,22 @@ export default CreatePant = ({ setModal, modalStatus }) => {
           />
           <Text style={styles.cansSelectedText}>{flaskCount}</Text>
 
+          <View style={styles.commentHeader}>
+            <Text style={styles.cansAmountText}>Kommentar</Text>
+            <View style={styles.inputFieldContainer}>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={text => onChangeText(text)}
+                value={pantTextComment}
+              />
+            </View>
+          </View>
+
           <View style={styles.canHeader}>
-            <MaterialIcons name="location-on" size={42} />
+            <Image size={42} style={styles.cansIcon} source={locationIcon} />
+
             {location ? (
-              <Text style={styles.cansAmountText}>
+              <Text style={styles.chooseLocationText}>
                 Longitude:{" "}
                 <Text style={{ fontWeight: "bold" }}>
                   {location.longitude.toFixed(3)}
@@ -103,14 +123,14 @@ export default CreatePant = ({ setModal, modalStatus }) => {
               <SelectLocationModal onSelectLocation={setLocation} />
             )}
           </View>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={addPant}
-            style={[globalStyles.lightGreenButton, styles.positionBottom]}
-          >
-            <Text style={globalStyles.buttonText}>Lets pant!</Text>
-          </TouchableOpacity>
         </View>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={addPant}
+          style={[globalStyles.lightGreenButton, styles.positionBottom]}
+        >
+          <Text style={globalStyles.buttonText}>Lets pant!</Text>
+        </TouchableOpacity>
       </Modal>
     </View>
   );
@@ -121,16 +141,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#F5F5F5"
   },
-
-  TouchableOpacityStyle: {
-    position: "absolute",
-    width: 70,
-    height: 70,
-    alignItems: "center",
-    justifyContent: "center",
-    bottom: 30
+  textInput: {
+    height: "100%",
+    width: "100%",
+    marginLeft: 40,
+    color: "gray"
   },
-
   pantTextField: {
     height: 40,
     width: 300,
@@ -159,7 +175,10 @@ const styles = StyleSheet.create({
     height: 70
   },
 
-  positionBottom: {},
+  positionBottom: {
+    marginBottom: 30,
+    marginHorizontal: 60
+  },
 
   exitButton: {
     alignSelf: "flex-end",
@@ -167,9 +186,10 @@ const styles = StyleSheet.create({
   },
 
   cansSelectedText: {
+    fontWeight: "bold",
     color: Colors.lightGreen,
-    fontFamily: "space-mono",
-    marginBottom: 10
+    marginBottom: 20,
+    marginLeft: 5
   },
   cansAmountText: {
     color: Colors.grayText,
@@ -177,15 +197,38 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
 
+  chooseLocationText: {
+    color: Colors.grayText,
+    marginLeft: 10,
+    fontSize: 18
+  },
+  inputFieldContainer: {
+    borderRadius: 25,
+    height: 56,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: Colors.xLightGray,
+    borderWidth: 2.4,
+    marginTop: 10
+  },
+
   ModalContent: {
+    marginTop: 20,
     padding: 20,
-    backgroundColor: "white"
+    backgroundColor: "white",
+    flex: 1
   },
 
   canHeader: {
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 10
+  },
+
+  commentHeader: {
+    flexDirection: "column",
+    marginBottom: 20
   },
 
   ModalColor: {

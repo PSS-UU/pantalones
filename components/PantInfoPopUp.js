@@ -18,6 +18,8 @@ import StarRating from "react-native-star-rating";
 import Colors from "../constants/Colors";
 import globalStyles from "../AppStyles";
 import cansIcon from "../assets/images/can.png";
+import flaskIcon from "../assets/images/flask.png";
+import moneyIcon from "../assets/images/money.png";
 import { PantStatus } from "../constants/PantStatus";
 
 const PantStatusButton = ({ hideModal, pant }) => {
@@ -150,15 +152,15 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
               </View>
               <View style={styles.pantAmountColumn}>
                 <View style={styles.pantAmountRow}>
-                  <Image style={styles.icon} source={cansIcon} />
-                  <Text style={styles.amountText}>{pant.cans}</Text>
+                  <Image style={styles.icon} source={flaskIcon} />
+                  <Text style={styles.amountText}>{pant.flasks}</Text>
                 </View>
                 <Text style={styles.descriptionText}>flaskor</Text>
               </View>
               <View style={styles.pantAmountColumn}>
                 <View style={styles.pantAmountRow}>
-                  <Image style={styles.icon} source={cansIcon} />
-                  <Text style={styles.amountText}>{pant.cans}</Text>
+                  <Image style={styles.icon} source={moneyIcon} />
+                  <Text style={styles.amountText}>{pant.pantMoney}</Text>
                 </View>
                 <Text style={styles.descriptionText}>kronor</Text>
               </View>
@@ -278,8 +280,9 @@ const styles = StyleSheet.create({
     paddingTop: 10
   },
   icon: {
-    width: 32,
-    height: 40
+    width: 34,
+    resizeMode: "contain",
+    height: 48
   },
   popupBackground: {
     borderRadius: 10,
