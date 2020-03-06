@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as firebase from "firebase";
 import MapView from "react-native-maps";
-import {
-  Dimensions,
-  StyleSheet,
-  View,
-  Image
-} from "react-native";
+import { Dimensions, StyleSheet, View, Image } from "react-native";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import PantInfoPopUp from "./PantInfoPopUp";
@@ -27,39 +22,49 @@ export const PantMap = ({ onRegionChangeComplete, onSelectLocation }) => {
   const displayModal = pant => {
     setSelectedPant(pant);
     setModal(true);
-  }
+  };
 
   const hideModal = () => {
     setSelectedPant(undefined);
     setModal(false);
-  }
+  };
 
   useEffect(() => {
+    let isCancelled = false;
+
     pantsRef.onSnapshot(snap => {
-      const list = [];
-      snap.forEach(doc => {
-        const data = doc.data();
-        list.push({
-          ...data,
-          id: doc.id
+      if (!isCancelled) {
+        const list = [];
+        snap.forEach(doc => {
+          const data = doc.data();
+          list.push({
+            ...data,
+            id: doc.id
+          });
         });
-      });
-
-      setPants(list);
+        setPants(list);
+      }
     });
-
     db.collection("stations").onSnapshot(snap => {
-      const list = [];
-      snap.forEach(doc => {
-        const data = doc.data();
-        list.push({
-          ...data,
-          id :doc.id
+      if (!isCancelled) {
+        const list = [];
+        snap.forEach(doc => {
+          const data = doc.data();
+          list.push({
+            ...data,
+            id: doc.id
+          });
         });
-      })
-      setStations(list);
+        setStations(list);
+      }
     });
+
+    return () => {
+      isCancelled = true;
+    };
   }, []);
+
+  useEffect(() => {}, []);
 
   const updateLocation = async location => {
     try {
