@@ -11,7 +11,6 @@ export const SelectLocationModal = props => {
   const [visible, setVisible] = useState();
 
   const onSelectLocation = () => {
-    console.log("onselectlocation");
     setVisible(false);
     props.onSelectLocation(region);
   };

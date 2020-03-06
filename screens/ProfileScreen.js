@@ -123,7 +123,6 @@ export default function ProfileScreen() {
     infoRef.on(
       "child_added",
       function(snapshot) {
-        console.log(snapshot.val());
         setNameFrom(snapshot.val());
       },
       function(errorObject) {
@@ -136,7 +135,6 @@ export default function ProfileScreen() {
     infoRef.once(
       "child_added",
       function(snapshot) {
-        console.log(snapshot.val());
         setAddressFrom(snapshot.val());
       },
       function(errorObject) {
