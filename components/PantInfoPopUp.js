@@ -160,7 +160,7 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
               <View style={styles.pantAmountColumn}>
                 <View style={styles.pantAmountRow}>
                   <Image style={styles.icon} source={moneyIcon} />
-                  <Text style={styles.amountText}>{pant.pantMoney}</Text>
+                  <Text style={styles.amountText}>{pant.estimatedValue}</Text>
                 </View>
                 <Text style={styles.descriptionText}>kronor</Text>
               </View>
@@ -168,8 +168,8 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
             <View style={styles.profileContainer}>
               <Image
                 style={{
-                  height: 90,
-                  width: 90,
+                  height: 70,
+                  width: 70,
                   borderRadius: 300 / 2,
                   overflow: "hidden"
                 }}
@@ -187,6 +187,7 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
                 ></StarRating>
               </View>
             </View>
+            <Text style={styles.pantComment}>{pant.message}</Text>
           </View>
           <PantStatusButton pant={pant} hideModal={hideModal} />
         </View>
@@ -206,6 +207,12 @@ const styles = StyleSheet.create({
   star: {
     marginRight: 5,
     paddingTop: 10
+  },
+  pantComment: {
+    color: "#7F7B8D",
+    marginLeft: 20,
+    marginTop: 20,
+    fontSize: 18
   },
   map: {
     width: Dimensions.get("window").width,
@@ -251,7 +258,8 @@ const styles = StyleSheet.create({
   displayPantContainer: {
     flexDirection: "row",
     paddingTop: 40,
-    justifyContent: "center"
+    justifyContent: "center",
+    marginHorizontal: 5
   },
 
   locationText: {

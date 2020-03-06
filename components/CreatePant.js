@@ -44,8 +44,8 @@ export default CreatePant = ({ setModal, modalStatus }) => {
       flasks: flaskCount,
       location: location,
       userId: user,
-      pantMoney: pantMoney,
-      pantComment: pantTextComment,
+      estimatedValue: pantMoney,
+      message: pantTextComment,
       status: PantStatus.Available
     });
     setCanAmount(0);
