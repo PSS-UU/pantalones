@@ -55,13 +55,13 @@ export default function ProfileScreen() {
     getProfilePicture();
   });
 
-  handleChange = e => {
+  let handleChange = e => {
     setNameInput({
       name: e.nativeEvent.text
     });
   };
 
-  handleChangeAddress = e => {
+  let handleChangeAddress = e => {
     setAddressInput({
       address: e.nativeEvent.text
     });
@@ -81,11 +81,11 @@ export default function ProfileScreen() {
     });
   };
 
-  handleSubmit = () => {
+  let handleSubmit = () => {
     addName(nameInput.name, addressInput.address);
   };
 
-  handleSubmitAddress = () => {
+  let handleSubmitAddress = () => {
     addAddress(nameInput.name, addressInput.address);
   };
 
@@ -98,19 +98,19 @@ export default function ProfileScreen() {
     }
   };
 
-  onChooseImagePress = async () => {
+  let onChooseImagePress = async () => {
     let result = await ImagePicker.launchImageLibraryAsync();
 
     if (!result.cancelled) {
       try {
-        await this.uploadImage(result.uri);
+        await uploadImage(result.uri);
       } catch (error) {
         Alert.alert("error", `Error: ${error}`);
       }
     }
   };
 
-  uploadImage = async uri => {
+  let uploadImage = async uri => {
     const response = await fetch(uri);
     const blob = await response.blob();
 
@@ -119,7 +119,7 @@ export default function ProfileScreen() {
     setImageUrl(url);
   };
 
-  getName = () => {
+  let getName = () => {
     infoRef.on(
       "child_added",
       function(snapshot) {
@@ -132,7 +132,7 @@ export default function ProfileScreen() {
     );
   };
 
-  getAddress = () => {
+  let getAddress = () => {
     infoRef.once(
       "child_added",
       function(snapshot) {
@@ -145,186 +145,192 @@ export default function ProfileScreen() {
     );
   };
 
-  saveAndDisplayName = () => {
-    this.handleSubmit();
-    this.getName();
+  let saveAndDisplayName = () => {
+    handleSubmit();
+    getName();
   };
 
-  saveAndDisplayAddress = () => {
-    this.handleSubmitAddress();
-    this.getAddress();
+  let saveAndDisplayAddress = () => {
+    handleSubmitAddress();
+    getAddress();
   };
 
-  saveAndDisplayAll = () => {
-    this.saveAndDisplayName();
-    this.saveAndDisplayAddress();
+  let saveAndDisplayAll = () => {
+    saveAndDisplayName();
+    saveAndDisplayAddress();
     setIsModalVisible(false);
   };
 
   return (
     <View style={profileStyles.container}>
-    <ScrollView
-      style={profileStyles.container}
-      contentContainerStyle={profileStyles.contentContainer}
-    >
-      <Image
-        style={profileStyles.backgroundImage}
-        source={require("../assets/images/background-wave.png")}
-      />
-
-      <View style={profileStyles.topInfo}>
+      <ScrollView
+        style={profileStyles.container}
+        contentContainerStyle={profileStyles.contentContainer}
+      >
         <Image
-          resizeMode="cover"
-          style={profileStyles.profilePicture}
-          source={{ uri: imageUrl }}
+          style={profileStyles.backgroundImage}
+          source={require("../assets/images/background-wave.png")}
         />
 
-        <TouchableOpacity
-          style={profileStyles.editButtonPlacement}
-          size={25}
-          onPress={() => setIsModalVisible(true)}
-        >
+        <View style={profileStyles.topInfo}>
           <Image
-            style={profileStyles.editButton}
-            source={require("../assets/images/setting-white.png")}
+            resizeMode="cover"
+            style={profileStyles.profilePicture}
+            source={{ uri: imageUrl }}
           />
-        </TouchableOpacity>
 
-        <Modal transparent={true} isVisible={isModalVisible}>
-          <View style={profileStyles.modalContentContainer}>
-            <View style={profileStyles.popupBackground}>
-              <View style={profileStyles.modalHeaderContainer}>
-                <TouchableOpacity
-                  style={profileStyles.closeModal}
-                  onPress={() => setIsModalVisible(false)}
-                >
-                  <Text style={{ color: "white", fontSize: 20 }}>X</Text>
-                </TouchableOpacity>
-              </View>
-              <Text style={profileStyles.settingText}>Inställningar</Text>
-              <View>
-                <View style={{ top: 20 }}>
-                  <Text style={profileStyles.changeNameText}
-                  >Ändra namn:
-                  </Text>
+          <TouchableOpacity
+            style={profileStyles.editButtonPlacement}
+            size={25}
+            onPress={() => setIsModalVisible(true)}
+          >
+            <Image
+              style={profileStyles.editButton}
+              source={require("../assets/images/setting-white.png")}
+            />
+          </TouchableOpacity>
+
+          <Modal transparent={true} isVisible={isModalVisible}>
+            <View style={profileStyles.modalContentContainer}>
+              <View style={profileStyles.popupBackground}>
+                <View style={profileStyles.modalHeaderContainer}>
+                  <TouchableOpacity
+                    style={profileStyles.closeModal}
+                    onPress={() => setIsModalVisible(false)}
+                  >
+                    <Text style={{ color: "white", fontSize: 20 }}>X</Text>
+                  </TouchableOpacity>
                 </View>
-              </View>
-              <View>
-                <View style={{ top: 30 }}>
-                <TextInput
-                    style={profileStyles.settingInput}
-                    onChange={handleChange}
-                    placeholder={nameFrom ? nameFrom :"Skriv ditt för- och efternamn..."}
+                <Text style={profileStyles.settingText}>Inställningar</Text>
+                <View>
+                  <View style={{ top: 20 }}>
+                    <Text style={profileStyles.changeNameText}>
+                      Ändra namn:
+                    </Text>
+                  </View>
+                </View>
+                <View>
+                  <View style={{ top: 30 }}>
+                    <TextInput
+                      style={profileStyles.settingInput}
+                      onChange={handleChange}
+                      placeholder={
+                        nameFrom ? nameFrom : "Skriv ditt för- och efternamn..."
+                      }
                     />
                     <Text style={profileStyles.changeAddressText}>
                       Ändra adress:
                     </Text>
-                  <TextInput
-                    style={profileStyles.settingInputAddress}
-                    onChange={handleChangeAddress}
-                    placeholder= {addressFrom ? addressFrom :"Skriv din adress..."}
-                  />
+                    <TextInput
+                      style={profileStyles.settingInputAddress}
+                      onChange={handleChangeAddress}
+                      placeholder={
+                        addressFrom ? addressFrom : "Skriv din adress..."
+                      }
+                    />
+                  </View>
+                </View>
+
+                <View style={profileStyles.saveButtonPlacement}>
+                  <TouchableOpacity
+                    style={profileStyles.saveButtonGreen}
+                    title="Spara"
+                    onPress={saveAndDisplayAll}
+                  >
+                    <Text style={profileStyles.whiteText}>Spara</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
+            </View>
+          </Modal>
 
-              <View style={profileStyles.saveButtonPlacement}>
-                <TouchableOpacity
-                  style={profileStyles.saveButtonGreen}
-                  title="Spara"
-                  onPress={saveAndDisplayAll}
-                >
-                  <Text style={profileStyles.whiteText}>Spara</Text>
-                </TouchableOpacity>
-              </View>
+          <TouchableOpacity
+            style={profileStyles.cameraButtonPlacement}
+            onPress={onChooseImagePress}
+          >
+            <Image
+              style={profileStyles.cameraButton}
+              source={require("../assets/images/camera-white.png")}
+            />
+          </TouchableOpacity>
+          <View style={profileStyles.infoNameAndFollowers}>
+            <Text style={profileStyles.textName}>
+              {nameFrom ? nameFrom : "För- och efternamn:"}
+            </Text>
+
+            <View style={profileStyles.followers}>
+              <Text style={profileStyles.textFollowers}>Antal följare:</Text>
             </View>
           </View>
-        </Modal>
+        </View>
 
-        <TouchableOpacity
-          style={profileStyles.cameraButtonPlacement}
-          onPress={this.onChooseImagePress}
-        >
-          <Image
-            style={profileStyles.cameraButton}
-            source={require("../assets/images/camera-white.png")}
-          />
-        </TouchableOpacity>
-        <View style={profileStyles.infoNameAndFollowers}>
-          <Text style={profileStyles.textName}>
-          {nameFrom ? nameFrom : "För- och efternamn:"}
+        <View style={profileStyles.displayPantContainer}>
+          <View style={profileStyles.pantAmountColumn}>
+            <View style={profileStyles.pantAmountRow}>
+              <Image style={profileStyles.iconCan} source={cansIcon} />
+              <Text style={profileStyles.amountText}>249</Text>
+            </View>
+            <Text style={profileStyles.descriptionText}>burkar</Text>
+          </View>
+          <View style={profileStyles.pantAmountColumn}>
+            <View style={profileStyles.pantAmountRow}>
+              <Image style={profileStyles.iconBottle} source={bottleIcon} />
+              <Text style={profileStyles.amountText}>10</Text>
+            </View>
+            <Text style={profileStyles.descriptionText}>flaskor</Text>
+          </View>
+          <View style={profileStyles.pantAmountColumn}>
+            <View style={profileStyles.pantAmountRow}>
+              <Image style={profileStyles.iconCan} source={moneyIcon} />
+              <Text style={profileStyles.amountText}>198</Text>
+            </View>
+            <Text style={profileStyles.descriptionText}>kronor</Text>
+          </View>
+        </View>
+
+        <View style={profileStyles.recension}>
+          <Text style={profileStyles.recensionText}>Recensioner</Text>
+          <StarRating
+            maxStars={5}
+            starSize={24}
+            rating={2}
+            fullStarColor={"#FADA6D"}
+            emptyStarColor={"#FADA6D"}
+            starStyle={profileStyles.star}
+            containerStyle={profileStyles.starContainer}
+          ></StarRating>
+        </View>
+        <View style={profileStyles.userInfoBlackText}>
+          <Text style={profileStyles.textEmail}>
+            E-postadress {"\n"}
+            {""}
+            <Text style={profileStyles.textInfoEmail}>
+              {user ? user.email : "None"} {"\n"}
+            </Text>
           </Text>
 
-          <View style={profileStyles.followers}>
-            <Text style={profileStyles.textFollowers}>Antal följare:</Text>
-          </View>
-        </View>
-      </View>
-
-      <View style={profileStyles.displayPantContainer}>
-        <View style={profileStyles.pantAmountColumn}>
-          <View style={profileStyles.pantAmountRow}>
-            <Image style={profileStyles.iconCan} source={cansIcon} />
-            <Text style={profileStyles.amountText}>249</Text>
-          </View>
-          <Text style={profileStyles.descriptionText}>burkar</Text>
-        </View>
-        <View style={profileStyles.pantAmountColumn}>
-          <View style={profileStyles.pantAmountRow}>
-            <Image style={profileStyles.iconBottle} source={bottleIcon} />
-            <Text style={profileStyles.amountText}>10</Text>
-          </View>
-          <Text style={profileStyles.descriptionText}>flaskor</Text>
-        </View>
-        <View style={profileStyles.pantAmountColumn}>
-          <View style={profileStyles.pantAmountRow}>
-            <Image style={profileStyles.iconCan} source={moneyIcon} />
-            <Text style={profileStyles.amountText}>198</Text>
-          </View>
-          <Text style={profileStyles.descriptionText}>kronor</Text>
-        </View>
-      </View>
-
-      <View style={profileStyles.recension}>
-        <Text style={profileStyles.recensionText}>Recensioner</Text>
-        <StarRating
-          maxStars={5}
-          starSize={24}
-          rating={2}
-          fullStarColor={"#FADA6D"}
-          emptyStarColor={"#FADA6D"}
-          starStyle={profileStyles.star}
-          containerStyle={profileStyles.starContainer}
-        ></StarRating>
-      </View>
-      <View style={profileStyles.userInfoBlackText}>
-        <Text style={profileStyles.textEmail}>
-          E-postadress {"\n"}
-          {""}
-          <Text style={profileStyles.textInfoEmail}>
-            {user ? user.email : "None"} {"\n"}
+          <Text style={profileStyles.textEmail}>
+            Adress
+            <Text style={profileStyles.textInfoEmail}>
+              {"\n"}
+              {addressFrom}
+              {"\n"}
+            </Text>
           </Text>
-        </Text>
 
-        <Text style={profileStyles.textEmail}>
-        Adress
-          <Text style={profileStyles.textInfoEmail}>
-          {"\n"}{addressFrom}{"\n"}
-          </Text>
-          </Text> 
+          <Text style={profileStyles.textEmail}>Poäng</Text>
+        </View>
 
-        <Text style={profileStyles.textEmail}>Poäng</Text>
-      </View>
-
-      <View style={profileStyles.logOutButtonPlacement}>
-        <TouchableOpacity
-          style={profileStyles.greenButton}
-          title="Logga ut"
-          onPress={logout}
-        >
-          <Text style={profileStyles.whiteText}>Logga ut</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+        <View style={profileStyles.logOutButtonPlacement}>
+          <TouchableOpacity
+            style={profileStyles.greenButton}
+            title="Logga ut"
+            onPress={logout}
+          >
+            <Text style={profileStyles.whiteText}>Logga ut</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -489,7 +495,7 @@ const profileStyles = StyleSheet.create({
 
   userInfoBlackText: {
     top: 120,
-    left: 10,
+    left: 10
   },
 
   textEmail: {
@@ -572,13 +578,13 @@ const profileStyles = StyleSheet.create({
   star: {
     marginRight: 5,
     paddingTop: 10,
-    paddingBottom: 0,
+    paddingBottom: 0
   },
 
   starContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
 
   recension: {
@@ -587,13 +593,13 @@ const profileStyles = StyleSheet.create({
     flexDirection: "column",
     flex: 1,
     alignItems: "flex-start",
-    color: '#282828',
-    height: 40,
+    color: "#282828",
+    height: 40
   },
 
   recensionText: {
     fontSize: 23,
-    color: '#282828'
+    color: "#282828"
   },
 
   modalContentContainer: {
@@ -637,6 +643,6 @@ const profileStyles = StyleSheet.create({
   modalHeaderContainer: {
     flexDirection: "row",
     top: 8,
-    left: 125,
+    left: 125
   }
 });
