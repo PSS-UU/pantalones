@@ -18,10 +18,7 @@ export const SelectLocationModal = props => {
 
   const footer = (
     <View>
-    <Button 
-    title="Välj plats"
-    onPress={onSelectLocation}>
-    </Button>
+      <Button title="Välj plats" onPress={onSelectLocation}></Button>
     </View>
   );
 
@@ -62,6 +59,6 @@ const styles = StyleSheet.create({
     padding: 10
   },
   locationButtonText: {
-    color: '#ffffff'
+    color: "#ffffff"
   }
 });
