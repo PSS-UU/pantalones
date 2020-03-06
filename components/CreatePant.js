@@ -4,19 +4,24 @@ import "@firebase/firestore";
 import Modal from "react-native-modal";
 import Colors from "../constants/Colors";
 import globalStyles from "../AppStyles";
+import cansIcon from "../assets/images/can.png";
 import {
   StyleSheet,
   View,
   TouchableOpacity,
   Text,
-  TextInput,
   Button,
-  Image
+  Image,
+  Slider,
+  Alert
 } from "react-native";
+import { SelectLocationModal } from "./SelectLocationModal";
+import { MaterialIcons } from "@expo/vector-icons";
+import { PantStatus } from "../constants/PantStatus";
 
-export default CreatePant = props => {
+export default CreatePant = ({ setModal, modalStatus }) => {
   const [cansCount, setCanAmount] = useState(0);
-  const [modalVisible, setModal] = useState(false);
+  const [location, setLocation] = useState(null);
 
   const user = firebase.auth().currentUser.uid;
   const dbh = firebase.firestore();
@@ -25,47 +30,68 @@ export default CreatePant = props => {
   async function addPant() {
     await ref.add({
       cans: cansCount,
-      userId: user
+      location: location,
+      userId: user,
+      status: PantStatus.Available
     });
-    setCanAmount("");
-    setModal(!modalVisible);
+    setCanAmount(0);
+    setLocation(null);
+    setModal(false);
   }
 
   return (
     <View style={styles.MainContainer}>
-      <Modal style={styles.ModalColor} isVisible={modalVisible}>
+      <Modal style={styles.ModalColor} isVisible={modalStatus}>
         <View style={styles.ModalHeaderContainer}>
           <Text style={styles.modalText}>Skapa pant</Text>
           <Button
             style={styles.exitButton}
             title="x"
-            onPress={() => setModal(!modalVisible)}
+            onPress={() => setModal(false)}
           />
         </View>
         <View style={styles.ModalContent}>
-          <TextInput
-            style={styles.pantTextField}
-            onChangeText={canAmount => setCanAmount(canAmount)}
+          <View style={styles.canHeader}>
+            <Image style={styles.cansIcon} source={cansIcon} />
+            <Text style={styles.cansAmountText}>Antal burkar</Text>
+          </View>
+          <Slider
+            value={0}
+            step={1}
+            maximumValue={300}
+            minimumTrackTintColor={Colors.lightGreen}
+            thumbTintColor={Colors.lightGreen}
+            onValueChange={value => setCanAmount(value)}
           />
+          <Text style={styles.cansSelectedText}>{cansCount}</Text>
+
+          <View style={styles.canHeader}>
+            <MaterialIcons name="location-on" size={42} />
+            {location ? (
+              <Text style={styles.cansAmountText}>
+                Longitude:{" "}
+                <Text style={{ fontWeight: "bold" }}>
+                  {location.longitude.toFixed(3)}
+                </Text>
+                {"\n"}
+                Latitude:{" "}
+                <Text style={{ fontWeight: "bold" }}>
+                  {location.latitude.toFixed(3)}
+                </Text>
+              </Text>
+            ) : (
+              <SelectLocationModal onSelectLocation={setLocation} />
+            )}
+          </View>
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={addPant}
-            style={[globalStyles.lightGreenButton, globalStyles.positionBottom]}
+            style={[globalStyles.lightGreenButton, styles.positionBottom]}
           >
             <Text style={globalStyles.buttonText}>Lets pant!</Text>
           </TouchableOpacity>
         </View>
       </Modal>
-      <TouchableOpacity
-        activeOpacity={0.7}
-        onPress={setModal}
-        style={styles.TouchableOpacityStyle}
-      >
-        <Image
-          source={require("../assets/images/floating_button_green.png")}
-          style={styles.FloatingButtonStyle}
-        />
-      </TouchableOpacity>
     </View>
   );
 };
@@ -93,6 +119,12 @@ const styles = StyleSheet.create({
     borderRadius: 20
   },
 
+  cansIcon: {
+    width: 40,
+    height: 40,
+    resizeMode: "contain"
+  },
+
   modalText: {
     fontSize: 32,
     color: Colors.lightGreen,
@@ -107,21 +139,41 @@ const styles = StyleSheet.create({
     height: 70
   },
 
+  positionBottom: {},
+
   exitButton: {
     alignSelf: "flex-end",
     flex: 1
   },
 
+  cansSelectedText: {
+    color: Colors.lightGreen,
+    fontFamily: "space-mono"
+  },
+  cansAmountText: {
+    color: Colors.grayText,
+    marginLeft: 10,
+    fontSize: 18
+  },
+
   ModalContent: {
     padding: 20,
-    backgroundColor: "white",
-    flex: 1
+    backgroundColor: "white"
+  },
+
+  canHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10
   },
 
   ModalColor: {
     backgroundColor: "white",
+    justifyContent: "center",
+    borderRadius: 20,
     flex: 1,
-    justifyContent: "center"
+    flexDirection: "column",
+    justifyContent: "flex-start"
   },
 
   ModalHeaderContainer: {
