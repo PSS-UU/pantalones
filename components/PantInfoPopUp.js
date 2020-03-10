@@ -24,6 +24,7 @@ import { PantStatus } from "../constants/PantStatus";
 
 const PantStatusButton = ({ hideModal, pant }) => {
   const db = firebase.firestore();
+  const user = firebase.auth().currentUser.uid;
 
   const claimPant = () => {
     Alert.alert(
@@ -41,7 +42,7 @@ const PantStatusButton = ({ hideModal, pant }) => {
               await db
                 .collection("pants")
                 .doc(pant.id)
-                .update({ status: PantStatus.Claimed });
+                .update({ status: PantStatus.Claimed, claimedUserId: user });
             } catch (error) {
               console.error(error);
               Alert.alert("Error", "Error!");

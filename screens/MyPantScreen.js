@@ -11,11 +11,13 @@ import {
   Image
 } from "react-native";
 import { PantCard } from "../components/PantCard";
+import { ClaimedPantCard } from "../components/ClaimedPantCard";
 import Colors from "../constants/Colors";
 
 export default function MyPant() {
   const [myPants, setMyPants] = useState([]);
   const [modalVisible, setModal] = useState(false);
+  const [myClaimedPants, setMyClaimedPants] = useState([]);
 
   const dbh = firebase.firestore();
   const ref = dbh.collection("pants"); //reference to the pants collection
@@ -23,7 +25,7 @@ export default function MyPant() {
 
   //Get all the current users POSTED Pant
   useEffect(() => {
-    return ref.where("userId", "==", user).onSnapshot(querySnapshot => {
+    ref.where("userId", "==", user).onSnapshot(querySnapshot => {
       const list = [];
       querySnapshot.forEach(doc => {
         list.push({
@@ -33,6 +35,17 @@ export default function MyPant() {
       });
 
       setMyPants(list);
+    });
+    ref.where("claimedUserId", "==", user).onSnapshot(querySnapshot => {
+      const claimedList = [];
+      querySnapshot.forEach(doc => {
+        claimedList.push({
+          ...doc.data(),
+          id: doc.id
+        });
+      });
+
+      setMyClaimedPants(claimedList);
     });
   }, []);
 
@@ -49,8 +62,10 @@ export default function MyPant() {
       <Text style={styles.title}>Min pant</Text>
       <View style={styles.pantCards}>
         <FlatList
-          data={myPants}
-          renderItem={({ item }) => <PantCard key={item.id} pant={item} />}
+          data={myClaimedPants}
+          renderItem={({ item }) => (
+            <ClaimedPantCard key={item.id} pant={item} />
+          )}
           keyExtractor={item => item.id}
         />
       </View>

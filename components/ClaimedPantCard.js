@@ -11,7 +11,7 @@ import divider from "../assets/images/divider.png";
 
 import locationIcon from "../assets/images/directions.png";
 
-export const PantCard = ({ pant }) => {
+export const ClaimedPantCard = ({ pant }) => {
   const db = firebase.firestore();
 
   const onPressEdit = closeCard => {
@@ -22,7 +22,7 @@ export const PantCard = ({ pant }) => {
   const onPressDelete = closeCard => {
     Alert.alert(
       "Ta bort pant",
-      "Är du säker på att du inte vill hämta denna pant?",
+      "Är du säker på att du vill ta bort denna panten?",
       [
         {
           text: "Avbryt",
@@ -50,7 +50,8 @@ export const PantCard = ({ pant }) => {
   };
 
   const rightActions = [
-    { color: Colors.lightGreen, icon: "delete", onPress: onPressDelete }
+    { color: "#0073bd", icon: "edit", onPress: onPressEdit },
+    { color: "#ce4257", icon: "delete", onPress: onPressDelete }
   ];
 
   const cardColor =
@@ -77,7 +78,7 @@ export const PantCard = ({ pant }) => {
   );
 };
 
-PantCard.propTypes = {
+ClaimedPantCard.propTypes = {
   pant: PropTypes.object.isRequired
 };
 
