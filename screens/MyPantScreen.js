@@ -26,7 +26,7 @@ export default function MyPant() {
       querySnapshot.forEach(doc => {
         list.push({
           ...doc.data(),
-          id: doc.id,
+          id: doc.id
         });
       });
 
@@ -36,7 +36,6 @@ export default function MyPant() {
 
   return (
     <View style={styles.mainContainer}>
-      <Text>Min pant</Text>
       <View style={styles.pantCards}>
         <FlatList
           data={myPants}
