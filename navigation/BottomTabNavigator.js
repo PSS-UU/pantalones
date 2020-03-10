@@ -5,10 +5,7 @@ import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen, { LoginScreen } from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import MyPantScreen from "../screens/MyPantScreen";
-import { getName } from "../screens/ProfileScreen";
 import Colors from "../constants/Colors";
-import { MaterialCommunityIcons } from "react-native-vector-icons";
-import Icon from "react-native-vector-icons/Feather";
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = "Home";
