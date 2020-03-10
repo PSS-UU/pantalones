@@ -10,8 +10,9 @@ import {
   TouchableOpacity,
   Image
 } from "react-native";
-import { PantCard } from "../components/PantCard";
 import { ClaimedPantCard } from "../components/ClaimedPantCard";
+import { PantCard } from "../components/PantCard";
+
 import Colors from "../constants/Colors";
 
 export default function MyPant() {
@@ -54,18 +55,18 @@ export default function MyPant() {
       <Text style={styles.title}>Pant att hämta</Text>
       <View style={styles.pantCards}>
         <FlatList
-          data={myPants}
-          renderItem={({ item }) => <PantCard key={item.id} pant={item} />}
+          data={myClaimedPants}
+          renderItem={({ item }) => (
+            <ClaimedPantCard key={item.id} pant={item} />
+          )}
           keyExtractor={item => item.id}
         />
       </View>
       <Text style={styles.title}>Min pant</Text>
       <View style={styles.pantCards}>
         <FlatList
-          data={myClaimedPants}
-          renderItem={({ item }) => (
-            <ClaimedPantCard key={item.id} pant={item} />
-          )}
+          data={myPants}
+          renderItem={({ item }) => <PantCard key={item.id} pant={item} />}
           keyExtractor={item => item.id}
         />
       </View>

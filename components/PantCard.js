@@ -22,7 +22,7 @@ export const PantCard = ({ pant }) => {
   const onPressDelete = closeCard => {
     Alert.alert(
       "Ta bort pant",
-      "Är du säker på att du inte vill hämta denna pant?",
+      "Är du säker på att du vill ta bort denna panten?",
       [
         {
           text: "Avbryt",
@@ -50,7 +50,8 @@ export const PantCard = ({ pant }) => {
   };
 
   const rightActions = [
-    { color: Colors.lightGreen, icon: "delete", onPress: onPressDelete }
+    { color: Colors.lightGreen, icon: "edit", onPress: onPressEdit },
+    { color: "#D35471", icon: "delete", onPress: onPressDelete }
   ];
 
   const cardColor =

@@ -11,6 +11,7 @@ import divider from "../assets/images/divider.png";
 
 import locationIcon from "../assets/images/directions.png";
 
+//This card is displayed for pants the user has created
 export const ClaimedPantCard = ({ pant }) => {
   const db = firebase.firestore();
 
@@ -22,7 +23,7 @@ export const ClaimedPantCard = ({ pant }) => {
   const onPressDelete = closeCard => {
     Alert.alert(
       "Ta bort pant",
-      "Är du säker på att du vill ta bort denna panten?",
+      "Är du säker på att du inte vill hämta denna pant?",
       [
         {
           text: "Avbryt",
@@ -37,7 +38,7 @@ export const ClaimedPantCard = ({ pant }) => {
               await db
                 .collection("pants")
                 .doc(pant.id)
-                .delete();
+                .update({ status: "AVAILABLE", claimedUserId: "" });
             } catch (error) {
               console.error(error);
               Alert.alert("Error", "Error!");
@@ -50,8 +51,7 @@ export const ClaimedPantCard = ({ pant }) => {
   };
 
   const rightActions = [
-    { color: "#0073bd", icon: "edit", onPress: onPressEdit },
-    { color: "#ce4257", icon: "delete", onPress: onPressDelete }
+    { color: Colors.lightGreen, icon: "delete", onPress: onPressDelete }
   ];
 
   const cardColor =
