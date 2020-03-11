@@ -8,8 +8,7 @@ import { PantStatus } from "../constants/PantStatus";
 import cansIcon from "../assets/images/can.png";
 import flaskIcon from "../assets/images/flask.png";
 import divider from "../assets/images/divider.png";
-
-import locationIcon from "../assets/images/directions.png";
+import locationIcon from "../assets/images/location-green.png";
 
 //This card is displayed for pants the user has created
 export const ClaimedPantCard = ({ pant }) => {
@@ -66,6 +65,7 @@ export const ClaimedPantCard = ({ pant }) => {
         <Image style={styles.divider} source={divider} />
         <View style={styles.canHeader}>
           <Image style={styles.locationIcon} source={locationIcon} />
+          <Text style={styles.amountText}>2 km</Text>
         </View>
       </View>
     </SwipeableCard>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   },
 
   amountText: {
-    fontSize: 22,
+    fontSize: 20,
     color: "white",
     paddingLeft: 10
   },
@@ -106,10 +106,9 @@ const styles = StyleSheet.create({
     resizeMode: "contain"
   },
   locationIcon: {
-    width: 40,
-    height: 40,
-    resizeMode: "contain",
-    transform: [{ rotate: "45deg" }]
+    width: 32,
+    height: 32,
+    resizeMode: "contain"
   },
   divider: {
     marginHorizontal: 16

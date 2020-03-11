@@ -101,13 +101,13 @@ const styles = StyleSheet.create({
   },
 
   amountText: {
-    fontSize: 22,
+    fontSize: 20,
     color: "white",
     paddingLeft: 10
   },
 
   cardStatus: {
-    fontSize: 22,
+    fontSize: 20,
     color: "white"
   },
 
