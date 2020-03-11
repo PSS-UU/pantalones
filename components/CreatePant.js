@@ -40,6 +40,7 @@ export default CreatePant = ({ setModal, modalStatus }) => {
       flasks: flaskCount,
       location: location,
       userId: user,
+      claimedUserId: "", //Will be updated when a user claims it
       estimatedValue: pantMoney,
       message: pantTextComment,
       status: PantStatus.Available

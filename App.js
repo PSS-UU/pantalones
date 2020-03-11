@@ -91,7 +91,11 @@ export function Main(props) {
           ref={containerRef}
           initialState={initialNavigationState}
         >
-          <Stack.Navigator>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false
+            }}
+          >
             <Stack.Screen name="Root" component={BottomTabNavigator} />
           </Stack.Navigator>
         </NavigationContainer>

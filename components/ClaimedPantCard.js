@@ -7,23 +7,17 @@ import { SwipeableCard } from "./SwipeableCard";
 import { PantStatus } from "../constants/PantStatus";
 import cansIcon from "../assets/images/can.png";
 import flaskIcon from "../assets/images/flask.png";
-import greenDivider from "../assets/images/divider.png";
-import grayDivider from "../assets/images/grayDivider.png";
+import divider from "../assets/images/divider.png";
+import locationIcon from "../assets/images/location-green.png";
 
-import locationIcon from "../assets/images/directions.png";
-
-export const PantCard = ({ pant }) => {
+//This card is displayed for pants the user has created
+export const ClaimedPantCard = ({ pant }) => {
   const db = firebase.firestore();
-
-  const onPressEdit = closeCard => {
-    Alert.alert("TODO", "TODO: Implement edit pant.");
-    closeCard();
-  };
 
   const onPressDelete = closeCard => {
     Alert.alert(
       "Ta bort pant",
-      "Är du säker på att du vill ta bort denna panten?",
+      "Är du säker på att du inte vill hämta denna pant?",
       [
         {
           text: "Avbryt",
@@ -38,7 +32,7 @@ export const PantCard = ({ pant }) => {
               await db
                 .collection("pants")
                 .doc(pant.id)
-                .delete();
+                .update({ status: "AVAILABLE", claimedUserId: "" });
             } catch (error) {
               console.error(error);
               Alert.alert("Error", "Error!");
@@ -51,17 +45,10 @@ export const PantCard = ({ pant }) => {
   };
 
   const rightActions = [
-    { color: Colors.lightGreen, icon: "edit", onPress: onPressEdit },
-    { color: "#D35471", icon: "delete", onPress: onPressDelete }
+    { color: Colors.lightGreen, icon: "delete", onPress: onPressDelete }
   ];
 
-  var cardStatus = pant.status === PantStatus.Available ? "Ledig" : "Hämtas";
-
-  const dividerColor =
-    pant.status === PantStatus.Available ? greenDivider : grayDivider;
-
-  const cardColor =
-    pant.status === PantStatus.Available ? styles.cardGreen : styles.cardGray;
+  const cardColor = styles.cardGreen;
 
   return (
     <SwipeableCard rightActions={rightActions}>
@@ -70,21 +57,22 @@ export const PantCard = ({ pant }) => {
           <Image style={styles.cansIcon} source={cansIcon} />
           <Text style={styles.amountText}>{pant.cans}</Text>
         </View>
-        <Image style={styles.divider} source={dividerColor} />
+        <Image style={styles.divider} source={divider} />
         <View style={styles.canHeader}>
           <Image style={styles.cansIcon} source={flaskIcon} />
           <Text style={styles.amountText}>{pant.flasks}</Text>
         </View>
-        <Image style={styles.divider} source={dividerColor} />
+        <Image style={styles.divider} source={divider} />
         <View style={styles.canHeader}>
-          <Text style={styles.cardStatus}>{cardStatus}</Text>
+          <Image style={styles.locationIcon} source={locationIcon} />
+          <Text style={styles.amountText}>2 km</Text>
         </View>
       </View>
     </SwipeableCard>
   );
 };
 
-PantCard.propTypes = {
+ClaimedPantCard.propTypes = {
   pant: PropTypes.object.isRequired
 };
 
@@ -106,11 +94,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10
   },
 
-  cardStatus: {
-    fontSize: 20,
-    color: "white"
-  },
-
   canHeader: {
     flexDirection: "row",
     alignItems: "center",
@@ -123,10 +106,9 @@ const styles = StyleSheet.create({
     resizeMode: "contain"
   },
   locationIcon: {
-    width: 40,
-    height: 40,
-    resizeMode: "contain",
-    transform: [{ rotate: "45deg" }]
+    width: 32,
+    height: 32,
+    resizeMode: "contain"
   },
   divider: {
     marginHorizontal: 16
@@ -136,7 +118,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.mediumGreen
   },
   cardGray: {
-    backgroundColor: "#C1C1C1",
+    backgroundColor: Colors.lightGray,
     borderColor: Colors.mediumGray
   },
   card: {
