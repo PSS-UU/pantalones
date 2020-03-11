@@ -87,6 +87,7 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
   const [userName, setUserName] = useState("Användare");
 
   const user = firebase.auth().currentUser;
+  const userId = firebase.auth().currentUser.uid;
   const userRef = firebase.database().ref(`users/${user.uid}`);
 
   const profilePictureRef = firebase

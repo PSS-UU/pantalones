@@ -7,7 +7,8 @@ import { SwipeableCard } from "./SwipeableCard";
 import { PantStatus } from "../constants/PantStatus";
 import cansIcon from "../assets/images/can.png";
 import flaskIcon from "../assets/images/flask.png";
-import divider from "../assets/images/divider.png";
+import greenDivider from "../assets/images/divider.png";
+import grayDivider from "../assets/images/grayDivider.png";
 
 import locationIcon from "../assets/images/directions.png";
 
@@ -54,6 +55,11 @@ export const PantCard = ({ pant }) => {
     { color: "#D35471", icon: "delete", onPress: onPressDelete }
   ];
 
+  var cardStatus = pant.status === PantStatus.Available ? "Ledig" : "Hämtas";
+
+  const dividerColor =
+    pant.status === PantStatus.Available ? greenDivider : grayDivider;
+
   const cardColor =
     pant.status === PantStatus.Available ? styles.cardGreen : styles.cardGray;
 
@@ -64,14 +70,14 @@ export const PantCard = ({ pant }) => {
           <Image style={styles.cansIcon} source={cansIcon} />
           <Text style={styles.amountText}>{pant.cans}</Text>
         </View>
-        <Image style={styles.divider} source={divider} />
+        <Image style={styles.divider} source={dividerColor} />
         <View style={styles.canHeader}>
           <Image style={styles.cansIcon} source={flaskIcon} />
           <Text style={styles.amountText}>{pant.flasks}</Text>
         </View>
-        <Image style={styles.divider} source={divider} />
+        <Image style={styles.divider} source={dividerColor} />
         <View style={styles.canHeader}>
-          <Image style={styles.locationIcon} source={locationIcon} />
+          <Text style={styles.cardStatus}>{cardStatus}</Text>
         </View>
       </View>
     </SwipeableCard>
@@ -100,6 +106,11 @@ const styles = StyleSheet.create({
     paddingLeft: 10
   },
 
+  cardStatus: {
+    fontSize: 22,
+    color: "white"
+  },
+
   canHeader: {
     flexDirection: "row",
     alignItems: "center",
@@ -125,7 +136,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.mediumGreen
   },
   cardGray: {
-    backgroundColor: Colors.lightGray,
+    backgroundColor: "#C1C1C1",
     borderColor: Colors.mediumGray
   },
   card: {
@@ -133,6 +144,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
+    alignItems: "center",
     padding: 20,
     borderWidth: 1,
     borderRadius: 20,

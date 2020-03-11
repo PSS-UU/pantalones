@@ -15,11 +15,6 @@ import locationIcon from "../assets/images/directions.png";
 export const ClaimedPantCard = ({ pant }) => {
   const db = firebase.firestore();
 
-  const onPressEdit = closeCard => {
-    Alert.alert("TODO", "TODO: Implement edit pant.");
-    closeCard();
-  };
-
   const onPressDelete = closeCard => {
     Alert.alert(
       "Ta bort pant",
@@ -54,8 +49,7 @@ export const ClaimedPantCard = ({ pant }) => {
     { color: Colors.lightGreen, icon: "delete", onPress: onPressDelete }
   ];
 
-  const cardColor =
-    pant.status === PantStatus.Available ? styles.cardGreen : styles.cardGray;
+  const cardColor = styles.cardGreen;
 
   return (
     <SwipeableCard rightActions={rightActions}>
@@ -133,6 +127,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
+    alignItems: "center",
     padding: 20,
     borderWidth: 1,
     borderRadius: 20,
