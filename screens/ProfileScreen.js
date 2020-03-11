@@ -392,7 +392,7 @@ const profileStyles = StyleSheet.create({
     //resizeMode: 'cover',
     position: "absolute",
     width: "100%",
-    height: "70%"
+    height: 380
   },
 
   profilePicture: {
@@ -494,7 +494,7 @@ const profileStyles = StyleSheet.create({
   },
 
   userInfoBlackText: {
-    top: 120,
+    top: 109,
     left: 10
   },
 
@@ -588,7 +588,7 @@ const profileStyles = StyleSheet.create({
   },
 
   recension: {
-    top: 73,
+    top: 67,
     left: 30,
     flexDirection: "column",
     flex: 1,
