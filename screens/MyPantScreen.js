@@ -114,9 +114,8 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 18,
-    fontFamily: "Avenir Next",
-    fontWeight: "600",
+    fontSize: 20,
+    fontWeight: "500",
     color: "#443E50",
     alignSelf: "flex-start",
     marginLeft: 24,
