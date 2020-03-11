@@ -6,7 +6,7 @@ const INITIAL_STATE = {};
 const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case types.auth.setUser:
-      return { user: action.payload };
+      return { ...state, user: action.payload };
     default:
       return state;
   }

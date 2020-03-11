@@ -19,38 +19,49 @@ import {
   Alert
 } from "react-native";
 import { SelectLocationModal } from "./SelectLocationModal";
-import { MaterialIcons } from "@expo/vector-icons";
-import { PantStatus } from "../constants/PantStatus";
+import { CLOUD_FUNCTIONS_URL } from "react-native-dotenv";
 
 export default CreatePant = ({ setModal, modalStatus }) => {
   const [cansCount, setCanAmount] = useState(0);
   const [flaskCount, setFlaskAmount] = useState(0);
   const [location, setLocation] = useState(null);
   const [pantTextComment, onChangeText] = useState("");
+  const [creatingPant, setCreatingPant] = useState();
 
   const user = firebase.auth().currentUser.uid;
-  const dbh = firebase.firestore();
-  const ref = dbh.collection("pants"); //reference to the pants collection
 
-  async function addPant() {
+  const addPant = async () => {
     const pantMoney = cansCount + flaskCount * 2;
+    setCreatingPant(true);
+    try {
+      const response = await fetch(`${CLOUD_FUNCTIONS_URL}createPant`, {
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+        method: "POST",
+        body: JSON.stringify({
+          cans: cansCount,
+          flasks: flaskCount,
+          estimatedValue: pantMoney,
+          message: pantTextComment,
+          location: location,
+          userId: user
+        })
+      });
+      await response.json();
+      setCreatingPant(false);
+      setCanAmount(0);
+      setFlaskAmount(0);
+      onChangeText("");
+      setLocation(null);
+      setModal(false);
+    } catch (error) {
+      console.error(error);
+      Alert.alert("Error", "Failed to create pant: " + error.message);
+    }
+  };
 
-    await ref.add({
-      cans: cansCount,
-      flasks: flaskCount,
-      location: location,
-      userId: user,
-      claimedUserId: "", //Will be updated when a user claims it
-      estimatedValue: pantMoney,
-      message: pantTextComment,
-      status: PantStatus.Available
-    });
-    setCanAmount(0);
-    setFlaskAmount(0);
-    onChangeText("");
-    setLocation(null);
-    setModal(false);
-  }
+  const buttonColor = creatingPant
+    ? globalStyles.disabledButton
+    : globalStyles.lightGreenButton;
 
   return (
     <View style={styles.MainContainer}>
@@ -126,9 +137,11 @@ export default CreatePant = ({ setModal, modalStatus }) => {
         <TouchableOpacity
           activeOpacity={0.7}
           onPress={addPant}
-          style={[globalStyles.lightGreenButton, styles.positionBottom]}
+          style={[buttonColor, styles.positionBottom]}
         >
-          <Text style={globalStyles.buttonText}>Lets pant!</Text>
+          <Text style={globalStyles.buttonText}>
+            {creatingPant ? "Lägger till pant..." : "Let's pant!"}
+          </Text>
         </TouchableOpacity>
       </Modal>
     </View>

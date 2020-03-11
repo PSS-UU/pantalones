@@ -90,22 +90,24 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
   const userId = firebase.auth().currentUser.uid;
   const userRef = firebase.database().ref(`users/${user.uid}`);
 
-  const profilePictureRef = firebase
-    .storage()
-    .ref()
-    .child(`images/profiles/${user.uid}`);
+  const profilePictureRef = firebase.storage().ref();
 
   useEffect(() => {
     const getProfilePicture = async () => {
-      const url = await profilePictureRef.getDownloadURL();
-      setImageUrl(url);
+      try {
+        const url = await profilePictureRef
+          .child(`images/profiles/${user.uid}`)
+          .getDownloadURL();
+        setImageUrl(url);
+      } catch (error) {}
     };
+
     getProfilePicture();
 
     userRef.once("value", function(snapshot) {
       setUserName(snapshot.val().name);
     });
-  });
+  }, [user, pant]);
 
   return (
     <Modal
