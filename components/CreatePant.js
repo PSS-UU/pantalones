@@ -271,21 +271,15 @@ const styles = StyleSheet.create({
 
   addImage: {
     position: "absolute",
-    width: "45%",
+    width: "50%",
     borderRadius: 10,
     height: "100%"
   },
 
-  addImage2: {
-    position: "absolute",
-    width: "45%",
-    height: "100%",
-    marginLeft: 160
-  },
 
   addImageContainer: {
     flexDirection: "column",
-    height: 130,
+    height: 140,
     marginTop: 20,
     marginBottom: 20,
     marginLeft: 20
