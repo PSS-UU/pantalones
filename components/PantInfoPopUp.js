@@ -18,14 +18,16 @@ import StarRating from "react-native-star-rating";
 import Colors from "../constants/Colors";
 import globalStyles from "../AppStyles";
 import cansIcon from "../assets/images/can.png";
+import flaskIcon from "../assets/images/flask.png";
+import moneyIcon from "../assets/images/money.png";
 import { PantStatus } from "../constants/PantStatus";
 
 
 const RaterPopUp = ({ hideModal, showRater, setShowRater, previous_rating, rating_count }) => {
-const db = firebase.database();
+const database = firebase.database();
 const user = firebase.auth().currentUser;
 
-var starCountRef = db.ref('user_info/' + user.uid);
+var starCountRef = database.ref('user_info/' + user.uid);
 
 const newAverageRating = (newRating, oldRating, amount) => {
   return (oldRating*amount+newRating)/(amount+1)
@@ -45,36 +47,43 @@ const closeModals = () => {
 
   return(  
   <Modal
-    transparent={false}
+    transparent={true}
     visible={showRater}
     //fix
     onBackdropPress={() => {
       setShowRater(false);
     }}
     >
-    <View>
-    <Text>Rate the user:</Text>
+    <View style={styles.modalContent}>
+    <View style={styles.raterBackground}>
+    <Text style={styles.rateUserText}>Rate the user:</Text>
+    <View style={styles.ratingContainer}>
     <StarRating   
       rating={5}
       selectedStar={(rating) => handleRate(rating)}
       fullStarColor={"#FADA6D"}
-      emptyStarColor={"#FADA6D"}>
+      emptyStarColor={"#FADA6D"}
+      >
       </StarRating>
+      </View>
       <Button
           title="Cancel" 
           onPress={() => closeModals()}
+          color = {Colors.lightGreen}
       />
+    </View>
     </View>
     </Modal>
     );
   }
 
 const PantStatusButton = ({ hideModal, pant, total_rating, previous_rating, rating_count }) => {
-  const db = firebase.database();
-  const user = firebase.auth().currentUser;
+  const database = firebase.database();
+  const db = firebase.firestore();
+  const user = firebase.auth().currentUser.uid;
   const [showRater, setShowRater] = useState(false);
   
-  var starCountRef = db.ref('user_info/' + user.uid);
+  var starCountRef = database.ref('user_info/' + user);
   
 
   const newAverageRating = (newRating, oldRating, amount) => {
@@ -103,7 +112,7 @@ const PantStatusButton = ({ hideModal, pant, total_rating, previous_rating, rati
               await db
                 .collection("pants")
                 .doc(pant.id)
-                .update({ status: PantStatus.Claimed });
+                .update({ status: PantStatus.Claimed, claimedUserId: user });
             } catch (error) {
               console.error(error);
               Alert.alert("Error", "Error!");
@@ -154,9 +163,10 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
   const [userName, setUserName] = useState("Användare");
 
   const user = firebase.auth().currentUser;
+  const userId = firebase.auth().currentUser.uid;
   const userRef = firebase.database().ref(`users/${user.uid}`);
-  const db = firebase.database();
-  var starCountRef = db.ref('user_info/' + user.uid);
+  const database = firebase.database();
+  var starCountRef = database.ref('user_info/' + user.uid);
 
 
   useEffect(() => {
@@ -173,22 +183,24 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
   };
 
 
-  const profilePictureRef = firebase
-    .storage()
-    .ref()
-    .child(`images/profiles/${user.uid}`);
+  const profilePictureRef = firebase.storage().ref();
 
   useEffect(() => {
     const getProfilePicture = async () => {
-      const url = await profilePictureRef.getDownloadURL();
-      setImageUrl(url);
+      try {
+        const url = await profilePictureRef
+          .child(`images/profiles/${user.uid}`)
+          .getDownloadURL();
+        setImageUrl(url);
+      } catch (error) {}
     };
+
     getProfilePicture();
 
     userRef.once("value", function(snapshot) {
       //setUserName(snapshot.val().name);
     });
-  });
+  }, [user, pant]);
 
   return (
     <Modal
@@ -237,15 +249,15 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
               </View>
               <View style={styles.pantAmountColumn}>
                 <View style={styles.pantAmountRow}>
-                  <Image style={styles.icon} source={cansIcon} />
-                  <Text style={styles.amountText}>{pant.cans}</Text>
+                  <Image style={styles.icon} source={flaskIcon} />
+                  <Text style={styles.amountText}>{pant.flasks}</Text>
                 </View>
                 <Text style={styles.descriptionText}>flaskor</Text>
               </View>
               <View style={styles.pantAmountColumn}>
                 <View style={styles.pantAmountRow}>
-                  <Image style={styles.icon} source={cansIcon} />
-                  <Text style={styles.amountText}>{pant.cans}</Text>
+                  <Image style={styles.icon} source={moneyIcon} />
+                  <Text style={styles.amountText}>{pant.estimatedValue}</Text>
                 </View>
                 <Text style={styles.descriptionText}>kronor</Text>
               </View>
@@ -253,8 +265,8 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
             <View style={styles.profileContainer}>
               <Image
                 style={{
-                  height: 90,
-                  width: 90,
+                  height: 70,
+                  width: 70,
                   borderRadius: 300 / 2,
                   overflow: "hidden"
                 }}
@@ -270,6 +282,7 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
       </StarRating>
               </View>
             </View>
+            <Text style={styles.pantComment}>{pant.message}</Text>
           </View>
           <PantStatusButton pant={pant} hideModal={hideModal} total_rating={newRating} previous_rating={starCount} rating_count={ratingCount}  />
         </View>
@@ -289,6 +302,12 @@ const styles = StyleSheet.create({
   star: {
     marginRight: 5,
     paddingTop: 10
+  },
+  pantComment: {
+    color: "#7F7B8D",
+    marginLeft: 20,
+    marginTop: 20,
+    fontSize: 18
   },
   map: {
     width: Dimensions.get("window").width,
@@ -334,7 +353,8 @@ const styles = StyleSheet.create({
   displayPantContainer: {
     flexDirection: "row",
     paddingTop: 40,
-    justifyContent: "center"
+    justifyContent: "center",
+    marginHorizontal: 5
   },
 
   locationText: {
@@ -363,8 +383,9 @@ const styles = StyleSheet.create({
     paddingTop: 10
   },
   icon: {
-    width: 32,
-    height: 40
+    width: 34,
+    resizeMode: "contain",
+    height: 48
   },
   popupBackground: {
     borderRadius: 10,
@@ -395,5 +416,25 @@ const styles = StyleSheet.create({
   pantAmountCenter: {
     alignItems: "center",
     flex: 1
+  },
+  raterBackground: {
+    borderRadius: 10,
+    backgroundColor: "white",
+    height: "60%",
+    width: "90%"
+  },
+  cancelRatingButton: {
+    borderRadius: 10,
+    color: "white"
+  },
+  ratingContainer: {
+    margin: 10,
+  },
+  rateUserText: {
+    textAlign: "center",
+    margin: 10,
+    fontSize: 16,
+    color: Colors.mediumGreen,
+    paddingTop: 10
   }
 });

@@ -2,20 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { RectButton } from "react-native-gesture-handler";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Animated,
-  Alert,
-  Platform
-} from "react-native";
+import { StyleSheet, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const AnimatedIcon = Animated.createAnimatedComponent(MaterialIcons);
-
 const CardActionIcon = ({ color, dragX, icon, onPress }) => {
-  // TODO: Fix animated icon on android
   const scale = dragX.interpolate({
     inputRange: [-120, 0],
     outputRange: [1.3, 0],
@@ -23,26 +13,12 @@ const CardActionIcon = ({ color, dragX, icon, onPress }) => {
   });
   return (
     <RectButton style={styles.rightAction} onPress={onPress}>
-      {Platform.OS === "ios" ? (
-        <AnimatedIcon
-          name={icon}
-          size={28}
-          color={color}
-          style={[
-            styles.actionIcon,
-            {
-              transform: [{ scale: scale }]
-            }
-          ]}
-        />
-      ) : (
-        <MaterialIcons
-          name={icon}
-          size={28}
-          color={color}
-          style={styles.actionIcon}
-        />
-      )}
+      <MaterialIcons
+        name={icon}
+        size={28}
+        color={color}
+        style={styles.actionIcon}
+      />
     </RectButton>
   );
 };

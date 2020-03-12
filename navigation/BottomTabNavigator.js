@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import * as firebase from "firebase";
+import firebase from "firebase";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen, { LoginScreen } from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import MyPantScreen from "../screens/MyPantScreen";
+import Colors from "../constants/Colors";
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = "Home";
@@ -18,14 +19,20 @@ export default function BottomTabNavigator({ navigation, route }) {
   navigation.setOptions({ headerTitle: getHeaderTitle(route) });
   if (user) {
     return (
-      <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
+      <BottomTab.Navigator
+        initialRouteName={INITIAL_ROUTE_NAME}
+        tabBarOptions={{
+          activeTintColor: Colors.lightGreen,
+          inactiveTintColor: Colors.lightGray
+        }}
+      >
         <BottomTab.Screen
           name="Home"
           component={HomeScreen}
           options={{
-            title: "Home",
+            title: "Pantkarta",
             tabBarIcon: ({ focused }) => (
-              <TabBarIcon focused={focused} name="ios-home" />
+              <TabBarIcon focused={focused} name="earth" />
             )
           }}
         />
@@ -33,9 +40,9 @@ export default function BottomTabNavigator({ navigation, route }) {
           name="MyPant"
           component={MyPantScreen}
           options={{
-            title: "MinPant",
+            title: "Min pant",
             tabBarIcon: ({ focused }) => (
-              <TabBarIcon focused={focused} name="ios-book" />
+              <TabBarIcon focused={focused} name="recycle" />
             )
           }}
         />
@@ -45,8 +52,11 @@ export default function BottomTabNavigator({ navigation, route }) {
           options={{
             title: "Profile",
             tabBarIcon: ({ focused }) => (
-              <TabBarIcon focused={focused} name="ios-contact" />
-            )
+              <TabBarIcon focused={focused} name="account-circle" />
+            ),
+            tabBarOnPress: () => {
+              ProfileScreen.getName();
+            }
           }}
         />
       </BottomTab.Navigator>
