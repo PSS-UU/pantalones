@@ -34,6 +34,10 @@ const newAverageRating = (newRating, oldRating, amount) => {
   };
 
 const handleRate = (rating) => {
+  if(isNaN(previous_rating) || isNaN(rating_count)){
+    previous_rating = 0;
+    rating_count = 0;
+  }
   const newRating = newAverageRating(rating, previous_rating, rating_count);
   starCountRef.set({total_rating: newRating, rating_count: rating_count+1});
   setShowRater(false);
@@ -78,23 +82,10 @@ const closeModals = () => {
   }
 
 const PantStatusButton = ({ hideModal, pant, total_rating, previous_rating, rating_count }) => {
-  const database = firebase.database();
   const db = firebase.firestore();
   const user = firebase.auth().currentUser.uid;
   const [showRater, setShowRater] = useState(false);
-  
-  var starCountRef = database.ref('user_info/' + user);
-  
 
-  const newAverageRating = (newRating, oldRating, amount) => {
-    return (oldRating*amount+newRating)/(amount+1)
-    };
-
-  const updateRating = (count, total, old) => {
-    Alert.alert("Not implemented", "Scan is not yet implemented.");
-    const newRating = newAverageRating(total_rating, previous_rating, rating_count);
-    starCountRef.set({total_rating: newRating, rating_count: rating_count+1});
-  };
 
   const claimPant = () => {
     Alert.alert(
@@ -178,7 +169,7 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
       });
   });
 
-  const onRatingPress = (rating, starCount) => {
+  const onRatingPress = (rating) => {
     setNewRating(rating);
   };
 
