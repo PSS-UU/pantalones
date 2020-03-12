@@ -337,7 +337,7 @@ const profileStyles = StyleSheet.create({
   },
 
   contentContainer: {
-    paddingTop: 15
+    paddingTop: 60
   },
 
   optionIconContainer: {
@@ -369,7 +369,7 @@ const profileStyles = StyleSheet.create({
     //resizeMode: 'cover',
     position: "absolute",
     width: "100%",
-    height: "70%"
+    height: 430
   },
 
   profilePicture: {
@@ -518,6 +518,11 @@ const profileStyles = StyleSheet.create({
   iconBottle: {
     width: 35,
     height: 42
+  },
+
+  iconMoney: {
+    width: 40,
+    height: 40
   },
 
   displayPantContainer: {

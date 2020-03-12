@@ -15,9 +15,6 @@ import {
 import StarRating from "react-native-star-rating";
 import Colors from "../constants/Colors";
 import globalStyles from "../AppStyles";
-import cansIcon from "../assets/images/can.png";
-import flaskIcon from "../assets/images/flask.png";
-import moneyIcon from "../assets/images/money.png";
 import { PantStatus } from "../constants/PantStatus";
 import { DisplayPantInfo } from "./DisplayPantInfo";
 
@@ -169,10 +166,10 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
   const [starCount, setStarCount] = useState(0);
   const [ratingCount, setRatingCount] = useState();
   const [newRating, setNewRating] = useState();
+  const [pantImageUrl, setPantImageUrl] = useState();
   const [userName, setUserName] = useState("Användare");
 
   const user = firebase.auth().currentUser;
-  const userId = firebase.auth().currentUser.uid;
   const userRef = firebase.database().ref(`users/${user.uid}`);
   const database = firebase.database();
   var starCountRef = database.ref("user_info/" + user.uid);
@@ -191,6 +188,20 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
   };
 
   const profilePictureRef = firebase.storage().ref();
+  const pantPictureRef = firebase
+    .storage()
+    .ref()
+    .child(`images/pant/undefined`);
+
+  useEffect(() => {
+    const getPantPicture = async () => {
+      try {
+        const url = await pantPictureRef.getDownloadURL();
+        setPantImageUrl(url);
+      } catch (error) {}
+    };
+    getPantPicture();
+  });
 
   useEffect(() => {
     const getProfilePicture = async () => {
@@ -212,6 +223,7 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
       }
     });
   }, [user, pant]);
+
 
   return (
     <Modal
@@ -272,6 +284,12 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
               </View>
             </View>
             <Text style={styles.pantComment}>{pant.message}</Text>
+            <View style={styles.addImageContainer}>
+              <Image
+                style={styles.addImage}
+                source={{uri:pantImageUrl}}
+              />
+            </View>
           </View>
           <PantStatusButton
             pant={pant}
@@ -304,6 +322,20 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 18
   },
+
+  addImageContainer: {
+    flexDirection: "column",
+    height: 130,
+    marginTop: 20,
+    marginBottom: 20,
+    marginLeft: 20
+  },
+  addImage: {
+    position: "absolute",
+    width: "45%",
+    height: "100%"
+  },
+
   map: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height
