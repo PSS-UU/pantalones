@@ -35,7 +35,7 @@ export default CreatePant = ({ setModal, modalStatus }) => {
   const pantPictureRef = firebase
     .storage()
     .ref()
-    .child(`images/pant/${user.uid}`);
+    .child(`images/pant/${user.uid} + ${cansCount}`);
 
   const addPant = async () => {
     const pantMoney = cansCount + flaskCount * 2;

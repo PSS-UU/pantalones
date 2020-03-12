@@ -191,7 +191,7 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
   const pantPictureRef = firebase
     .storage()
     .ref()
-    .child(`images/pant/undefined`);
+    .child(`images/pant/undefined + ${pant.cans}`);
 
   useEffect(() => {
     const getPantPicture = async () => {
