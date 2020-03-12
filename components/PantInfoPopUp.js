@@ -332,6 +332,7 @@ const styles = StyleSheet.create({
   },
   addImage: {
     position: "absolute",
+    borderRadius: 10,
     width: "45%",
     height: "100%"
   },
