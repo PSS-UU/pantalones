@@ -37,9 +37,9 @@ export const DisplayPantInfo = ({ flasks, cans, estimatedValue }) => {
 };
 
 DisplayPantInfo.defaultProps = {
-  flasks: 10,
-  cans: 10,
-  estimatedValue: 10
+  flasks: "10",
+  cans: "10",
+  estimatedValue: "10"
 };
 
 const styles = StyleSheet.create({
