@@ -250,7 +250,7 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
               <Text style={styles.statusText}>{pant.status}</Text>
               <Text style={styles.locationText}>2km bort</Text>
             </View>
-            <DisplayPantInfo pant={pant} />
+            <DisplayPantInfo {...pant} />
             <View style={styles.profileContainer}>
               <Image
                 style={{
