@@ -6,13 +6,13 @@ import moneyIcon from "../assets/images/money.png";
 import Colors from "../constants/Colors";
 import divider from "../assets/images/divider.png";
 
-export const DisplayPantInfo = ({ pant }) => {
+export const DisplayPantInfo = ({ pant: { flasks, cans, estimatedValue } }) => {
   return (
     <View style={styles.displayPantContainer}>
       <View style={styles.pantAmountColumn}>
         <View style={styles.pantAmountRow}>
           <Image style={styles.icon} source={cansIcon} />
-          <Text style={styles.amountText}>{pant.cans}</Text>
+          <Text style={styles.amountText}>{cans}</Text>
         </View>
         <Text style={styles.descriptionText}>burkar</Text>
       </View>
@@ -20,7 +20,7 @@ export const DisplayPantInfo = ({ pant }) => {
       <View style={styles.pantAmountColumn}>
         <View style={styles.pantAmountRow}>
           <Image style={styles.icon} source={flaskIcon} />
-          <Text style={styles.amountText}>{pant.flasks}</Text>
+          <Text style={styles.amountText}>{flasks}</Text>
         </View>
         <Text style={styles.descriptionText}>flaskor</Text>
       </View>
@@ -28,12 +28,18 @@ export const DisplayPantInfo = ({ pant }) => {
       <View style={styles.pantAmountColumn}>
         <View style={styles.pantAmountRow}>
           <Image style={styles.icon} source={moneyIcon} />
-          <Text style={styles.amountText}>{pant.estimatedValue}</Text>
+          <Text style={styles.amountText}>{estimatedValue}</Text>
         </View>
         <Text style={styles.descriptionText}>kronor</Text>
       </View>
     </View>
   );
+};
+
+DisplayPantInfo.defaultProps = {
+  flasks: 10,
+  cans: 10,
+  estimatedValue: 10
 };
 
 const styles = StyleSheet.create({

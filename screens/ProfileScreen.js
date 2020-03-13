@@ -26,6 +26,7 @@ import bottleIcon from "../assets/images/flaskor.png";
 import Colors from "../constants/Colors";
 import StarRating from "react-native-star-rating";
 import Modal from "react-native-modal";
+import { DisplayPantInfo } from "../components/DisplayPantInfo";
 
 export default function ProfileScreen() {
   const [imageUrl, setImageUrl] = useState();
@@ -262,29 +263,7 @@ export default function ProfileScreen() {
           </View>
         </View>
 
-        <View style={profileStyles.displayPantContainer}>
-          <View style={profileStyles.pantAmountColumn}>
-            <View style={profileStyles.pantAmountRow}>
-              <Image style={profileStyles.iconCan} source={cansIcon} />
-              <Text style={profileStyles.amountText}>249</Text>
-            </View>
-            <Text style={profileStyles.descriptionText}>burkar</Text>
-          </View>
-          <View style={profileStyles.pantAmountColumn}>
-            <View style={profileStyles.pantAmountRow}>
-              <Image style={profileStyles.iconBottle} source={bottleIcon} />
-              <Text style={profileStyles.amountText}>10</Text>
-            </View>
-            <Text style={profileStyles.descriptionText}>flaskor</Text>
-          </View>
-          <View style={profileStyles.pantAmountColumn}>
-            <View style={profileStyles.pantAmountRow}>
-              <Image style={profileStyles.iconCan} source={moneyIcon} />
-              <Text style={profileStyles.amountText}>198</Text>
-            </View>
-            <Text style={profileStyles.descriptionText}>kronor</Text>
-          </View>
-        </View>
+        <DisplayPantInfo></DisplayPantInfo>
 
         <View style={profileStyles.recension}>
           <Text style={profileStyles.recensionText}>Recensioner</Text>
