@@ -20,6 +20,8 @@ import flaskIcon from "../assets/images/flask.png";
 import moneyIcon from "../assets/images/money.png";
 import { PantStatus } from "../constants/PantStatus";
 import { DisplayPantInfo } from "./DisplayPantInfo";
+import divider from "../assets/images/divider.png";
+import closeModal from "../assets/images/close-modal.png";
 
 const RaterPopUp = ({
   hideModal,
@@ -228,13 +230,13 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
             <View style={styles.modalHeaderContainer}>
               <Text style={styles.modalText}>Pant</Text>
               <TouchableOpacity onPress={() => hideModal()}>
-                <Text style={{ color: "white" }}>X</Text>
+                <Image source={closeModal} style={{ width: 46, height: 46 }} />
               </TouchableOpacity>
             </View>
             <View
               style={{
                 flexDirection: "row",
-                paddingLeft: 20,
+                paddingLeft: 30,
                 alignItems: "center",
                 marginTop: -12
               }}
@@ -243,7 +245,6 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
                 source={require("../assets/images/location.png")}
                 style={{ width: 14, height: 20 }}
               />
-              <Text style={styles.statusText}>{pant.status}</Text>
               <Text style={styles.locationText}>2km bort</Text>
             </View>
             <DisplayPantInfo {...pant} />
@@ -345,7 +346,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingTop: 40,
     justifyContent: "center",
-    marginHorizontal: 5
+    alignItems: "center",
+    marginHorizontal: 10
   },
 
   locationText: {
@@ -363,7 +365,7 @@ const styles = StyleSheet.create({
   },
 
   amountText: {
-    fontSize: 26,
+    fontSize: 24,
     color: "white",
     paddingLeft: 10
   },
@@ -371,7 +373,8 @@ const styles = StyleSheet.create({
   descriptionText: {
     fontSize: 16,
     color: Colors.mediumGreen,
-    paddingTop: 10
+    paddingTop: 10,
+    fontWeight: "500"
   },
   icon: {
     width: 34,
@@ -386,7 +389,10 @@ const styles = StyleSheet.create({
   },
   modalHeaderContainer: {
     flexDirection: "row",
-    padding: 20
+    paddingRight: 20,
+    paddingTop: 30,
+    paddingBottom: 10,
+    paddingLeft: 30
   },
   positionBottom: {
     margin: 20
