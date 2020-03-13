@@ -5,6 +5,8 @@ import Modal from "react-native-modal";
 import Colors from "../constants/Colors";
 import globalStyles from "../AppStyles";
 import cansIcon from "../assets/images/can.png";
+import flaskIcon from "../assets/images/flask.png";
+import locationIcon from "../assets/images/location-green.png";
 import {
   StyleSheet,
   View,
@@ -13,39 +15,63 @@ import {
   Button,
   Image,
   Slider,
+  TextInput,
   Alert
 } from "react-native";
 import { SelectLocationModal } from "./SelectLocationModal";
-import { MaterialIcons } from "@expo/vector-icons";
+import { CLOUD_FUNCTIONS_URL } from "react-native-dotenv";
 
-export default CreatePant = () => {
+export default CreatePant = ({ setModal, modalStatus }) => {
   const [cansCount, setCanAmount] = useState(0);
+  const [flaskCount, setFlaskAmount] = useState(0);
   const [location, setLocation] = useState(null);
-  const [modalVisible, setModal] = useState(false);
+  const [pantTextComment, onChangeText] = useState("");
+  const [creatingPant, setCreatingPant] = useState();
 
   const user = firebase.auth().currentUser.uid;
-  const dbh = firebase.firestore();
-  const ref = dbh.collection("pants"); //reference to the pants collection
 
-  async function addPant() {
-    await ref.add({
-      cans: cansCount,
-      location: location,
-      userId: user
-    });
-    setCanAmount(0);
-    setModal(!modalVisible);
-  }
+  const addPant = async () => {
+    const pantMoney = cansCount + flaskCount * 2;
+    setCreatingPant(true);
+    try {
+      const response = await fetch(`${CLOUD_FUNCTIONS_URL}createPant`, {
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+        method: "POST",
+        body: JSON.stringify({
+          cans: cansCount,
+          flasks: flaskCount,
+          estimatedValue: pantMoney,
+          message: pantTextComment,
+          location: location,
+          userId: user
+        })
+      });
+      await response.json();
+      setCreatingPant(false);
+      setCanAmount(0);
+      setFlaskAmount(0);
+      onChangeText("");
+      setLocation(null);
+      setModal(false);
+    } catch (error) {
+      console.error(error);
+      Alert.alert("Error", "Failed to create pant: " + error.message);
+    }
+  };
+
+  const buttonColor = creatingPant
+    ? globalStyles.disabledButton
+    : globalStyles.lightGreenButton;
 
   return (
     <View style={styles.MainContainer}>
-      <Modal style={styles.ModalColor} isVisible={modalVisible}>
+      <Modal style={styles.ModalColor} isVisible={modalStatus}>
         <View style={styles.ModalHeaderContainer}>
           <Text style={styles.modalText}>Skapa pant</Text>
           <Button
             style={styles.exitButton}
             title="x"
-            onPress={() => setModal(!modalVisible)}
+            onPress={() => setModal(false)}
           />
         </View>
         <View style={styles.ModalContent}>
@@ -64,36 +90,60 @@ export default CreatePant = () => {
           <Text style={styles.cansSelectedText}>{cansCount}</Text>
 
           <View style={styles.canHeader}>
-            <MaterialIcons name="location-on" size={42} />
+            <Image style={styles.cansIcon} source={flaskIcon} />
+            <Text style={styles.cansAmountText}>Antal flaskor</Text>
+          </View>
+          <Slider
+            value={0}
+            step={1}
+            maximumValue={300}
+            minimumTrackTintColor={Colors.lightGreen}
+            thumbTintColor={Colors.lightGreen}
+            onValueChange={value => setFlaskAmount(value)}
+          />
+          <Text style={styles.cansSelectedText}>{flaskCount}</Text>
+
+          <View style={styles.commentHeader}>
+            <Text style={styles.cansAmountText}>Kommentar</Text>
+            <View style={styles.inputFieldContainer}>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={text => onChangeText(text)}
+                value={pantTextComment}
+              />
+            </View>
+          </View>
+
+          <View style={styles.canHeader}>
+            <Image size={42} style={styles.cansIcon} source={locationIcon} />
+
             {location ? (
-              <Text style={styles.cansAmountText}>
-                Longitude: <Text style={{ fontWeight: 'bold' }}>{location.longitude.toFixed(3)}</Text>
+              <Text style={styles.chooseLocationText}>
+                Longitude:{" "}
+                <Text style={{ fontWeight: "bold" }}>
+                  {location.longitude.toFixed(3)}
+                </Text>
                 {"\n"}
-                Latitude: <Text style={{ fontWeight: 'bold' }}>{location.latitude.toFixed(3)}</Text>
+                Latitude:{" "}
+                <Text style={{ fontWeight: "bold" }}>
+                  {location.latitude.toFixed(3)}
+                </Text>
               </Text>
             ) : (
               <SelectLocationModal onSelectLocation={setLocation} />
             )}
           </View>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={addPant}
-            style={[globalStyles.lightGreenButton, styles.positionBottom]}
-          >
-            <Text style={globalStyles.buttonText}>Lets pant!</Text>
-          </TouchableOpacity>
         </View>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={addPant}
+          style={[buttonColor, styles.positionBottom]}
+        >
+          <Text style={globalStyles.buttonText}>
+            {creatingPant ? "Lägger till pant..." : "Let's pant!"}
+          </Text>
+        </TouchableOpacity>
       </Modal>
-      <TouchableOpacity
-        activeOpacity={0.7}
-        onPress={() => setModal(true)}
-        style={styles.TouchableOpacityStyle}
-      >
-        <Image
-          source={require("../assets/images/floating_button_green.png")}
-          style={styles.FloatingButtonStyle}
-        />
-      </TouchableOpacity>
     </View>
   );
 };
@@ -103,16 +153,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#F5F5F5"
   },
-
-  TouchableOpacityStyle: {
-    position: "absolute",
-    width: 70,
-    height: 70,
-    alignItems: "center",
-    justifyContent: "center",
-    bottom: 30
+  textInput: {
+    height: "100%",
+    width: "100%",
+    marginLeft: 40,
+    color: "gray"
   },
-
   pantTextField: {
     height: 40,
     width: 300,
@@ -141,7 +187,10 @@ const styles = StyleSheet.create({
     height: 70
   },
 
-  positionBottom: {},
+  positionBottom: {
+    marginBottom: 30,
+    marginHorizontal: 60
+  },
 
   exitButton: {
     alignSelf: "flex-end",
@@ -149,8 +198,10 @@ const styles = StyleSheet.create({
   },
 
   cansSelectedText: {
+    fontWeight: "bold",
     color: Colors.lightGreen,
-    fontFamily: "space-mono"
+    marginBottom: 20,
+    marginLeft: 5
   },
   cansAmountText: {
     color: Colors.grayText,
@@ -158,15 +209,38 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
 
+  chooseLocationText: {
+    color: Colors.grayText,
+    marginLeft: 10,
+    fontSize: 18
+  },
+  inputFieldContainer: {
+    borderRadius: 25,
+    height: 56,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: Colors.xLightGray,
+    borderWidth: 2.4,
+    marginTop: 10
+  },
+
   ModalContent: {
+    marginTop: 20,
     padding: 20,
-    backgroundColor: "white"
+    backgroundColor: "white",
+    flex: 1
   },
 
   canHeader: {
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 10
+  },
+
+  commentHeader: {
+    flexDirection: "column",
+    marginBottom: 20
   },
 
   ModalColor: {

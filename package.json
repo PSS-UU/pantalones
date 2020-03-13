@@ -14,8 +14,6 @@
   "dependencies": {
     "@expo/vector-icons": "~10.0.0",
     "@react-native-community/masked-view": "0.1.5",
-    "@react-native-firebase/app": "^6.3.4",
-    "@react-native-firebase/firestore": "^6.3.4",
     "@react-navigation/bottom-tabs": "^5.0.0",
     "@react-navigation/native": "^5.0.0",
     "@react-navigation/stack": "^5.0.3",
@@ -25,6 +23,7 @@
     "expo-asset": "~8.0.0",
     "expo-constants": "~8.0.0",
     "expo-font": "~8.0.0",
+    "expo-image-picker": "~8.0.1",
     "expo-web-browser": "~8.0.0",
     "firebase": "^7.8.2",
     "fs": "0.0.1-security",
@@ -32,7 +31,9 @@
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
+    "react-native-action-button": "^2.8.5",
     "react-native-gesture-handler": "~1.5.0",
+    "react-native-htmlview": "^0.15.0",
     "react-native-maps": "0.26.1",
     "react-native-modal": "^11.5.4",
     "react-native-safe-area-context": "0.6.0",
@@ -40,8 +41,7 @@
     "react-native-star-rating": "^1.1.0",
     "react-native-web": "~0.11.7",
     "react-redux": "^7.2.0",
-    "redux": "^4.0.5",
-    "expo-image-picker": "~8.0.1"
+    "redux": "^4.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

@@ -10,7 +10,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as firebase from "firebase";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import useLinking from "./navigation/useLinking";
-import appStyles from "./AppStyles";
 import reducer from "./state/reducers";
 import { setUser } from "./state/actions";
 
@@ -19,7 +18,7 @@ import {
   AUTH_DOMAIN,
   DATABASE_URL,
   STORAGE_BUCKET,
-  PROJECT_ID
+  PROJECT_ID,
 } from "react-native-dotenv";
 
 const Stack = createStackNavigator();
@@ -30,7 +29,7 @@ const firebaseConfig = {
   authDomain: AUTH_DOMAIN,
   databaseURL: DATABASE_URL,
   storageBucket: STORAGE_BUCKET,
-  projectId: PROJECT_ID
+  projectId: PROJECT_ID,
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -91,7 +90,11 @@ export function Main(props) {
           ref={containerRef}
           initialState={initialNavigationState}
         >
-          <Stack.Navigator>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false
+            }}
+          >
             <Stack.Screen name="Root" component={BottomTabNavigator} />
           </Stack.Navigator>
         </NavigationContainer>

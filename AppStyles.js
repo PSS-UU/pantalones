@@ -4,7 +4,8 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 export const Colors = {
   green: "#28A07D",
   darkGreen: "black",
-  lightGreen: "#42C9A7"
+  lightGreen: "#42C9A7",
+  gray: "#ccc",
 };
 
 export default StyleSheet.create({
@@ -28,6 +29,14 @@ export default StyleSheet.create({
   positionBottom: {
     position: "absolute",
     bottom: 30
+  },
+
+  disabledButton: {
+    borderRadius: 20,
+    backgroundColor: Colors.gray,
+    justifyContent: "center",
+    padding: 16,
+    alignItems: "center"
   },
 
   lightGreenButton: {
