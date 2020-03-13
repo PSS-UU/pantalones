@@ -23,6 +23,7 @@ import moneyIcon from "../assets/images/money.png";
 import { PantStatus } from "../constants/PantStatus";
 import divider from "../assets/images/divider.png";
 import closeModal from "../assets/images/close-modal.png";
+import { DisplayPantInfo } from "../components/DisplayPantInfo";
 
 const PantStatusButton = ({ hideModal, pant }) => {
   const db = firebase.firestore();
@@ -147,31 +148,7 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
               />
               <Text style={styles.locationText}>2km bort</Text>
             </View>
-            <View style={styles.displayPantContainer}>
-              <View style={styles.pantAmountColumn}>
-                <View style={styles.pantAmountRow}>
-                  <Image style={styles.icon} source={cansIcon} />
-                  <Text style={styles.amountText}>{pant.cans}</Text>
-                </View>
-                <Text style={styles.descriptionText}>burkar</Text>
-              </View>
-              <Image style={styles.divider} source={divider} />
-              <View style={styles.pantAmountColumn}>
-                <View style={styles.pantAmountRow}>
-                  <Image style={styles.icon} source={flaskIcon} />
-                  <Text style={styles.amountText}>{pant.flasks}</Text>
-                </View>
-                <Text style={styles.descriptionText}>flaskor</Text>
-              </View>
-              <Image style={styles.divider} source={divider} />
-              <View style={styles.pantAmountColumn}>
-                <View style={styles.pantAmountRow}>
-                  <Image style={styles.icon} source={moneyIcon} />
-                  <Text style={styles.amountText}>{pant.estimatedValue}</Text>
-                </View>
-                <Text style={styles.descriptionText}>kronor</Text>
-              </View>
-            </View>
+            <DisplayPantInfo pant={pant}></DisplayPantInfo>
             <View style={styles.profileContainer}>
               <Image
                 style={{
@@ -250,26 +227,7 @@ const styles = StyleSheet.create({
     fontFamily: "fredoka-one"
   },
 
-  pantAmountColumn: {
-    flexDirection: "column",
-    flex: 1,
-    alignItems: "flex-start",
-    alignItems: "center"
-  },
-  pantAmountRow: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: 30
-  },
-  displayPantContainer: {
-    flexDirection: "row",
-    paddingTop: 40,
-    justifyContent: "center",
-    alignItems: "center",
-    marginHorizontal: 10
-  },
-
+ 
   locationText: {
     color: Colors.xLightGreen,
     paddingLeft: 18,
@@ -282,24 +240,6 @@ const styles = StyleSheet.create({
     right: 0,
     // textAlign: 'right',
     fontSize: 16
-  },
-
-  amountText: {
-    fontSize: 24,
-    color: "white",
-    paddingLeft: 10
-  },
-
-  descriptionText: {
-    fontSize: 16,
-    color: Colors.mediumGreen,
-    paddingTop: 10,
-    fontWeight: "500"
-  },
-  icon: {
-    width: 34,
-    resizeMode: "contain",
-    height: 48
   },
   popupBackground: {
     borderRadius: 10,
