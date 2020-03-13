@@ -22,6 +22,7 @@ import { PantStatus } from "../constants/PantStatus";
 import { DisplayPantInfo } from "./DisplayPantInfo";
 import divider from "../assets/images/divider.png";
 import closeModal from "../assets/images/close-modal.png";
+import { DisplayPantInfo } from "../components/DisplayPantInfo";
 
 const RaterPopUp = ({
   hideModal,
@@ -330,26 +331,7 @@ const styles = StyleSheet.create({
     fontFamily: "fredoka-one"
   },
 
-  pantAmountColumn: {
-    flexDirection: "column",
-    flex: 1,
-    alignItems: "flex-start",
-    alignItems: "center"
-  },
-  pantAmountRow: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: 30
-  },
-  displayPantContainer: {
-    flexDirection: "row",
-    paddingTop: 40,
-    justifyContent: "center",
-    alignItems: "center",
-    marginHorizontal: 10
-  },
-
+ 
   locationText: {
     color: Colors.xLightGreen,
     paddingLeft: 18,
@@ -362,24 +344,6 @@ const styles = StyleSheet.create({
     right: 0,
     // textAlign: 'right',
     fontSize: 16
-  },
-
-  amountText: {
-    fontSize: 24,
-    color: "white",
-    paddingLeft: 10
-  },
-
-  descriptionText: {
-    fontSize: 16,
-    color: Colors.mediumGreen,
-    paddingTop: 10,
-    fontWeight: "500"
-  },
-  icon: {
-    width: 34,
-    resizeMode: "contain",
-    height: 48
   },
   popupBackground: {
     borderRadius: 10,
