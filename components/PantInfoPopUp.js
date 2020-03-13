@@ -18,70 +18,9 @@ import { PantStatus } from "../constants/PantStatus";
 import closeModal from "../assets/images/close-modal.png";
 import { DisplayPantInfo } from "../components/DisplayPantInfo";
 
-
-const RaterPopUp = ({ hideModal, showRater, setShowRater, previous_rating, rating_count }) => {
-const database = firebase.database();
-const user = firebase.auth().currentUser;
-
-var starCountRef = database.ref('user_info/' + user.uid);
-
-const newAverageRating = (newRating, oldRating, amount) => {
-  return (oldRating*amount+newRating)/(amount+1)
-  };
-
-const handleRate = (rating) => {
-  if(isNaN(previous_rating) || isNaN(rating_count)){
-    previous_rating = 0;
-    rating_count = 0;
-  }
-  const newRating = newAverageRating(rating, previous_rating, rating_count);
-  starCountRef.set({total_rating: newRating, rating_count: rating_count+1});
-  setShowRater(false);
-  hideModal();
-};
-
-const closeModals = () => {
-  setShowRater(false);
-  hideModal();
-};
-
-  return(  
-  <Modal
-    transparent={true}
-    visible={showRater}
-    //fix
-    onBackdropPress={() => {
-      setShowRater(false);
-    }}
-    >
-    <View style={styles.modalContent}>
-    <View style={styles.raterBackground}>
-    <Text style={styles.rateUserText}>Rate the user:</Text>
-    <View style={styles.ratingContainer}>
-    <StarRating   
-      rating={5}
-      selectedStar={(rating) => handleRate(rating)}
-      fullStarColor={"#FADA6D"}
-      emptyStarColor={"#FADA6D"}
-      >
-      </StarRating>
-      </View>
-      <Button
-          title="Cancel" 
-          onPress={() => closeModals()}
-          color = {Colors.lightGreen}
-      />
-    </View>
-    </View>
-    </Modal>
-    );
-  }
-
-const PantStatusButton = ({ hideModal, pant, total_rating, previous_rating, rating_count }) => {
+const PantStatusButton = ({ hideModal, pant }) => {
   const db = firebase.firestore();
   const user = firebase.auth().currentUser.uid;
-  const [showRater, setShowRater] = useState(false);
-
 
   const claimPant = () => {
     Alert.alert(
@@ -124,51 +63,28 @@ const PantStatusButton = ({ hideModal, pant, total_rating, previous_rating, rati
       );
     case PantStatus.Claimed:
       return (
-        <View>
         <TouchableOpacity
           activeOpacity={0.7}
           style={[globalStyles.lightGreenButton, styles.positionBottom]}
-          onPress={() => {setShowRater(true);}}
+          onPress={() =>
+            Alert.alert("Not implemented", "Scan is not yet implemented.")
+          }
         >
           <Text style={globalStyles.buttonText}>Scanna!</Text>
-          <RaterPopUp hideModal = {hideModal} showRater = {showRater} setShowRater = {setShowRater} total_rating ={total_rating} previous_rating = {previous_rating} rating_count = {rating_count} ></RaterPopUp>
-
         </TouchableOpacity>
-                </View>
       );
     default:
       return null;
   }
 };
 
-
 export default function PantInfoPopUp({ pant, modal, hideModal }) {
   const [imageUrl, setImageUrl] = useState();
-  const [starCount, setStarCount] = useState(0);
-  const [ratingCount, setRatingCount] = useState();
-  const [newRating, setNewRating] = useState();
   const [userName, setUserName] = useState("Användare");
 
   const user = firebase.auth().currentUser;
   const userId = firebase.auth().currentUser.uid;
   const userRef = firebase.database().ref(`users/${user.uid}`);
-  const database = firebase.database();
-  var starCountRef = database.ref('user_info/' + user.uid);
-
-
-  useEffect(() => {
-    starCountRef.once('value', function(ratingSnapshot) {
-      if(ratingSnapshot.val()!= null){
-      setStarCount(ratingSnapshot.val().total_rating);
-      setRatingCount(ratingSnapshot.val().rating_count);
-        }    
-      });
-  });
-
-  const onRatingPress = (rating) => {
-    setNewRating(rating);
-  };
-
 
   const profilePictureRef = firebase.storage().ref();
 
@@ -185,7 +101,7 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
     getProfilePicture();
 
     userRef.once("value", function(snapshot) {
-      //setUserName(snapshot.val().name);
+      setUserName(snapshot.val().name);
     });
   }, [user, pant]);
 
@@ -242,17 +158,19 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
               />
               <View style={styles.profileInfo}>
                 <Text style={styles.profileName}>{userName}</Text>
-                <StarRating   
-      rating={starCount}
-      selectedStar={(rating) => onRatingPress(rating, starCount)}
-      fullStarColor={"#FADA6D"}
-      emptyStarColor={"#FADA6D"}>
-      </StarRating>
+                <StarRating
+                  maxStars={5}
+                  starSize={24}
+                  rating={2}
+                  fullStarColor={"#FADA6D"}
+                  emptyStarColor={"#FADA6D"}
+                  starStyle={styles.star}
+                ></StarRating>
               </View>
             </View>
             <Text style={styles.pantComment}>{pant.message}</Text>
           </View>
-          <PantStatusButton pant={pant} hideModal={hideModal} total_rating={newRating} previous_rating={starCount} rating_count={ratingCount}  />
+          <PantStatusButton pant={pant} hideModal={hideModal} />
         </View>
       </View>
     </Modal>
@@ -351,25 +269,5 @@ const styles = StyleSheet.create({
   pantAmountCenter: {
     alignItems: "center",
     flex: 1
-  },
-  raterBackground: {
-    borderRadius: 10,
-    backgroundColor: "white",
-    height: "60%",
-    width: "90%"
-  },
-  cancelRatingButton: {
-    borderRadius: 10,
-    color: "white"
-  },
-  ratingContainer: {
-    margin: 10,
-  },
-  rateUserText: {
-    textAlign: "center",
-    margin: 10,
-    fontSize: 16,
-    color: Colors.mediumGreen,
-    paddingTop: 10
   }
 });
