@@ -5,23 +5,16 @@ import {
   Modal,
   Dimensions,
   StyleSheet,
-  TouchableHighlight,
   View,
   Text,
   Image,
   TouchableOpacity,
-  Button,
-  ImageBackground,
   Alert
 } from "react-native";
 import StarRating from "react-native-star-rating";
 import Colors from "../constants/Colors";
 import globalStyles from "../AppStyles";
-import cansIcon from "../assets/images/can.png";
-import flaskIcon from "../assets/images/flask.png";
-import moneyIcon from "../assets/images/money.png";
 import { PantStatus } from "../constants/PantStatus";
-import divider from "../assets/images/divider.png";
 import closeModal from "../assets/images/close-modal.png";
 import { DisplayPantInfo } from "../components/DisplayPantInfo";
 
@@ -227,7 +220,6 @@ const styles = StyleSheet.create({
     fontFamily: "fredoka-one"
   },
 
- 
   locationText: {
     color: Colors.xLightGreen,
     paddingLeft: 18,
