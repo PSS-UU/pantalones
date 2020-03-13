@@ -263,7 +263,7 @@ export default function ProfileScreen() {
           </View>
         </View>
 
-        <DisplayPantInfo></DisplayPantInfo>
+        <DisplayPantInfo />
 
         <View style={profileStyles.recension}>
           <Text style={profileStyles.recensionText}>Recensioner</Text>

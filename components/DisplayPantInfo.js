@@ -6,7 +6,7 @@ import moneyIcon from "../assets/images/money.png";
 import Colors from "../constants/Colors";
 import divider from "../assets/images/divider.png";
 
-export const DisplayPantInfo = ({ pant: { flasks, cans, estimatedValue } }) => {
+export const DisplayPantInfo = ({ flasks, cans, estimatedValue }) => {
   return (
     <View style={styles.displayPantContainer}>
       <View style={styles.pantAmountColumn}>
@@ -37,9 +37,9 @@ export const DisplayPantInfo = ({ pant: { flasks, cans, estimatedValue } }) => {
 };
 
 DisplayPantInfo.defaultProps = {
-  flasks: 10,
-  cans: 10,
-  estimatedValue: 10
+  flasks: "10",
+  cans: "10",
+  estimatedValue: "10"
 };
 
 const styles = StyleSheet.create({

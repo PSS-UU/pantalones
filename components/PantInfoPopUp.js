@@ -141,7 +141,11 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
               />
               <Text style={styles.locationText}>2km bort</Text>
             </View>
-            <DisplayPantInfo pant={pant}></DisplayPantInfo>
+            <DisplayPantInfo
+              flasks={pant.flasks}
+              cans={pant.cans}
+              estimatedValue={pant.estimatedValue}
+            ></DisplayPantInfo>
             <View style={styles.profileContainer}>
               <Image
                 style={{
