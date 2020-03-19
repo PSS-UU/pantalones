@@ -101,7 +101,10 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
     getProfilePicture();
 
     userRef.once("value", function(snapshot) {
-      setUserName(snapshot.val().name);
+      if(snapshot.val()!= null){
+        setUserName(snapshot.val().name);
+          }  
+      else{setUserName("")}
     });
   }, [user, pant]);
 
