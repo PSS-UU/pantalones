@@ -40,12 +40,17 @@ export default function ProfileScreen() {
   const [addressInput, setAddressInput] = useState({ name: "", address: "" });
   const [nameFrom, setNameFrom] = useState();
   const [addressFrom, setAddressFrom] = useState();
+  const [starCount, setStarCount] = useState(0);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  const database = firebase.database();
+  var starCountRef = database.ref("user_info/" + user.uid);
+  
   useEffect(() => {
     getName();
     getAddress();
+    getRating();
   }, []);
 
   useEffect(() => {
@@ -55,6 +60,14 @@ export default function ProfileScreen() {
     };
     getProfilePicture();
   });
+
+  let getRating = () => {
+    starCountRef.once("value", function(ratingSnapshot) {
+      if (ratingSnapshot.val() != null) {
+        setStarCount(ratingSnapshot.val().total_rating);
+      }
+    });
+  };
 
   let handleChange = e => {
     setNameInput({
@@ -270,7 +283,7 @@ export default function ProfileScreen() {
           <StarRating
             maxStars={5}
             starSize={24}
-            rating={2}
+            rating={starCount}
             fullStarColor={"#FADA6D"}
             emptyStarColor={"#FADA6D"}
             starStyle={profileStyles.star}
