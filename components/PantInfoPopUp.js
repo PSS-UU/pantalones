@@ -17,6 +17,7 @@ import Colors from "../constants/Colors";
 import globalStyles from "../AppStyles";
 import { PantStatus } from "../constants/PantStatus";
 import { DisplayPantInfo } from "./DisplayPantInfo";
+import closeModal from "../assets/images/close-modal.png";
 
 const RaterPopUp = ({
   hideModal,
@@ -62,12 +63,13 @@ const RaterPopUp = ({
         setShowRater(false);
       }}
     >
-      <View style={styles.modalContent}>
+      <View style={styles.starModalContent}>
         <View style={styles.raterBackground}>
           <Text style={styles.rateUserText}>Rate the user:</Text>
           <View style={styles.ratingContainer}>
             <StarRating
-              rating={5}
+              rating={0}
+              starSize={28}
               selectedStar={rating => handleRate(rating)}
               fullStarColor={"#FADA6D"}
               emptyStarColor={"#FADA6D"}
@@ -224,7 +226,6 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
     });
   }, [user, pant]);
 
-
   return (
     <Modal
       transparent={true}
@@ -244,7 +245,10 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
             <View style={styles.modalHeaderContainer}>
               <Text style={styles.modalText}>Pant</Text>
               <TouchableOpacity onPress={() => hideModal()}>
-                <Text style={{ color: "white" }}>X</Text>
+                <Image
+                  source={require("../assets/images/close-modal.png")}
+                  style={{ width: 28, height: 40 }}
+                />
               </TouchableOpacity>
             </View>
             <View
@@ -259,7 +263,6 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
                 source={require("../assets/images/location.png")}
                 style={{ width: 14, height: 20 }}
               />
-              <Text style={styles.statusText}>{pant.status}</Text>
               <Text style={styles.locationText}>2km bort</Text>
             </View>
             <DisplayPantInfo {...pant} />
@@ -277,6 +280,7 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
                 <Text style={styles.profileName}>{userName}</Text>
                 <StarRating
                   rating={starCount}
+                  starSize={28}
                   selectedStar={rating => onRatingPress(rating, starCount)}
                   fullStarColor={"#FADA6D"}
                   emptyStarColor={"#FADA6D"}
@@ -285,10 +289,7 @@ export default function PantInfoPopUp({ pant, modal, hideModal }) {
             </View>
             <Text style={styles.pantComment}>{pant.message}</Text>
             <View style={styles.addImageContainer}>
-              <Image
-                style={styles.addImage}
-                source={{uri:pantImageUrl}}
-              />
+              <Image style={styles.addImage} source={{ uri: pantImageUrl }} />
             </View>
           </View>
           <PantStatusButton
@@ -430,7 +431,12 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     alignItems: "center",
-    margin: 0,
+    margin: 20,
+    justifyContent: "center"
+  },
+  starModalContent: {
+    alignItems: "center",
+    margin: 20,
     justifyContent: "center"
   },
   backgroundImage: {
@@ -448,21 +454,23 @@ const styles = StyleSheet.create({
   raterBackground: {
     borderRadius: 10,
     backgroundColor: "white",
-    height: "60%",
-    width: "90%"
+    height: "40%",
+    width: "60%",
+    justifyContent: "center",
+    alignItems: "center"
   },
   cancelRatingButton: {
     borderRadius: 10,
     color: "white"
   },
   ratingContainer: {
-    margin: 10
+    marginHorizontal: 100
   },
   rateUserText: {
     textAlign: "center",
     margin: 10,
-    fontSize: 16,
-    color: Colors.mediumGreen,
+    fontSize: 20,
+    color: Colors.mediumGray,
     paddingTop: 10
   }
 });

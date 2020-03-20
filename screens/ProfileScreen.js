@@ -471,8 +471,9 @@ const profileStyles = StyleSheet.create({
   },
 
   userInfoBlackText: {
-    top: 120,
-    left: 10
+    top: 140,
+    left: 10,
+    color: Colors.mediumGray
   },
 
   textEmail: {
@@ -502,12 +503,12 @@ const profileStyles = StyleSheet.create({
 
   greenButton: {
     borderRadius: 20,
-    backgroundColor: "#228669",
+    backgroundColor: Colors.lightGreen,
     height: 40,
     width: 100,
     justifyContent: "center",
     alignItems: "center",
-    top: 130
+    top: 160
   },
 
   iconCan: {
@@ -570,18 +571,17 @@ const profileStyles = StyleSheet.create({
   },
 
   recension: {
-    top: 73,
+    top: 100,
     left: 30,
     flexDirection: "column",
     flex: 1,
     alignItems: "flex-start",
-    color: "#282828",
+    color: Colors.mediumGray,
     height: 40
   },
 
   recensionText: {
-    fontSize: 23,
-    color: "#282828"
+    fontSize: 23
   },
 
   modalContentContainer: {
