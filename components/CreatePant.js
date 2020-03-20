@@ -7,6 +7,8 @@ import globalStyles from "../AppStyles";
 import cansIcon from "../assets/images/can.png";
 import flaskIcon from "../assets/images/flask.png";
 import locationIcon from "../assets/images/location-green.png";
+import addImageIcon from "../assets/images/add.png";
+import * as ImagePicker from "expo-image-picker";
 import {
   StyleSheet,
   View,
@@ -30,9 +32,15 @@ export default CreatePant = ({ setModal, modalStatus }) => {
 
   const user = firebase.auth().currentUser.uid;
 
+  const pantPictureRef = firebase
+    .storage()
+    .ref()
+    .child(`images/pant/${user.uid} + ${cansCount}`);
+
   const addPant = async () => {
     const pantMoney = cansCount + flaskCount * 2;
     setCreatingPant(true);
+    resetUrl();
     try {
       const response = await fetch(`${CLOUD_FUNCTIONS_URL}createPant`, {
         headers: { "Content-Type": "application/json; charset=utf-8" },
@@ -57,6 +65,41 @@ export default CreatePant = ({ setModal, modalStatus }) => {
       console.error(error);
       Alert.alert("Error", "Failed to create pant: " + error.message);
     }
+  };
+
+  const [imageUrl, setImageUrl] = useState();
+
+
+  const getPantPicture = async () => {
+    const url = await pantPictureRef.getDownloadURL();
+    setImageUrl(url);
+  };
+
+  const resetUrl = () => {
+    const no = "";
+    setImageUrl(no);
+  }
+
+  let onChooseImagePress = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync();
+
+    if (!result.cancelled) {
+      try {
+        await uploadImage(result.uri);
+      } catch (error) {
+        Alert.alert("error", `Error: ${error}`);
+      }
+    }
+  };
+
+  let uploadImage = async uri => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+
+    await pantPictureRef.put(blob);
+    const url = await pantPictureRef.getDownloadURL();
+    setImageUrl(url);
+    getPantPicture();
   };
 
   const buttonColor = creatingPant
@@ -112,6 +155,23 @@ export default CreatePant = ({ setModal, modalStatus }) => {
                 value={pantTextComment}
               />
             </View>
+          </View>
+          
+          <View>
+            <Text style={styles.cansAmountText}>Bilder</Text>
+            <View>
+            <TouchableOpacity
+            style={styles.addImageContainer}
+            onPress={onChooseImagePress}
+            >
+              <Image
+                style={styles.addImage}
+                source={imageUrl ? {uri:imageUrl} : addImageIcon }
+              />
+              
+            </TouchableOpacity>
+            </View>
+            
           </View>
 
           <View style={styles.canHeader}>
@@ -207,6 +267,22 @@ const styles = StyleSheet.create({
     color: Colors.grayText,
     marginLeft: 10,
     fontSize: 18
+  },
+
+  addImage: {
+    position: "absolute",
+    width: "50%",
+    borderRadius: 10,
+    height: "100%"
+  },
+
+
+  addImageContainer: {
+    flexDirection: "column",
+    height: 140,
+    marginTop: 20,
+    marginBottom: 20,
+    marginLeft: 20
   },
 
   chooseLocationText: {
